@@ -10,9 +10,10 @@
 
 ### 1.1 Characters
 
+> **Player character = the player's own Roblox avatar.** No custom player model is needed. The game applies clothing/accessory cosmetics on top of the player's existing avatar via `HumanoidDescription`. All animations below target the standard Roblox R6/R15 rig.
+
 | Asset | Notes | Priority |
 |---|---|---|
-| Raka (player rig) | Roblox R15 compatible, young male, neutral outfit | P0 |
 | Mbok Sari | Older Javanese woman, kebaya | P0 |
 | Parmin | Middle-aged warung man, apron, peci | P0 |
 | Laila | Young woman, journalist look, Palembang | P1 |
@@ -428,6 +429,8 @@
 | Login Streak — Active Day | Lit flame | P0 |
 | Login Streak — Missed Day | Gray flame | P0 |
 | Notification Bell | Bell | P0 |
+| Nama Panggilan Badge | Player nickname display on nameplate | P0 |
+| Online Indicator | Green dot for active players in zone | P0 |
 | Bonus Peti (chest) | Chest icon | P0 |
 | Reroll (task) | Refresh arrow | P0 |
 | Crafting | Gear + sparkle | P0 |
@@ -463,11 +466,10 @@
 
 ### 4.3 NPC Portraits (for dialog UI, bust-style illustration)
 
+> **No player portrait needed.** Dialog box shows only the NPC speaking. The player's own Roblox avatar is visible in the world; no in-dialog representation required.
+
 | Character | Priority |
 |---|---|
-| Raka — neutral | P0 |
-| Raka — happy | P0 |
-| Raka — serious | P0 |
 | Mbok Sari — warm | P0 |
 | Parmin — grinning | P0 |
 | Laila — focused | P1 |
@@ -523,11 +525,11 @@
 
 | Asset | Notes | Priority |
 |---|---|---|
-| Raka receives Arjuna's letter | Emotional; desa setting at dusk | P0 |
+| Player receives Arjuna's letter | Emotional; desa setting at dusk | P0 |
 | First view of Suroboyo harbor | Wide establishing shot | P0 |
 | Kongsi Hitam warehouse — interior | Tense; stacked crates, lantern light | P0 |
 | Arjuna in the Ternate cell | Dim, stone walls | P1 |
-| Raka at Danau Sentani (epilogue) | Calm, reflective, mountains reflected | P1 |
+| Player at Danau Sentani (epilogue) | Calm, reflective, mountains reflected | P1 |
 | Each chapter title card background | Minimal, zone-themed, 15 total | P0–P1 |
 
 ---
@@ -888,7 +890,7 @@ One unique day theme per zone. Grouped by island:
 
 | Track | Scene | Priority |
 |---|---|---|
-| Raka Receives Letter | Solo suling, sad and sparse | P0 |
+| Player Receives Letter | Solo suling, sad and sparse | P0 |
 | First View of Suroboyo Harbor | Swelling gamelan | P0 |
 | Kongsi Hitam Reveal | Low tension string + tifa | P0 |
 | Arjuna Found | Emotional full resolve | P1 |
@@ -899,7 +901,9 @@ One unique day theme per zone. Grouped by island:
 
 ## 9. Animations
 
-### 9.1 Player Character (Raka)
+### 9.1 Player Character (Roblox Avatar Rig)
+
+> Animations target the standard Roblox R6/R15 rig and are applied to every player's avatar via `AnimationController`. No custom character model needed — these override or extend default Roblox animations.
 
 | Animation | Notes | Priority |
 |---|---|---|
@@ -954,17 +958,17 @@ One unique day theme per zone. Grouped by island:
 
 | Category | Estimated Count | P0 | P1 | P2 |
 |---|---|---|---|---|
-| 3D Models (characters, props, architecture) | ~120 | ~50 | ~60 | ~10 |
+| 3D Models (NPCs, props, architecture) | ~119 | ~49 | ~60 | ~10 |
 | Clothing / Cosmetic accessories | ~60 | ~15 | ~35 | ~10 |
 | Item Icons (2D, 256×256) | ~100 | ~40 | ~50 | ~10 |
-| UI Icons | ~60 | ~60 | — | — |
-| 2D Illustrations (portraits, loading, maps, panels) | ~90 | ~45 | ~40 | ~5 |
+| UI Icons | ~62 | ~62 | — | — |
+| 2D Illustrations (NPC portraits, loading, maps, panels) | ~87 | ~43 | ~39 | ~5 |
 | Textures (terrain, architecture, fabric) | ~55 | ~20 | ~30 | ~5 |
 | SFX | ~130 | ~80 | ~45 | ~5 |
 | VFX (particle systems) | ~40 | ~25 | ~12 | ~3 |
 | BGM tracks | ~75 | ~25 | ~45 | ~5 |
 | Animations | ~50 | ~30 | ~15 | ~5 |
-| **Total** | **~780** | **~390** | **~332** | **~58** |
+| **Total** | **~778** | **~389** | **~331** | **~58** |
 
 ---
 

@@ -24,16 +24,25 @@ Their symbol: a black ship with no flag. Their motto, whispered in port taverns:
 
 ---
 
-## 3. Protagonist — Raka
+## 3. Protagonist — The Player (Pemuda)
 
-**Full name:** Raka Wicaksono *(default; player may rename)*
-**Age:** 19
-**Origin:** Desa kecil, Jawa Tengah (starting zone adjacent to KotaJogja)
-**Background:** Son of Arjuna, a traveling merchant. Raka grew up hearing stories of the archipelago from his father. After Arjuna disappeared and left behind a debt to a Suroboyo moneylender, Raka leaves the desa with nothing but the key, the map, and whatever he can carry.
+**The player is the protagonist.** There is no fixed named main character. Every player who enters the game inhabits the role of a *pemuda* — a young person from Jawa who inherits a shared backstory and sets out across Nusantara. This is a multiplayer open world; all players coexist in the same zones simultaneously.
 
-**Personality:** Curious, determined, sometimes reckless. He is not a hero by nature — he is a young man in over his head, shaped by the choices the player makes.
+**Shared backstory (canon for all players):**
+You are a young person from a small desa in Jawa Tengah. Your father, Arjuna — a traveling merchant — has been missing for six months. He left behind a debt owed to a Suroboyo moneylender named Pak Toha, and a sealed letter containing a crude map of Suroboyo's old port district and a brass key with no known lock. You leave the desa to find him, repay the debt, and discover what he was chasing.
 
-**Starting stats:** Morality 50, Rupiah 500, no weapons (default punch/silat), basic inventory.
+**What varies per player:**
+- Roblox avatar appearance (clothing, accessories)
+- Morality score — shaped by choices made during quests and world interactions
+- Quest progress — each player runs their own chapter timeline
+- Inventory, Rupiah, Gold, relationships, achievements, Galeri
+
+**NPC dialog style:**
+- Second-person throughout: *"Kamu pasti anaknya Pak Arjuna..."*
+- Player is never called by a fixed name in scripted dialog
+- Players can set a **Nama Panggilan** (nickname) in their profile — used only in multiplayer social UI (nameplate, relationship badge, leaderboard), never in NPC dialog
+
+**Starting stats:** Morality 50, Rupiah 500, no weapon (default punch/silat stance), empty inventory.
 
 ---
 
@@ -41,13 +50,13 @@ Their symbol: a black ship with no flag. Their motto, whispered in port taverns:
 
 | Character | Location | Role |
 |---|---|---|
-| **Mbok Sari** | KotaJogja | Raka's aunt; first safe haven; gives early quest leads |
+| **Mbok Sari** | KotaJogja | Player's first safe haven in Jogja; old friend of Arjuna who kept his letters; gives early quest leads |
 | **Parmin** | KotaJogja | Old warung owner; comic relief; longtime friend of Arjuna |
 | **Laila** | Palembang | Journalist; investigating Kongsi Hitam from the Sumatera side; eventual ally |
 | **Pak Daeng** | Makassar | Retired Bugis sea captain; knows every port in Nusantara |
 | **Rina** | Jayapura | Young Sentani woman; guide in Papua; keeper of a clue Arjuna left behind |
 | **Tuan Besar** | Ternate | The face of Kongsi Hitam — elegant, generous in public, ruthless in private |
-| **Arjuna** | (found late game) | Raka's father; alive but imprisoned; the moral compass of the story |
+| **Arjuna** | (found late game) | Pemuda's father; alive but imprisoned; the moral compass of the story |
 
 ---
 
@@ -150,7 +159,7 @@ Gorontalo is the smallest of Sulawesi's provincial capitals, occupying the narro
 Palu sits in a narrow bay, surrounded by mountains — a geography that makes it beautiful and, in the past, vulnerable. The Kaili people of this region are known for their *bawang goreng* (fried shallots) — a Palu export that reaches every kitchen in Nusantara — and for the *ikan kaledo* soup made from beef shank and tamarind. The city's position at the center of Sulawesi makes it a crossroads; information travels through here. A former Kongsi Hitam ledger keeper fled to Palu after a falling-out with the Syndicate; he is now running a small food stall and hoping no one finds him.
 
 **Kendari** *(Sulawesi Tenggara)*
-Kendari is the capital of southeast Sulawesi, a city built around a bay so protected it barely has waves. The Tolaki people's *mosehe* ceremony — a ritual cleansing of conflict between families — is still practiced here. Kendari's silver filigree craftsmen are among the finest in the archipelago; the *tetobo* technique produces lacelike jewelry of extraordinary delicacy. Raka will find a Kendari silversmith who once made a piece commissioned by Arjuna — a pendant with a specific pattern that, when decoded, is a set of coordinates.
+Kendari is the capital of southeast Sulawesi, a city built around a bay so protected it barely has waves. The Tolaki people's *mosehe* ceremony — a ritual cleansing of conflict between families — is still practiced here. Kendari's silver filigree craftsmen are among the finest in the archipelago; the *tetobo* technique produces lacelike jewelry of extraordinary delicacy. Pemuda will find a Kendari silversmith who once made a piece commissioned by Arjuna — a pendant with a specific pattern that, when decoded, is a set of coordinates.
 
 **Mamuju** *(Sulawesi Barat)*
 Mamuju is the youngest of Sulawesi's provincial capitals, carved out of South Sulawesi province and still finding its identity. The Mandar people — seafarers, fishermen, silk weavers — have lived on this coast for centuries. *Perahu Mandar* wooden boats are built in the fishing villages, and Mandar woven silk (*sutera Mandar*) is prized for its iridescence. Mamuju feels remote: it is. But that remoteness has made it useful to people who do not want to be found. A Kongsi Hitam safe house operates out of a fish processing facility on the coast road.
@@ -160,7 +169,7 @@ Mamuju is the youngest of Sulawesi's provincial capitals, carved out of South Su
 ### PAPUA
 
 **Jayapura** *(Papua)*
-Jayapura hugs the shore of Sentani lake's outlet to the sea, a city that arrived fast and unevenly among a landscape that has been home to the Sentani people for millennia. Sentani art is among the most distinctive in the world — *tifa* drums with stretched lizard-skin heads, carved canoe prows, bark paintings of spiraling fish and geometric ancestors. The *noken* bag, woven from tree bark or orchid fiber and carried by Papuan women on their heads, has been recognized as UNESCO intangible heritage. Rina, the young Sentani woman who will guide Raka in Papua, knows where Arjuna went when he came here — and why he never came back.
+Jayapura hugs the shore of Sentani lake's outlet to the sea, a city that arrived fast and unevenly among a landscape that has been home to the Sentani people for millennia. Sentani art is among the most distinctive in the world — *tifa* drums with stretched lizard-skin heads, carved canoe prows, bark paintings of spiraling fish and geometric ancestors. The *noken* bag, woven from tree bark or orchid fiber and carried by Papuan women on their heads, has been recognized as UNESCO intangible heritage. Rina, the young Sentani woman who will guide Pemuda in Papua, knows where Arjuna went when he came here — and why he never came back.
 
 **Sorong** *(Papua Barat Daya)*
 Sorong is the gateway to Raja Ampat, an island group that contains more species of fish, coral, and marine life than anywhere else on Earth. The city itself is a busy transit port — ferries, fishing boats, dive operators, and cargo ships cycle through constantly. The *cenderawasih* (bird of paradise) plume was once a major trade commodity; it is now illegal, but Kongsi Hitam still moves them. A feather trader in Sorong's night market is a link in the chain. The sea around here is so clear you can see the bottom in ten meters of water.
@@ -169,7 +178,7 @@ Sorong is the gateway to Raja Ampat, an island group that contains more species 
 Manokwari is the oldest colonial-era settlement in Papua, at the base of the Arfak mountains where the forest starts and does not stop for hundreds of kilometers. The Arfak people are known as extraordinary naturalists; they have named and categorized birds that scientists documented centuries later. The *cenderawasih* displays its plumage in the highland forest at dawn, and to see it is to understand why people have coveted it for centuries. A missionary archive in Manokwari contains a letter Arjuna wrote under a false name — the last record of where he was headed.
 
 **Merauke** *(Papua Selatan)*
-Merauke is the easternmost city in Indonesia — the final edge of the map, where the savanna rolls flat toward the sea and *kangguru* (tree kangaroos) move through the grasslands at dusk. The Marind-Anim people here have one of the most complex ceremonial traditions in the archipelago; their *sago* cultivation techniques have sustained communities in this difficult landscape for generations. The city feels like an endpoint — because it is. This is where the final arc of the main quest converges. What Raka finds here determines the ending.
+Merauke is the easternmost city in Indonesia — the final edge of the map, where the savanna rolls flat toward the sea and *kangguru* (tree kangaroos) move through the grasslands at dusk. The Marind-Anim people here have one of the most complex ceremonial traditions in the archipelago; their *sago* cultivation techniques have sustained communities in this difficult landscape for generations. The city feels like an endpoint — because it is. This is where the final arc of the main quest converges. What Pemuda finds here determines the ending.
 
 ---
 
@@ -208,7 +217,7 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 
 #### Chapter 1 — Keberangkatan (Departure)
 **Location:** KotaJogja → Suroboyo
-**Scene:** Raka receives his father's final letter. Mbok Sari confirms Arjuna has been missing for six months. The moneylender Pak Toha arrives: Arjuna owed him Rp 50.000 and now Raka must pay it or lose the family home. The letter contains a crude map of Suroboyo's old port district, and a brass key with no lock.
+**Scene:** Pemuda receives his father's final letter. Mbok Sari confirms Arjuna has been missing for six months. The moneylender Pak Toha arrives: Arjuna owed him Rp 50.000 and now Pemuda must pay it or lose the family home. The letter contains a crude map of Suroboyo's old port district, and a brass key with no lock.
 
 **Objectives:**
 1. Talk to Mbok Sari in KotaJogja
@@ -216,15 +225,15 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 3. Travel to Suroboyo (pelabuhan or bandara)
 4. Find Parmin's contact in Suroboyo's old harbor district
 
-**Key choice:** Pak Toha offers to forgive the debt if Raka delivers a package to Suroboyo for him — contents unknown. Accept = Rp debt cleared, morality −15, early Kongsi Hitam entanglement. Refuse = debt remains, morality +5, arrives in Suroboyo clean.
+**Key choice:** Pak Toha offers to forgive the debt if Pemuda delivers a package to Suroboyo for him — contents unknown. Accept = Rp debt cleared, morality −15, early Kongsi Hitam entanglement. Refuse = debt remains, morality +5, arrives in Suroboyo clean.
 
-**Outcome:** Raka arrives in Suroboyo. The harbor contact is a woman named Wulan who worked with Arjuna. She is cautious and will only talk after Raka proves himself.
+**Outcome:** Pemuda arrives in Suroboyo. The harbor contact is a woman named Wulan who worked with Arjuna. She is cautious and will only talk after Pemuda proves himself.
 
 ---
 
 #### Chapter 2 — Pelabuhan Lama (The Old Port)
 **Location:** Suroboyo
-**Scene:** Wulan reveals that Arjuna had been documenting cargo discrepancies — goods that left the official ledger but still arrived at private warehouses. She gives Raka a hidden ledger page and warns him: someone already searched her warehouse once.
+**Scene:** Wulan reveals that Arjuna had been documenting cargo discrepancies — goods that left the official ledger but still arrived at private warehouses. She gives Pemuda a hidden ledger page and warns him: someone already searched her warehouse once.
 
 **Objectives:**
 1. Gain Wulan's trust (help with two of her side tasks first)
@@ -232,15 +241,15 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 3. Investigate the three warehouses marked on Arjuna's map
 4. Escape or confront the Kongsi Hitam enforcer who arrives at Warehouse 2
 
-**Key choice:** The enforcer, Bram, offers to let Raka walk away and forget everything. Accept = leave with nothing, morality +0, Bram remains active antagonist later. Fight/resist = risky combat, morality +0, Bram is defeated or escapes, evidence secured.
+**Key choice:** The enforcer, Bram, offers to let Pemuda walk away and forget everything. Accept = leave with nothing, morality +0, Bram remains active antagonist later. Fight/resist = risky combat, morality +0, Bram is defeated or escapes, evidence secured.
 
-**Outcome:** Raka has partial evidence and a name: "Tuan Besar, Ternate." Wulan is shaken. Suroboyo is no longer safe for Raka.
+**Outcome:** Pemuda has partial evidence and a name: "Tuan Besar, Ternate." Wulan is shaken. Suroboyo is no longer safe for Pemuda.
 
 ---
 
 #### Chapter 3 — Warisan Keris (The Keris Legacy)
 **Location:** KotaJogja
-**Scene:** Raka returns to Jogja to regroup with Mbok Sari. She reveals that Arjuna's family once owned a heirloom keris that was supposedly sold — but was actually taken as collateral by a debt collector connected to Kongsi Hitam. The keris, if recovered, would prove the family's noble lineage and grant Raka access to Abdi Dalem records that list licensed merchants.
+**Scene:** Pemuda returns to Jogja to regroup with Mbok Sari. She reveals that Arjuna's family once owned a heirloom keris that was supposedly sold — but was actually taken as collateral by a debt collector connected to Kongsi Hitam. The keris, if recovered, would prove the family's noble lineage and grant Pemuda access to Abdi Dalem records that list licensed merchants.
 
 **Objectives:**
 1. Speak with the Abdi Dalem gatekeeper NPC
@@ -250,13 +259,13 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 
 **Key choice:** The debt collector is also a victim of Kongsi Hitam — they own his debt too. Expose this and help him = morality +10, gain an ally. Use leverage against him to just take the keris = morality −10, faster resolution.
 
-**Outcome:** Raka recovers the keris (Arjuna's Keris — unique weapon item with special morality bonus). The merchant records show that Arjuna was last registered as traveling to Palembang, Sumatera.
+**Outcome:** Pemuda recovers the keris (Arjuna's Keris — unique weapon item with special morality bonus). The merchant records show that Arjuna was last registered as traveling to Palembang, Sumatera.
 
 ---
 
 #### Chapter 4 — Bayangan di Semarang (Shadow in Semarang)
 **Location:** Semarang
-**Scene:** A lead from the records points to a Semarang notary who witnessed a contract signed by Arjuna — and another party. Raka travels to Semarang. The notary is frightened, working out of a back office in the pecinan quarter. He confirms: Arjuna signed over his trading license to a third party as insurance before heading to Sumatera. The third party was fronting for Kongsi Hitam.
+**Scene:** A lead from the records points to a Semarang notary who witnessed a contract signed by Arjuna — and another party. Pemuda travels to Semarang. The notary is frightened, working out of a back office in the pecinan quarter. He confirms: Arjuna signed over his trading license to a third party as insurance before heading to Sumatera. The third party was fronting for Kongsi Hitam.
 
 **Objectives:**
 1. Find the notary office in Semarang's pecinan
@@ -264,7 +273,7 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 3. Retrieve the signed contract duplicate
 4. Decide what to do with the notary (help him flee = morality +10, leave him = morality 0, use him as bait = morality −15)
 
-**Outcome:** Raka has the contract. He now knows Arjuna was headed to Banda Aceh, Sumatera, on someone else's trail. Arc I complete. New destination unlocked: Sumatera.
+**Outcome:** Pemuda has the contract. He now knows Arjuna was headed to Banda Aceh, Sumatera, on someone else's trail. Arc I complete. New destination unlocked: Sumatera.
 
 ---
 
@@ -274,7 +283,7 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 
 #### Chapter 5 — Rencong dan Janji (The Rencong and the Promise)
 **Location:** Banda Aceh
-**Scene:** Arjuna's journal mentions a shipping clerk — Ali — who saw something at the harbor a year ago. Raka finds Ali, but Ali has been coerced into silence by a Kongsi Hitam harbor agent. The city's Islamic community guards its own, but Raka is an outsider.
+**Scene:** Arjuna's journal mentions a shipping clerk — Ali — who saw something at the harbor a year ago. Pemuda finds Ali, but Ali has been coerced into silence by a Kongsi Hitam harbor agent. The city's Islamic community guards its own, but Pemuda is an outsider.
 
 **Objectives:**
 1. Build trust with a local community figure (complete 1 side quest from Banda Aceh NPC pool)
@@ -282,7 +291,7 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 3. Protect Ali during a meeting at the old sea wall
 4. Obtain Ali's testimony about the ship registry falsification
 
-**Key choice:** A local *teungku* (Islamic scholar) offers to vouch for Raka to Ali — but asks for help resolving a community dispute first (morality +10 path). Alternatively, Raka can bribe the harbor master for Ali's address directly (morality −10, faster).
+**Key choice:** A local *teungku* (Islamic scholar) offers to vouch for Pemuda to Ali — but asks for help resolving a community dispute first (morality +10 path). Alternatively, Pemuda can bribe the harbor master for Ali's address directly (morality −10, faster).
 
 **Outcome:** Ali confirms a specific ship name — *KM Fajar Hitam* (Black Dawn) — that carries falsified manifests between Sumatera ports. The trail leads to Palembang and a journalist named Laila.
 
@@ -290,15 +299,15 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 
 #### Chapter 6 — Tinta Merah (Red Ink)
 **Location:** Palembang
-**Scene:** Laila has been investigating KM Fajar Hitam for months. She and Raka's paths converge. She has financial records; Raka has testimony. Together they have almost enough — but "almost" is not enough. Laila wants to publish. Raka wants to know where his father is. These goals may not be compatible.
+**Scene:** Laila has been investigating KM Fajar Hitam for months. She and Pemuda's paths converge. She has financial records; Pemuda has testimony. Together they have almost enough — but "almost" is not enough. Laila wants to publish. Pemuda wants to know where his father is. These goals may not be compatible.
 
 **Objectives:**
 1. Meet Laila at the Ampera Bridge at dusk
-2. Cross-reference Raka's documents with Laila's records at her safehouse
+2. Cross-reference Pemuda's documents with Laila's records at her safehouse
 3. Identify the three missing cargo entries that could expose the route
 4. Recover the missing entries from Kongsi Hitam's Palembang warehouse office (stealth or combat)
 
-**Key choice:** Laila wants to publish immediately with what they have. Raka wants to wait until he finds his father — publishing now might warn Kongsi Hitam. Support Laila's publication = morality +5, Kongsi Hitam goes on alert early, story branches; wait = morality 0, father safer for now, investigation continues quietly.
+**Key choice:** Laila wants to publish immediately with what they have. Pemuda wants to wait until he finds his father — publishing now might warn Kongsi Hitam. Support Laila's publication = morality +5, Kongsi Hitam goes on alert early, story branches; wait = morality 0, father safer for now, investigation continues quietly.
 
 **Outcome:** The missing entries name a warehouse in Medan as a collection point for trafficked benda pusaka (heirloom artifacts). Arjuna's name appears in the records — as a courier who refused to deliver a shipment and then disappeared.
 
@@ -306,15 +315,15 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 
 #### Chapter 7 — Ulos Duka (Mourning Cloth)
 **Location:** Medan → Padang
-**Scene:** In Medan, Raka finds the warehouse — gutted, cleaned, and abandoned. The artifacts are gone. A Batak community elder tells him that a young man matching Arjuna's description was seen at the market six months ago, buying *ulos* cloth and asking about ships to Padang. In Padang, a Minangkabau businesswoman named Rahimah — Arjuna's old partner — finally answers Raka's questions. She knows exactly what happened.
+**Scene:** In Medan, Pemuda finds the warehouse — gutted, cleaned, and abandoned. The artifacts are gone. A Batak community elder tells him that a young man matching Arjuna's description was seen at the market six months ago, buying *ulos* cloth and asking about ships to Padang. In Padang, a Minangkabau businesswoman named Rahimah — Arjuna's old partner — finally answers Pemuda's questions. She knows exactly what happened.
 
 **Objectives:**
 1. Search the Medan warehouse for remaining evidence
 2. Interview the elder; complete a trust-building task for the Batak community
 3. Travel to Padang
-4. Meet Rahimah; protect her from a Kongsi Hitam operative who follows Raka
+4. Meet Rahimah; protect her from a Kongsi Hitam operative who follows Pemuda
 
-**Key choice:** Rahimah asks Raka to promise he will not pursue Kongsi Hitam if finding his father means letting the Syndicate walk free. Promise = morality −5 (a lie you may or may not keep), she gives more information. Refuse to promise = morality +10, she respects his honesty but gives less detail.
+**Key choice:** Rahimah asks Pemuda to promise he will not pursue Kongsi Hitam if finding his father means letting the Syndicate walk free. Promise = morality −5 (a lie you may or may not keep), she gives more information. Refuse to promise = morality +10, she respects his honesty but gives less detail.
 
 **Outcome:** Rahimah confirms Arjuna was taken alive. He is being held somewhere in the eastern archipelago — Sulawesi or further. Arc II complete. Kalimantan and Sulawesi unlock.
 
@@ -334,9 +343,9 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 3. Travel upriver to the affected village
 4. Gather evidence of illegal logging (document 4 cut stumps, photograph company markings)
 
-**Key choice:** The logging crew foreman offers Raka money to leave. Accept = morality −20, Rp 5.000, story continues but Dayak ally is lost. Refuse and expose = morality +15, evidence secured, foreman becomes antagonist.
+**Key choice:** The logging crew foreman offers Pemuda money to leave. Accept = morality −20, Rp 5.000, story continues but Dayak ally is lost. Refuse and expose = morality +15, evidence secured, foreman becomes antagonist.
 
-**Outcome:** Evidence recovered. The logging company is a Kongsi Hitam subsidiary. Its parent company is registered in Samarinda. A Dayak tracker named Juhang agrees to guide Raka further east.
+**Outcome:** Evidence recovered. The logging company is a Kongsi Hitam subsidiary. Its parent company is registered in Samarinda. A Dayak tracker named Juhang agrees to guide Pemuda further east.
 
 ---
 
@@ -362,7 +371,7 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 
 #### Chapter 10 — Pak Daeng Bicara (Pak Daeng Speaks)
 **Location:** Makassar
-**Scene:** Pak Daeng, the retired Bugis captain, agrees to meet Raka at a *coto makassar* warung. Over breakfast, he is direct: he knows about Kongsi Hitam, he has refused their contracts twice, and he knows where the *KM Fajar Hitam* goes after Makassar. But information is not free — Daeng needs something from Raka first.
+**Scene:** Pak Daeng, the retired Bugis captain, agrees to meet Pemuda at a *coto makassar* warung. Over breakfast, he is direct: he knows about Kongsi Hitam, he has refused their contracts twice, and he knows where the *KM Fajar Hitam* goes after Makassar. But information is not free — Daeng needs something from Pemuda first.
 
 **Objectives:**
 1. Eat breakfast with Pak Daeng (dialog scene)
@@ -370,7 +379,7 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 3. Return the manuscript to Daeng
 4. Receive the shipping route information
 
-**Key choice:** The rival merchant who has the lontaraq is willing to return it if Raka intimidates his business competition for him (morality −15). Alternatively, help the merchant's competition fairly and the merchant will return the lontaraq out of shame (morality +10, longer path).
+**Key choice:** The rival merchant who has the lontaraq is willing to return it if Pemuda intimidates his business competition for him (morality −15). Alternatively, help the merchant's competition fairly and the merchant will return the lontaraq out of shame (morality +10, longer path).
 
 **Outcome:** Daeng reveals: the *KM Fajar Hitam* makes a stop in Kendari before heading to Maluku. Someone is being kept below deck on its Maluku run. It departs Makassar in three days.
 
@@ -378,15 +387,15 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 
 #### Chapter 11 — Perak Kendari (Kendari Silver)
 **Location:** Kendari
-**Scene:** In Kendari, Raka meets the silversmith who made a pendant for Arjuna — a compass rose with a hidden coordinate encoded in the filigree pattern. The silversmith still has the template. The coordinates point to an island in Maluku. But the *KM Fajar Hitam* has already docked and left; Raka missed it.
+**Scene:** In Kendari, Pemuda meets the silversmith who made a pendant for Arjuna — a compass rose with a hidden coordinate encoded in the filigree pattern. The silversmith still has the template. The coordinates point to an island in Maluku. But the *KM Fajar Hitam* has already docked and left; Pemuda missed it.
 
 **Objectives:**
 1. Find the silversmith's workshop
 2. Have the pendant decoded (requires crafting a copy using the template + silver ingredients)
 3. Book passage on the next available ship to Maluku (via Kendari pelabuhan)
-4. Survive an ambush at the harbor — Kongsi Hitam knows Raka is getting close
+4. Survive an ambush at the harbor — Kongsi Hitam knows Pemuda is getting close
 
-**Outcome:** Raka has the coordinates. Arc IV complete. Maluku fully unlocks. The ambush confirms: Tuan Besar knows who Raka is.
+**Outcome:** Pemuda has the coordinates. Arc IV complete. Maluku fully unlocks. The ambush confirms: Tuan Besar knows who Pemuda is.
 
 ---
 
@@ -406,7 +415,7 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 3. Document the stolen artifacts inside
 4. Report to the pedanda — or report to the Majelis Nusantara contact in Jakarta (if unlocked)
 
-**Key choice:** Inside the facility, Raka finds one artifact being packed for immediate shipment. Take it and return it to the temple = morality +20, the artifact is saved, Kongsi Hitam loses a valuable piece. Leave it to maintain cover and document everything = morality +5, better long-term evidence, artifact is lost.
+**Key choice:** Inside the facility, Pemuda finds one artifact being packed for immediate shipment. Take it and return it to the temple = morality +20, the artifact is saved, Kongsi Hitam loses a valuable piece. Leave it to maintain cover and document everything = morality +5, better long-term evidence, artifact is lost.
 
 **Outcome:** List of stolen artifacts recovered. One Ternate destination address confirmed — it matches Daeng's shipping route information.
 
@@ -418,7 +427,7 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 
 #### Chapter 13 — Ambon, Awal Segalanya (Ambon, Where It Began)
 **Location:** Ambon
-**Scene:** Ambon is where Kongsi Hitam was founded. Tuan Besar's family tree is public record in the colonial-era church archive — his great-grandfather founded the original spice collective that became the Syndicate. Raka needs access to the archive, which requires permission from the city archivist, who owes nothing to anyone from Jawa.
+**Scene:** Ambon is where Kongsi Hitam was founded. Tuan Besar's family tree is public record in the colonial-era church archive — his great-grandfather founded the original spice collective that became the Syndicate. Pemuda needs access to the archive, which requires permission from the city archivist, who owes nothing to anyone from Jawa.
 
 **Objectives:**
 1. Earn the archivist's trust (two side tasks from Ambon NPC pool)
@@ -432,7 +441,7 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 
 #### Chapter 14 — Benteng Terakhir (The Last Fortress)
 **Location:** Ternate
-**Scene:** Raka arrives in Ternate. Tuan Besar is hosting a trade gathering at the old Benteng Oranje — in plain sight, publicly, because the law cannot touch him here. He has money, influence, and the Sultan's ear. He also has Arjuna in a private cell beneath the old fort's storage level. Raka must find his father and the charter — without getting killed.
+**Scene:** Pemuda arrives in Ternate. Tuan Besar is hosting a trade gathering at the old Benteng Oranje — in plain sight, publicly, because the law cannot touch him here. He has money, influence, and the Sultan's ear. He also has Arjuna in a private cell beneath the old fort's storage level. Pemuda must find his father and the charter — without getting killed.
 
 **Objectives:**
 1. Infiltrate Tuan Besar's trade gathering (use disguise/morality path or stealth)
@@ -470,9 +479,9 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 - **Hand it to Laila for publication:** Ends with public exposure, maximum impact, Kongsi Hitam dismantled publicly. Morality: any. "Pahlawan" ending.
 - **Hand it to a trusted Majelis official:** Quieter legal process, slower justice, not all members implicated. Morality 60+. "Bijaksana" ending.
 - **Destroy the evidence to protect specific officials you befriended:** Kongsi Hitam weakened but not destroyed. Morality 40−. "Pragmatis" ending.
-- **Use it as personal leverage:** Raka becomes a shadow power. Morality 0−20. "Penjahat" ending — full villain arc.
+- **Use it as personal leverage:** Pemuda becomes a shadow power. Morality 0−20. "Penjahat" ending — full villain arc.
 
-**Final scene:** Raka stands at the edge of Danau Sentani. The lake reflects the mountains. Arjuna sits nearby. Whatever the player chose — the music plays, the ending narration runs, and the world continues. The open world remains fully playable post-story.
+**Final scene:** Pemuda stands at the edge of Danau Sentani. The lake reflects the mountains. Arjuna sits nearby. Whatever the player chose — the music plays, the ending narration runs, and the world continues. The open world remains fully playable post-story.
 
 ---
 
@@ -622,7 +631,7 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 | Flag ID | Set by | Affects |
 |---|---|---|
 | `CH1_DEBT_CLEARED` | Ch1 choice | Pak Toha appears as enemy later if debt not cleared |
-| `CH1_PACKAGE_DELIVERED` | Ch1 choice | Kongsi Hitam aware of Raka from Ch2 onward |
+| `CH1_PACKAGE_DELIVERED` | Ch1 choice | Kongsi Hitam aware of Pemuda from Ch2 onward |
 | `CH6_LAILA_PUBLISHED` | Ch6 choice | Kongsi Hitam on high alert from Arc III onward |
 | `CH10_LONTARAQ_PATH` | Ch10 choice | Pak Daeng's ship available as free transport in Sulawesi if good path |
 | `CH11_CLERK_HELPED` | Ch9 choice | Clerk becomes informant NPC; extra dialog in Ch14 |
@@ -635,7 +644,7 @@ Ternate is a volcano-island with a sultanate older than the Netherlands, a city 
 
 After the main quest ends, the world remains fully open. Changes based on choices:
 
-- **High morality ending:** NPCs across all islands greet Raka with warmth. Kongsi Hitam NPCs replaced with neutral traders. Pak Toha's warehouse in Suroboyo is converted to a community market.
+- **High morality ending:** NPCs across all islands greet Pemuda with warmth. Kongsi Hitam NPCs replaced with neutral traders. Pak Toha's warehouse in Suroboyo is converted to a community market.
 - **Neutral ending:** World mostly unchanged. Laila's articles appear as readable newspapers in warungs.
 - **Low morality ending:** Certain NPCs refuse to interact. Some shop prices increase. Rival zone spawns more aggressive.
 - **All endings:** Arjuna appears in KotaJogja as a permanent NPC with additional dialog. Rina sends occasional letters (collectible items). All side quests remain available. New post-game side quests unlock per island.

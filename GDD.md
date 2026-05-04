@@ -35,9 +35,15 @@ A secondary mission of this game is **cultural education** — introducing playe
 
 The world spans multiple real Indonesian regions — each zone is a stylized, Roblox-scale representation of a distinct city or island, with authentic architecture, local culture, and regional identity. Time period is early modern (pre-internet, late-20th-century kampung life aesthetic).
 
-### 3.2 Main Character
+### 3.2 Player Character
 
-The player character is a young man (pemuda) from a small Javanese desa. He starts with nothing and travels across the Indonesian archipelago, discovering new cultures and people, and building his reputation.
+**The player IS the protagonist.** There is no fixed named main character. Each player uses their own Roblox avatar and inhabits the role of a *pemuda* (young person) from Jawa who sets out across the archipelago. Every player runs their own independent quest progress, morality score, and inventory while sharing the same open world with other players simultaneously.
+
+- NPC dialog addresses the player as **"Kamu"** (you) — never a fixed name
+- Cutscene narration uses second-person: *"Kamu menerima surat itu..."*
+- The story's starting scenario (missing father-figure Arjuna, debt to moneylender) is the shared canon backstory all players begin with
+- Player's Roblox avatar is their visual identity — cosmetics change appearance, not the base avatar
+- Multiple players can be in the same zone, see each other, and interact via the relationship system
 
 ### 3.3 Themes
 
