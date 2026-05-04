@@ -10,7 +10,9 @@
 
 ## 1. Overview
 
-Hikayat Pemuda is a story-driven open-world RPG set in a fictionalized Indonesian countryside. Inspired by Red Dead Redemption 2, the game emphasizes narrative depth, player morality, NPC relationship systems, and emergent exploration. Players take on the role of a young Indonesian man navigating life, community, and conflict through quests, trade, and social bonds.
+Hikayat Pemuda is a story-driven open-world RPG set across iconic Indonesian cities and islands. Inspired by Red Dead Redemption 2, the game emphasizes narrative depth, player morality, NPC relationship systems, and emergent exploration. Players take on the role of a young Indonesian man navigating life, community, and conflict through quests, trade, and social bonds.
+
+A secondary mission of this game is **cultural education** — introducing players worldwide to Indonesian food, clothing, weapons, language, architecture, traditions, and regional identity through authentic, interactive storytelling.
 
 ---
 
@@ -23,6 +25,7 @@ Hikayat Pemuda is a story-driven open-world RPG set in a fictionalized Indonesia
 | **Living World** | NPCs have routines, react to player reputation |
 | **Social Play** | Player-to-player relationships enrich the experience |
 | **Accessible** | Fully playable on mobile and desktop with native Roblox UI |
+| **Cultural Pride** | Each zone authentically represents an Indonesian region's culture, food, and tradition |
 
 ---
 
@@ -30,17 +33,29 @@ Hikayat Pemuda is a story-driven open-world RPG set in a fictionalized Indonesia
 
 ### 3.1 Setting
 
-A semi-open rural Indonesian world — villages, forests, rivers, markets, and sacred sites. Time period is early modern (pre-internet, kampung life aesthetic).
+The world spans multiple real Indonesian regions — each zone is a stylized, Roblox-scale representation of a distinct city or island, with authentic architecture, local culture, and regional identity. Time period is early modern (pre-internet, late-20th-century kampung life aesthetic).
 
 ### 3.2 Main Character
 
-The player character is a young man (pemuda) from a struggling family. He must navigate personal growth, community duty, and moral choices.
+The player character is a young man (pemuda) from a small Javanese desa. He starts with nothing and travels across the Indonesian archipelago, discovering new cultures and people, and building his reputation.
 
 ### 3.3 Themes
 
 - Responsibility and coming-of-age
 - Community vs. self-interest
 - Consequence of reputation
+- Pride and understanding of Indonesian cultural identity
+- Unity in diversity (Bhinneka Tunggal Ika)
+
+### 3.4 Cultural Mission
+
+Every region the player visits is designed to teach something real:
+- **Food**: authentic dishes with lore describing their origin region
+- **Clothing**: traditional attire from each island with cultural context
+- **Weapons**: traditional Indonesian weapons (no firearms)
+- **Architecture**: each zone's buildings reflect the region's real architectural style
+- **Language**: NPC dialog contains regional expressions and Bahasa Indonesia flavor text
+- **Traditions**: world events tied to real Indonesian ceremonies and holidays
 
 ---
 
@@ -83,30 +98,173 @@ Chapter → Scene(s) → Objective(s) → Choice Point → Outcome → Next Chap
 
 ## 5. Open World
 
-### 5.1 World Zones
+### 5.1 World Structure
 
-| Zone | Description | Unlock Condition |
-|---|---|---|
-| Kampung Awal | Starting village, tutorial area | Default |
-| Pasar Besar | Main market hub | Chapter 1 complete |
-| Hutan Larangan | Dangerous forest, rare resources | Chapter 2 complete |
-| Tepi Sungai | River area, fishing, hidden quests | Default |
-| Bukit Tua | Remote hilltop, sacred site | Chapter 3 complete |
+The world is divided into two hierarchy levels:
 
-### 5.2 Exploration
+```
+Universe (Hikayat Pemuda)
+└── Place (Island/Kepulauan)       ← separate Roblox Place, own PlaceId
+    └── Zone (City / Province)     ← areas within the same Place, streaming enabled
+```
 
-- Players can roam freely within unlocked zones
-- Hidden collectibles, lore items, and secret NPCs placed throughout
-- No minimap by default; directional compass and landmark icons only (immersive)
-- Optional: player can buy "Peta" (map item) from shop to reveal zone layout
+**Place** = a major Indonesian island or island group. Each Place is a separate Roblox experience place connected via `TeleportService`. Players travel between Places using **Bandara (Airport)** or **Pelabuhan (Seaport)** — physical locations in-world with ProximityPrompt "Pesan Tiket."
 
-### 5.3 World Events
+**Zone** = a stylized city or province within a Place. Zones are distinct map areas within the same Place, loaded via Roblox Streaming Enabled as players move between them. Zone boundaries are marked by natural transitions (road, river, terrain change) or a simple checkpoint sign.
 
-Random world events spawn periodically:
-- Merchant attacked by bandits (intervene = morality up)
-- Rare ingredient spawn
-- NPC in distress
-- Festival event (time-limited, cosmetic rewards)
+---
+
+### 5.2 Places & Zones
+
+#### 🌴 Jawa *(Starting Place)*
+
+| Zone | Province | Cultural Highlight | Unlock |
+|---|---|---|---|
+| **Suroboyo** | Jawa Timur | Port city — rujak cingur, Jembatan Merah, Bugis mix | Default |
+| **Kota Jogja** | DIY Yogyakarta | Kraton, Malioboro batik market, gudeg | Default |
+| **Semarang** | Jawa Tengah | Lawang Sewu, lumpia, pecinan (Chinatown mix) | Chapter 1 |
+| **Bandung** | Jawa Barat | Sunda culture — angklung, mie kocok, kujang | Chapter 1 |
+| **Jakarta** | DKI Jakarta | Capital — Monas area, Betawi culture, kerak telor | Chapter 2 |
+| **Serang** | Banten | Baduy enclave, debus tradition, golok Banten | Chapter 2 |
+
+---
+
+#### 🌋 Sumatera
+
+| Zone | Province | Cultural Highlight | Unlock |
+|---|---|---|---|
+| **Banda Aceh** | Aceh | Islamic architecture — tari saman, mie aceh, rencong | Default |
+| **Medan** | Sumatera Utara | Batak culture — ulos, bika ambon, Danau Toba proximity | Default |
+| **Padang** | Sumatera Barat | Minangkabau — rumah gadang, rendang, randai dance | Chapter 1 |
+| **Pekanbaru** | Riau | Melayu — lancang kuning, sagu | Chapter 1 |
+| **Palembang** | Sumatera Selatan | Ampera Bridge, pempek, songket, Sungai Musi | Chapter 1 |
+| **Bandar Lampung** | Lampung | Tapis cloth, gajah Sumatera, Way Kambas proximity | Chapter 2 |
+| **Pangkal Pinang** | Bangka Belitung | Timah mining, mie belitung, pantai pasir putih | Chapter 2 |
+| **Jambi** | Jambi | Batik Jambi, Candi Muaro Jambi, sungai | Chapter 2 |
+| **Bengkulu** | Bengkulu | Rafflesia arnoldii, kain besurek, benteng Inggris | Chapter 3 |
+| **Tanjung Pinang** | Kepulauan Riau | Melayu pesisir, seafood, pulau bintan proximity | Chapter 3 |
+
+---
+
+#### 🌿 Kalimantan
+
+| Zone | Province | Cultural Highlight | Unlock |
+|---|---|---|---|
+| **Pontianak** | Kalimantan Barat | Equator monument — Melayu + Tionghoa mix, soto banjar | Default |
+| **Banjarmasin** | Kalimantan Selatan | Floating market (pasar terapung), Banjar culture, sasirangan | Default |
+| **Palangka Raya** | Kalimantan Tengah | Dayak Ngaju — betang longhouse, beads, sungai | Chapter 1 |
+| **Samarinda** | Kalimantan Timur | Sarung samarinda, sungai Mahakam, near IKN | Chapter 2 |
+| **Tanjung Selor** | Kalimantan Utara | Frontier zone — remote, rare forest drops, Tidung culture | Chapter 3 |
+
+---
+
+#### 🌊 Sulawesi
+
+| Zone | Province | Cultural Highlight | Unlock |
+|---|---|---|---|
+| **Makassar** | Sulawesi Selatan | Bugis — Fort Rotterdam, coto makassar, pinisi boat | Default |
+| **Tanah Toraja** | Sulawesi Selatan | Tongkonan, tau-tau, kopi Toraja, Rambu Solo' | Default |
+| **Manado** | Sulawesi Utara | Minahasa — tinutuan, Bunaken proximity, woku | Chapter 1 |
+| **Gorontalo** | Gorontalo | Gorontalo culture — karawo embroidery, nasi bihu | Chapter 2 |
+| **Palu** | Sulawesi Tengah | Kaili culture — bawang goreng, ikan kaledo | Chapter 2 |
+| **Kendari** | Sulawesi Tenggara | Tolaki — tenun Kendari, lasoani beach | Chapter 3 |
+| **Mamuju** | Sulawesi Barat | Mandar — perahu Mandar, ikan bakar, remote feel | Chapter 3 |
+
+---
+
+#### 🦜 Papua
+
+| Zone | Province | Cultural Highlight | Unlock |
+|---|---|---|---|
+| **Jayapura** | Papua | Sentani culture — tifa drum, ukiran Sentani, danau Sentani | Default |
+| **Sorong** | Papua Barat Daya | Raja Ampat gateway — diving, cenderawasih bird | Chapter 1 |
+| **Manokwari** | Papua Barat | Arfak mountains, cenderawasih display, forest | Chapter 2 |
+| **Merauke** | Papua Selatan | Marind-Anim culture — savanna, kangguru, sagu | Chapter 3 |
+
+---
+
+#### 🌺 Nusa Tenggara *(includes Bali)*
+
+| Zone | Province | Cultural Highlight | Unlock |
+|---|---|---|---|
+| **Denpasar** | Bali | Pura Besakih, kecak dance, gamelan Bali, lawar | Default |
+| **Mataram** | NTB (Lombok) | Sasak culture — tenun Lombok, ayam taliwang, Rinjani | Default |
+| **Kupang** | NTT (Timor) | Timor culture — tenun ikat, savanna, se'i babi | Chapter 1 |
+
+---
+
+#### 🌶️ Maluku
+
+| Zone | Province | Cultural Highlight | Unlock |
+|---|---|---|---|
+| **Ambon** | Maluku | Rempah-rempah (spice islands) — tari cakalele, ikan kuah pala | Default |
+| **Ternate** | Maluku Utara | Kesultanan Ternate — cengkeh, pala, benteng Oranje | Chapter 1 |
+
+---
+
+### 5.3 Travel System
+
+#### 5.3.1 Bandara (Airport) — Inter-Island Travel
+
+- Located in each Place (at least one per island, in the main/default zone)
+- ProximityPrompt on ticket counter NPC: "Pesan Tiket Pesawat"
+- Opens **Peta Perjalanan** UI — Indonesia map showing all Places
+- Locked Places shown grayed out with lock icon and unlock hint
+- Travel costs **Rupiah** (ticket price varies by distance)
+- Triggers `TeleportService:TeleportToPlaceInstance()` — player loads into the destination Place's arrival zone (near that island's bandara)
+
+**Ticket prices (approximate):**
+| Route | Price |
+|---|---|
+| Within island (express) | Rp 2.000 |
+| Jawa ↔ Sumatera | Rp 5.000 |
+| Jawa ↔ Kalimantan | Rp 6.000 |
+| Jawa ↔ Sulawesi | Rp 8.000 |
+| Jawa ↔ Papua | Rp 15.000 |
+| Jawa ↔ Maluku | Rp 12.000 |
+| Jawa ↔ Nusa Tenggara | Rp 5.000 |
+
+#### 5.3.2 Pelabuhan (Seaport) — Inter-Zone & Inter-Island Travel
+
+- Located in coastal zones (most zones have one)
+- Inter-zone within same Place: free or cheap (Rp 500), uses local teleport (no Place switch)
+- Inter-island via sea: available for geographically close islands only (e.g., Jawa ↔ Bali, Sumatera ↔ Kepulauan Riau), costs Rupiah, uses TeleportService
+- Slower "travel feel" — brief loading screen styled as a kapal ferry view
+
+#### 5.3.3 Travel UI — Peta Perjalanan
+
+- Full-screen Indonesia archipelago map
+- Island groups clickable to zoom in
+- Zones shown as dots — green = unlocked, gray = locked, yellow = current
+- Bottom panel: selected destination name, ticket cost, "Berangkat" button
+- Localized to Bahasa Indonesia / English
+- Mobile: pinch-to-zoom supported
+
+#### 5.3.4 Unlock Logic
+
+- All **Default** zones within starting Place (Jawa) are available immediately
+- Non-Jawa Places: **each island's Default zones** unlock when player first travels there (no quest gate for travel itself — freedom to explore)
+- Locked zones within a Place: unlock via quest progression as noted in tables above
+- Player cannot travel to a Place if they have never unlocked it (first visit requires completing Chapter 1 on Jawa)
+
+---
+
+### 5.4 Within-Zone Exploration
+
+- Players roam freely within unlocked zones
+- Hidden collectibles, lore items, and secret NPCs placed throughout each zone
+- No minimap by default — directional compass + landmark icons (immersive)
+- Player can buy **"Peta [Zone]"** (zone-specific map) from local shop to reveal that zone's layout
+- Each zone has at least: 1 shop, 1 quest-giver NPC, 1 collectible, 1 ambient NPC
+
+### 5.5 World Events
+
+Random events spawn per zone, per server:
+- Merchant attacked (intervene = morality +8)
+- Rare ingredient spawn at fixed location
+- NPC in distress (help = morality +5, Rupiah reward)
+- Cultural festival procession (ambient, no action required — watching gives lore collectible)
+- Poacher/bandit camp (defeat all = morality +10, loot drop)
 
 ---
 
@@ -186,14 +344,22 @@ Random world events spawn periodically:
 
 ### 8.1 Weapons
 
-No firearms. Melee and ranged only.
+No firearms. Traditional Indonesian weapons only — melee and ranged.
 
-| Weapon | Type | Range | Damage Tier |
-|---|---|---|---|
-| Kepalan (Punch) | Melee | Very Short | Low |
-| Kayu Balok | Melee | Short | Medium |
-| Pisau | Melee | Short | Medium-High |
-| Ketapel (Slingshot) | Ranged | Medium | Low-Medium |
+| Weapon | Origin | Type | Range | Damage Tier |
+|---|---|---|---|---|
+| Kepalan / Pencak Silat | Java/Sumatra | Melee | Very Short | Low |
+| Tongkat (staff) | General Nusantara | Melee | Short | Medium |
+| Golok | Betawi / Sunda | Melee | Short | Medium |
+| Keris | Java / Bali | Melee | Short | Medium-High |
+| Mandau | Kalimantan (Dayak) | Melee | Short | High |
+| Ketapel | General Nusantara | Ranged | Medium | Low-Medium |
+| Sumpit (blowpipe) | Kalimantan / Papua | Ranged | Long | Low (status effect) |
+
+- **Keris**: ceremonial, high morality players get bonus damage (revered weapon)
+- **Mandau**: only obtainable in Hutan Kalimantan zone
+- **Sumpit**: darts apply slow effect on enemy for 3 seconds
+- **Pencak Silat** punch style: unlock after completing a side quest in Desa Jawa — replaces default punch animation with silat moves
 
 ### 8.2 Combat Mechanics
 
@@ -215,13 +381,13 @@ No firearms. Melee and ranged only.
 
 ### 9.1 Item Types
 
-| Type | Use | Example |
+| Type | Use | Example (Indonesian) |
 |---|---|---|
-| **Makanan/Minuman** | Consume to restore stamina | Nasi Bungkus, Es Teh |
-| **Kosmetik/UGC** | Equip to change appearance | Baju Batik, Peci |
-| **Koleksi** | Display item, tradeable, show-off | Koin Langka, Foto Jadoel |
-| **Senjata** | Equip to combat slot | Pisau, Kayu Balok |
-| **Bahan** | Craft into other items | Beras, Benang, Kayu |
+| **Makanan/Minuman** | Consume to restore stamina | Nasi Gudeg, Pempek, Bakpia, Kopi Toraja, Es Teh |
+| **Kosmetik/UGC** | Equip to change appearance | Batik Yogya, Blangkon, Tanjak, Baju Pokko', Songket |
+| **Koleksi** | Display item, tradeable, show-off | Wayang Kulit mini, Tau-Tau figurine, Batik Scroll, Mandau mini |
+| **Senjata** | Equip to combat slot | Keris, Golok, Mandau, Tongkat, Ketapel, Sumpit |
+| **Bahan** | Craft into other items | Beras, Benang Emas, Rotan, Getah Karet, Daun Pisang, Kayu Ulin |
 
 ### 9.2 Inventory UI
 
@@ -519,48 +685,90 @@ AssetConfig.Items = {
 }
 
 -- ============================================================
--- WEAPONS (equippable definitions, references Items)
+-- WEAPONS (equippable definitions — all traditional Indonesian)
 -- ============================================================
 AssetConfig.Weapons = {
-    Punch = {
-        id          = "Punch",
-        nameKey     = "item.punch.name",
-        damage      = 8,
-        cooldown    = 0.5,
+    PencakSilat = {
+        id          = "PencakSilat",
+        nameKey     = "item.pencaksilat.name",
+        origin      = "Java / Sumatra",
+        damage      = 10,
+        cooldown    = 0.45,
         staminaCost = 5,
         range       = 4,
         animationId = "rbxassetid://000000010",
+        unlockQuest = "SQ_SilatMaster",  -- replaces default punch
     },
-    KayuBalok = {
-        id          = "KayuBalok",
-        nameKey     = "item.kayubalok.name",
-        damage      = 15,
-        cooldown    = 0.9,
+    Tongkat = {
+        id          = "Tongkat",
+        nameKey     = "item.tongkat.name",
+        origin      = "Nusantara",
+        damage      = 14,
+        cooldown    = 0.85,
+        staminaCost = 10,
+        range       = 6,
+        animationId = "rbxassetid://000000011",
+        itemRef     = "Tongkat",
+    },
+    Golok = {
+        id          = "Golok",
+        nameKey     = "item.golok.name",
+        origin      = "Betawi / Sunda",
+        damage      = 18,
+        cooldown    = 0.8,
         staminaCost = 12,
         range       = 5,
-        animationId = "rbxassetid://000000011",
-        itemRef     = "KayuBalok",
+        animationId = "rbxassetid://000000012",
+        itemRef     = "Golok",
     },
-    Pisau = {
-        id          = "Pisau",
-        nameKey     = "item.pisau.name",
-        damage      = 20,
-        cooldown    = 0.8,
+    Keris = {
+        id          = "Keris",
+        nameKey     = "item.keris.name",
+        origin      = "Java / Bali",
+        damage      = 22,
+        cooldown    = 0.75,
         staminaCost = 10,
         range       = 4,
-        animationId = "rbxassetid://000000012",
-        itemRef     = "Pisau",
+        animationId = "rbxassetid://000000013",
+        itemRef     = "Keris",
+        moralityBonus = { minMorality = 90, damageMultiplier = 1.25 },
+    },
+    Mandau = {
+        id          = "Mandau",
+        nameKey     = "item.mandau.name",
+        origin      = "Kalimantan (Dayak)",
+        damage      = 28,
+        cooldown    = 0.95,
+        staminaCost = 15,
+        range       = 5,
+        animationId = "rbxassetid://000000014",
+        itemRef     = "Mandau",
+        zoneRestricted = "HutanKalimantan",  -- only obtainable in this zone
     },
     Ketapel = {
         id          = "Ketapel",
         nameKey     = "item.ketapel.name",
+        origin      = "Nusantara",
         damage      = 12,
         cooldown    = 1.2,
         staminaCost = 8,
         range       = 20,
         projectileSpeed = 80,
-        animationId = "rbxassetid://000000013",
+        animationId = "rbxassetid://000000015",
         itemRef     = "Ketapel",
+    },
+    Sumpit = {
+        id          = "Sumpit",
+        nameKey     = "item.sumpit.name",
+        origin      = "Kalimantan / Papua",
+        damage      = 8,
+        cooldown    = 1.5,
+        staminaCost = 6,
+        range       = 35,
+        projectileSpeed = 120,
+        statusEffect = { type = "Slow", duration = 3, multiplier = 0.5 },
+        animationId = "rbxassetid://000000016",
+        itemRef     = "Sumpit",
     },
 }
 
@@ -711,14 +919,360 @@ AssetConfig.Currency = {
 }
 
 -- ============================================================
--- WORLD ZONES
+-- PLACES (Islands) — each maps to a Roblox PlaceId
+-- ============================================================
+AssetConfig.Places = {
+    Jawa = {
+        id          = "Jawa",
+        nameKey     = "place.jawa",
+        placeId     = 0,            -- fill with actual Roblox PlaceId
+        isStarting  = true,
+        bandaraZone = "Suroboyo",
+        pelabuhanZone = "Suroboyo",
+    },
+    Sumatera = {
+        id          = "Sumatera",
+        nameKey     = "place.sumatera",
+        placeId     = 0,
+        bandaraZone = "Medan",
+        pelabuhanZone = "Palembang",
+    },
+    Kalimantan = {
+        id          = "Kalimantan",
+        nameKey     = "place.kalimantan",
+        placeId     = 0,
+        bandaraZone = "Banjarmasin",
+        pelabuhanZone = "Pontianak",
+    },
+    Sulawesi = {
+        id          = "Sulawesi",
+        nameKey     = "place.sulawesi",
+        placeId     = 0,
+        bandaraZone = "Makassar",
+        pelabuhanZone = "Makassar",
+    },
+    Papua = {
+        id          = "Papua",
+        nameKey     = "place.papua",
+        placeId     = 0,
+        bandaraZone = "Jayapura",
+        pelabuhanZone = "Sorong",
+    },
+    NusaTenggara = {
+        id          = "NusaTenggara",
+        nameKey     = "place.nusatenggara",
+        placeId     = 0,
+        bandaraZone = "Denpasar",
+        pelabuhanZone = "Denpasar",
+    },
+    Maluku = {
+        id          = "Maluku",
+        nameKey     = "place.maluku",
+        placeId     = 0,
+        bandaraZone = "Ambon",
+        pelabuhanZone = "Ambon",
+    },
+}
+
+-- ============================================================
+-- TRAVEL (Ticket Prices in Rupiah)
+-- ============================================================
+AssetConfig.Travel = {
+    -- Bandara (Airport) — inter-island via TeleportService
+    airTickets = {
+        SameIsland     = 2000,
+        JawaToSumatera = 5000,
+        JawaToKalimantan = 6000,
+        JawaToSulawesi = 8000,
+        JawaToNusaTenggara = 5000,
+        JawaToMaluku   = 12000,
+        JawaToPapua    = 15000,
+    },
+    -- Pelabuhan (Seaport) — inter-zone within same island
+    ferryTickets = {
+        WithinIsland   = 500,
+        -- Cross-sea short routes (Jawa <-> Bali, Jawa <-> Sumatera via Selat Sunda)
+        ShortCrossSea  = 1500,
+    },
+}
+
+-- ============================================================
+-- WORLD ZONES (organized by Place)
 -- ============================================================
 AssetConfig.Zones = {
-    KampungAwal   = { id = "KampungAwal",  nameKey = "zone.kampungawal",  unlockQuest = nil              },
-    PasarBesar    = { id = "PasarBesar",   nameKey = "zone.pasarbesar",   unlockQuest = "MQ_Ch1_Awal"    },
-    HutanLarangan = { id = "HutanLarangan",nameKey = "zone.hutanlarangan",unlockQuest = "MQ_Ch2_Hutan"   },
-    TepiSungai    = { id = "TepiSungai",   nameKey = "zone.tepisungai",   unlockQuest = nil              },
-    BukitTua      = { id = "BukitTua",     nameKey = "zone.bukittua",     unlockQuest = "MQ_Ch3_Bukit"   },
+
+    -- JAWA
+    Suroboyo = {
+        id = "Suroboyo", place = "Jawa", nameKey = "zone.suroboyo",
+        region = "Jawa Timur", unlockQuest = nil,
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000100", ambientSound = "rbxassetid://000000150",
+        culturalNote = "Betawi-Jawa port city, rujak cingur, Jembatan Merah",
+    },
+    KotaJogja = {
+        id = "KotaJogja", place = "Jawa", nameKey = "zone.kotajogja",
+        region = "DIY Yogyakarta", unlockQuest = nil,
+        hasBandara = false, hasPelabuhan = false,
+        bgmId = "rbxassetid://000000101", ambientSound = "rbxassetid://000000151",
+        culturalNote = "Kraton, Malioboro, batik parang/kawung, gudeg, keris",
+    },
+    Semarang = {
+        id = "Semarang", place = "Jawa", nameKey = "zone.semarang",
+        region = "Jawa Tengah", unlockQuest = "MQ_Ch1_Awal",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000102", ambientSound = "rbxassetid://000000152",
+        culturalNote = "Lawang Sewu, lumpia, pecinan, Jawa-Tionghoa mix",
+    },
+    Bandung = {
+        id = "Bandung", place = "Jawa", nameKey = "zone.bandung",
+        region = "Jawa Barat", unlockQuest = "MQ_Ch1_Awal",
+        hasBandara = true, hasPelabuhan = false,
+        bgmId = "rbxassetid://000000103", ambientSound = "rbxassetid://000000153",
+        culturalNote = "Sunda — angklung, mie kocok, kujang, Gedung Sate",
+    },
+    Jakarta = {
+        id = "Jakarta", place = "Jawa", nameKey = "zone.jakarta",
+        region = "DKI Jakarta", unlockQuest = "MQ_Ch2_Jakarta",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000104", ambientSound = "rbxassetid://000000154",
+        culturalNote = "Betawi — Monas, kerak telor, ondel-ondel, kota tua",
+    },
+    Serang = {
+        id = "Serang", place = "Jawa", nameKey = "zone.serang",
+        region = "Banten", unlockQuest = "MQ_Ch2_Jakarta",
+        hasBandara = false, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000105", ambientSound = "rbxassetid://000000155",
+        culturalNote = "Baduy enclave, debus tradition, golok Banten",
+    },
+
+    -- SUMATERA
+    BandaAceh = {
+        id = "BandaAceh", place = "Sumatera", nameKey = "zone.bandaaceh",
+        region = "Aceh", unlockQuest = nil,
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000110", ambientSound = "rbxassetid://000000160",
+        culturalNote = "Islamic architecture, tari saman, mie aceh, rencong dagger",
+    },
+    Medan = {
+        id = "Medan", place = "Sumatera", nameKey = "zone.medan",
+        region = "Sumatera Utara", unlockQuest = nil,
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000111", ambientSound = "rbxassetid://000000161",
+        culturalNote = "Batak — ulos, bika ambon, Danau Toba, tor-tor dance",
+    },
+    Padang = {
+        id = "Padang", place = "Sumatera", nameKey = "zone.padang",
+        region = "Sumatera Barat", unlockQuest = "MQ_Ch1_Awal",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000112", ambientSound = "rbxassetid://000000162",
+        culturalNote = "Minangkabau — rumah gadang, rendang, randai, saluang",
+    },
+    Pekanbaru = {
+        id = "Pekanbaru", place = "Sumatera", nameKey = "zone.pekanbaru",
+        region = "Riau", unlockQuest = "MQ_Ch1_Awal",
+        hasBandara = true, hasPelabuhan = false,
+        bgmId = "rbxassetid://000000113", ambientSound = "rbxassetid://000000163",
+        culturalNote = "Melayu Riau — lancang kuning, sagu, tepak sirih",
+    },
+    Palembang = {
+        id = "Palembang", place = "Sumatera", nameKey = "zone.palembang",
+        region = "Sumatera Selatan", unlockQuest = "MQ_Ch1_Awal",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000114", ambientSound = "rbxassetid://000000164",
+        culturalNote = "Ampera Bridge, pempek, songket, Sungai Musi, Sriwijaya legacy",
+    },
+    BandarLampung = {
+        id = "BandarLampung", place = "Sumatera", nameKey = "zone.bandarlampung",
+        region = "Lampung", unlockQuest = "MQ_Ch2_Sumatera",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000115", ambientSound = "rbxassetid://000000165",
+        culturalNote = "Tapis cloth, gajah Sumatera, Way Kambas, tari sigeh pengunten",
+    },
+    PangkalPinang = {
+        id = "PangkalPinang", place = "Sumatera", nameKey = "zone.pangkalpinang",
+        region = "Bangka Belitung", unlockQuest = "MQ_Ch2_Sumatera",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000116", ambientSound = "rbxassetid://000000166",
+        culturalNote = "Timah (tin) mining heritage, mie belitung, pantai pasir putih",
+    },
+    Jambi = {
+        id = "Jambi", place = "Sumatera", nameKey = "zone.jambi",
+        region = "Jambi", unlockQuest = "MQ_Ch2_Sumatera",
+        hasBandara = true, hasPelabuhan = false,
+        bgmId = "rbxassetid://000000117", ambientSound = "rbxassetid://000000167",
+        culturalNote = "Batik Jambi, Candi Muaro Jambi ruins, sungai Batanghari",
+    },
+    Bengkulu = {
+        id = "Bengkulu", place = "Sumatera", nameKey = "zone.bengkulu",
+        region = "Bengkulu", unlockQuest = "MQ_Ch3_Sumatera",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000118", ambientSound = "rbxassetid://000000168",
+        culturalNote = "Rafflesia arnoldii, kain besurek, benteng Inggris (Fort Marlborough)",
+    },
+    TanjungPinang = {
+        id = "TanjungPinang", place = "Sumatera", nameKey = "zone.tanjungpinang",
+        region = "Kepulauan Riau", unlockQuest = "MQ_Ch3_Sumatera",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000119", ambientSound = "rbxassetid://000000169",
+        culturalNote = "Melayu pesisir, seafood, Pulau Penyengat royal ruins",
+    },
+
+    -- KALIMANTAN
+    Pontianak = {
+        id = "Pontianak", place = "Kalimantan", nameKey = "zone.pontianak",
+        region = "Kalimantan Barat", unlockQuest = nil,
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000120", ambientSound = "rbxassetid://000000170",
+        culturalNote = "Equator monument, Melayu-Tionghoa mix, soto banjar",
+    },
+    Banjarmasin = {
+        id = "Banjarmasin", place = "Kalimantan", nameKey = "zone.banjarmasin",
+        region = "Kalimantan Selatan", unlockQuest = nil,
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000121", ambientSound = "rbxassetid://000000171",
+        culturalNote = "Pasar terapung (floating market), sasirangan cloth, Banjar culture",
+    },
+    PalangkaRaya = {
+        id = "PalangkaRaya", place = "Kalimantan", nameKey = "zone.palangkaraya",
+        region = "Kalimantan Tengah", unlockQuest = "MQ_Ch1_Kalimantan",
+        hasBandara = true, hasPelabuhan = false,
+        bgmId = "rbxassetid://000000122", ambientSound = "rbxassetid://000000172",
+        culturalNote = "Dayak Ngaju — betang longhouse, manik-manik, mandau, sungai Kahayan",
+    },
+    Samarinda = {
+        id = "Samarinda", place = "Kalimantan", nameKey = "zone.samarinda",
+        region = "Kalimantan Timur", unlockQuest = "MQ_Ch2_Kalimantan",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000123", ambientSound = "rbxassetid://000000173",
+        culturalNote = "Sarung samarinda weaving, sungai Mahakam, Kutai kingdom legacy",
+    },
+    TanjungSelor = {
+        id = "TanjungSelor", place = "Kalimantan", nameKey = "zone.tanjungselor",
+        region = "Kalimantan Utara", unlockQuest = "MQ_Ch3_Kalimantan",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000124", ambientSound = "rbxassetid://000000174",
+        culturalNote = "Tidung culture, frontier remote feel, rare forest drops",
+    },
+
+    -- SULAWESI
+    Makassar = {
+        id = "Makassar", place = "Sulawesi", nameKey = "zone.makassar",
+        region = "Sulawesi Selatan", unlockQuest = nil,
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000130", ambientSound = "rbxassetid://000000180",
+        culturalNote = "Bugis — Fort Rotterdam, coto makassar, pinisi boat, andi nobility",
+    },
+    TanahToraja = {
+        id = "TanahToraja", place = "Sulawesi", nameKey = "zone.tanahtoraja",
+        region = "Sulawesi Selatan", unlockQuest = nil,
+        hasBandara = false, hasPelabuhan = false,
+        bgmId = "rbxassetid://000000131", ambientSound = "rbxassetid://000000181",
+        culturalNote = "Tongkonan, tau-tau, kopi Toraja, Rambu Solo' procession",
+    },
+    Manado = {
+        id = "Manado", place = "Sulawesi", nameKey = "zone.manado",
+        region = "Sulawesi Utara", unlockQuest = "MQ_Ch1_Sulawesi",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000132", ambientSound = "rbxassetid://000000182",
+        culturalNote = "Minahasa — tinutuan bubur, Bunaken sea, woku spice, cakalang",
+    },
+    Gorontalo = {
+        id = "Gorontalo", place = "Sulawesi", nameKey = "zone.gorontalo",
+        region = "Gorontalo", unlockQuest = "MQ_Ch2_Sulawesi",
+        hasBandara = true, hasPelabuhan = false,
+        bgmId = "rbxassetid://000000133", ambientSound = "rbxassetid://000000183",
+        culturalNote = "Karawo embroidery, nasi bihu, binde biluhuta soup",
+    },
+    Palu = {
+        id = "Palu", place = "Sulawesi", nameKey = "zone.palu",
+        region = "Sulawesi Tengah", unlockQuest = "MQ_Ch2_Sulawesi",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000134", ambientSound = "rbxassetid://000000184",
+        culturalNote = "Kaili culture, bawang goreng Palu, ikan kaledo, teluk Palu",
+    },
+    Kendari = {
+        id = "Kendari", place = "Sulawesi", nameKey = "zone.kendari",
+        region = "Sulawesi Tenggara", unlockQuest = "MQ_Ch3_Sulawesi",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000135", ambientSound = "rbxassetid://000000185",
+        culturalNote = "Tolaki — tenun Kendari silver filigree, sinonggi sagu",
+    },
+    Mamuju = {
+        id = "Mamuju", place = "Sulawesi", nameKey = "zone.mamuju",
+        region = "Sulawesi Barat", unlockQuest = "MQ_Ch3_Sulawesi",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000136", ambientSound = "rbxassetid://000000186",
+        culturalNote = "Mandar — perahu Mandar, ikan bakar, remote frontier vibe",
+    },
+
+    -- PAPUA
+    Jayapura = {
+        id = "Jayapura", place = "Papua", nameKey = "zone.jayapura",
+        region = "Papua", unlockQuest = nil,
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000140", ambientSound = "rbxassetid://000000190",
+        culturalNote = "Sentani — tifa drum, ukiran Sentani, danau Sentani, noken bag",
+    },
+    Sorong = {
+        id = "Sorong", place = "Papua", nameKey = "zone.sorong",
+        region = "Papua Barat Daya", unlockQuest = "MQ_Ch1_Papua",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000141", ambientSound = "rbxassetid://000000191",
+        culturalNote = "Raja Ampat gateway, cenderawasih bird, diving, bahari culture",
+    },
+    Manokwari = {
+        id = "Manokwari", place = "Papua", nameKey = "zone.manokwari",
+        region = "Papua Barat", unlockQuest = "MQ_Ch2_Papua",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000142", ambientSound = "rbxassetid://000000192",
+        culturalNote = "Arfak mountains, cenderawasih display, hutan hujan Papua",
+    },
+    Merauke = {
+        id = "Merauke", place = "Papua", nameKey = "zone.merauke",
+        region = "Papua Selatan", unlockQuest = "MQ_Ch3_Papua",
+        hasBandara = true, hasPelabuhan = false,
+        bgmId = "rbxassetid://000000143", ambientSound = "rbxassetid://000000193",
+        culturalNote = "Marind-Anim — savanna, kangguru Papua, sagu, tari wutukala",
+    },
+
+    -- NUSA TENGGARA (+ Bali)
+    Denpasar = {
+        id = "Denpasar", place = "NusaTenggara", nameKey = "zone.denpasar",
+        region = "Bali", unlockQuest = nil,
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000150", ambientSound = "rbxassetid://000000200",
+        culturalNote = "Pura Besakih, kecak dance, gamelan Bali, lawar, ogoh-ogoh",
+    },
+    Mataram = {
+        id = "Mataram", place = "NusaTenggara", nameKey = "zone.mataram",
+        region = "NTB (Lombok)", unlockQuest = nil,
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000151", ambientSound = "rbxassetid://000000201",
+        culturalNote = "Sasak — tenun Lombok, ayam taliwang, Rinjani, gendang beleq",
+    },
+    Kupang = {
+        id = "Kupang", place = "NusaTenggara", nameKey = "zone.kupang",
+        region = "NTT (Timor)", unlockQuest = "MQ_Ch1_NusaTenggara",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000152", ambientSound = "rbxassetid://000000202",
+        culturalNote = "Timor — tenun ikat NTT, se'i babi, savanna, flobamora culture",
+    },
+
+    -- MALUKU
+    Ambon = {
+        id = "Ambon", place = "Maluku", nameKey = "zone.ambon",
+        region = "Maluku", unlockQuest = nil,
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000160", ambientSound = "rbxassetid://000000210",
+        culturalNote = "Rempah-rempah (spice islands), tari cakalele, ikan kuah pala, sagu",
+    },
+    Ternate = {
+        id = "Ternate", place = "Maluku", nameKey = "zone.ternate",
+        region = "Maluku Utara", unlockQuest = "MQ_Ch1_Maluku",
+        hasBandara = true, hasPelabuhan = true,
+        bgmId = "rbxassetid://000000161", ambientSound = "rbxassetid://000000211",
+        culturalNote = "Kesultanan Ternate, cengkeh, pala, Benteng Oranje, kie raha",
+    },
 }
 
 -- ============================================================
@@ -895,11 +1449,20 @@ AssetConfig.Achievements = {
         reward  = { rupiah = 5000 },
     },
     {
-        id      = "ACH_AllZones",
-        nameKey = "ach.allzones.name",
-        descKey = "ach.allzones.desc",
-        type    = "Explore",
-        count   = 5,
+        id      = "ACH_AllPlaces",
+        nameKey = "ach.allplaces.name",
+        descKey = "ach.allplaces.desc",
+        type    = "ExplorePlace",
+        count   = 7,          -- all 7 islands
+        reward  = { gold = 5, items = { { id = "TitlePenjelajahNusantara", amount = 1 } } },
+    },
+    {
+        id      = "ACH_AllZonesJawa",
+        nameKey = "ach.allzonesjawa.name",
+        descKey = "ach.allzonesjawa.desc",
+        type    = "ExploreZone",
+        place   = "Jawa",
+        count   = 6,
         reward  = { gold = 1 },
     },
     {
@@ -923,13 +1486,15 @@ AssetConfig.Achievements = {
 
 -- ============================================================
 -- AUDIO
+-- Note: zone BGM and ambientSound IDs live in AssetConfig.Zones above.
+-- This section covers global/shared audio only.
 -- ============================================================
 AssetConfig.Audio = {
     BGM = {
-        KampungAwal   = "rbxassetid://000000100",
-        PasarBesar    = "rbxassetid://000000101",
-        HutanLarangan = "rbxassetid://000000102",
         Combat        = "rbxassetid://000000103",
+        MainMenu      = "rbxassetid://000000104",
+        QuestComplete = "rbxassetid://000000105",
+        TravelScreen  = "rbxassetid://000000106",
     },
     SFX = {
         Punch         = "rbxassetid://000000110",
@@ -970,7 +1535,8 @@ All player data saved via `DataStoreService`.
     activeQuests     = {},          -- max 5 concurrent side quests
 
     relationships    = {},          -- { targetUserId, type }
-    unlockedZones    = { "KampungAwal", "TepiSungai" },
+    unlockedPlaces   = { "Jawa" },          -- islands visited at least once
+    unlockedZones    = { "Suroboyo", "KotaJogja" },  -- zones within places
 
     -- Task system
     dailyTasks       = {},          -- { taskId, progress, completed, claimed } — reset daily
@@ -1004,6 +1570,27 @@ All player data saved via `DataStoreService`.
 
 ## 19. Folder Structure (Roblox Studio)
 
+### 19.0 Roblox Universe Layout
+
+The game is a **Roblox Universe** (one game, many Places). Each island is a separate Place:
+
+```
+Universe: Hikayat Pemuda
+├── Place: Jawa          (starting place, PlaceId filled in AssetConfig.Places.Jawa.placeId)
+├── Place: Sumatera
+├── Place: Kalimantan
+├── Place: Sulawesi
+├── Place: Papua
+├── Place: NusaTenggara
+└── Place: Maluku
+```
+
+- `AssetConfig` is published to **each** Place via Roblox package or `require(assetId)` so all Places share one config
+- `DataStoreService` keys are shared across all Places in same Universe automatically
+- `TeleportService:TeleportToPlaceInstance()` handles inter-island travel
+
+### 19.1 Per-Place Folder Structure (same structure replicated in each Place)
+
 ```
 game
 ├── ReplicatedStorage
@@ -1027,7 +1614,9 @@ game
 │       ├── MoralityChanged
 │       ├── AchievementUnlocked
 │       ├── LoginStreakClaimed
-│       └── OpenGaleri
+│       ├── OpenGaleri
+│       ├── OpenTravelMap
+│       └── TeleportToPlace
 ├── ServerScriptService
 │   ├── GameManager              (Script)
 │   ├── DataManager              (Script)
@@ -1039,6 +1628,8 @@ game
 │   ├── RelationshipServer       (Script)
 │   ├── AchievementServer        (Script)
 │   ├── LoginStreakServer         (Script)
+│   ├── TravelServer             (Script)  ← handles TeleportService, ticket purchase
+│   ├── ZoneManager              (Script)  ← streaming, zone boundary detection
 │   ├── EventManager             (Script)
 │   └── LeaderboardServer        (Script)
 ├── StarterPlayerScripts
@@ -1058,21 +1649,77 @@ game
 │   ├── SocialGui                (ScreenGui)
 │   ├── AchievementGui           (ScreenGui)
 │   ├── GaleriGui                (ScreenGui)
-│   └── LoginStreakGui           (ScreenGui)
+│   ├── LoginStreakGui           (ScreenGui)
+│   └── TravelGui                (ScreenGui)  ← Peta Perjalanan, ticket purchase
 └── Workspace
     ├── Map
-    │   ├── KampungAwal
-    │   ├── PasarBesar
-    │   │   └── Leaderboard      (BillboardGui NPC)
-    │   ├── HutanLarangan
-    │   ├── TepiSungai
-    │   └── BukitTua
+    │   ├── Zones                (folders per zone, streamed in/out)
+    │   │   ├── Suroboyo
+    │   │   ├── KotaJogja
+    │   │   │   └── Leaderboard  (BillboardGui NPC)
+    │   │   ├── Semarang
+    │   │   ├── Bandung
+    │   │   ├── Jakarta
+    │   │   └── Serang
+    │   ├── Bandara              (airport building model, shared prefab)
+    │   └── Pelabuhan            (seaport building model, shared prefab)
     └── NPCs
 ```
 
 ---
 
-## 20. Out of Scope (v1)
+## 20. Indonesian Culture System
+
+### 20.1 Cultural Lore Cards
+
+Every food, clothing, collectible, and weapon item has an optional **Lore Card** — a short info panel (2–3 sentences) explaining its real-world cultural origin.
+
+- Accessible by long-pressing/hovering an item → tap "Tentang Item"
+- Written in both Bahasa Indonesia and English (localization key)
+- Example (Keris): *"Keris adalah senjata tradisional Jawa yang juga merupakan benda pusaka. Keris diakui UNESCO sebagai Warisan Budaya Tak Benda Dunia sejak 2005."*
+
+### 20.2 Budaya (Culture) Collectible Category
+
+A dedicated sub-type within Koleksi items: **Budaya** collectibles are cultural artifacts, each tied to a specific region.
+
+| Collectible | Region | Rarity |
+|---|---|---|
+| Wayang Kulit (Arjuna) | Jawa Tengah | Tidak Biasa |
+| Batik Parang Scroll | Yogyakarta | Tidak Biasa |
+| Perisai Dayak Ukir | Kalimantan | Langka |
+| Songket Palembang | Sumatera Selatan | Langka |
+| Tau-Tau Toraja | Sulawesi Selatan | Epik |
+| Keris Pusaka | Jawa / Bali | Legenda |
+
+All Budaya collectibles show in the Galeri Pribadi. A completion % per region is tracked ("Koleksi Jawa: 2/5").
+
+### 20.3 Regional NPC Flavor
+
+NPCs in each zone speak with regional expressions as flavor (not replacing Bahasa Indonesia — just as natural dialog additions):
+
+| Zone | Flavor expression | Meaning |
+|---|---|---|
+| Desa Jawa | "Monggo, Mas." | "Please, come in." (Javanese polite) |
+| Kota Jogja | "Nuwun sewu, nggih." | "Excuse me, please." |
+| Hutan Kalimantan | "Eh, iko datang!" | Greeting (Banjar Malay) |
+| Tepi Sungai Musi | "Apo kabar, kawan?" | "How are you, friend?" (Palembang) |
+| Tanah Toraja | "Melo' ko?" | "How are you?" (Toraja) |
+
+### 20.4 Traditional Architecture per Zone
+
+Each zone's buildings are built using Roblox parts styled after real regional architecture. Reference assets defined in `AssetConfig.Architecture` (image IDs, part colors, roof style).
+
+| Zone | Roof style | Key material | Distinctive feature |
+|---|---|---|---|
+| Desa Jawa | Joglo (pyramid) | Kayu jati (teak) | Pendopo open pavilion |
+| Kota Jogja | Limasan | Brick + kapur | Gapura / gateway arches |
+| Hutan Kalimantan | Betang (longhouse) | Kayu ulin | Elevated on stilts, long |
+| Tepi Sungai Musi | Panggung (stilt) | Papan kayu | Built over/beside river |
+| Tanah Toraja | Tongkonan | Kayu + bambu | Curved boat-shaped roof |
+
+---
+
+## 21. Out of Scope (v1)
 
 - Firearms or gun combat
 - Player vs. Player combat outside rival relationship + non-safe zones
@@ -1286,12 +1933,14 @@ Players always see what's next:
 
 Recurring seasonal events with exclusive cosmetic rewards (not pay-walled):
 
-| Event | Season | Exclusive Reward |
-|---|---|---|
-| Lebaran Festival | Eid al-Fitr period | Baju Koko set, ketupat cosmetic |
-| HUT RI | August 17 | Merah-putih accessories |
-| Tahun Baru | New Year | Kembang api emote, topi party |
-| Panen Raya | Mid-year | Farmer cosmetic set |
+| Event | Season | Zone Spotlight | Exclusive Reward |
+|---|---|---|---|
+| Lebaran / Idul Fitri | Eid al-Fitr | Desa Jawa + Kota Jogja | Baju Koko, Ketupat display, Sarung batik |
+| HUT Kemerdekaan RI | August 17 | All zones (flag decorations) | Pita merah-putih, lomba 17-an emote |
+| Tahun Baru Islam | Islamic New Year | Desa Jawa | Sorban, kaligrafi collectible |
+| Panen Raya | Mid-year harvest | Desa Jawa + TepiSungaiMusi | Caping (farmer hat), ani-ani tool cosmetic |
+| Nyepi Awareness | Bali/Hindu New Year | Tanah Toraja (sacred vibe) | Ogoh-ogoh miniature collectible |
+| Festival Danau Toba | Mid-year | (future Sumatra zone preview) | Ulos Batak cosmetic |
 
 - Events last 7–14 days
 - Event-exclusive tasks added to daily pool during event
