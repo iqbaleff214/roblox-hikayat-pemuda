@@ -1,0 +1,37 @@
+# TestEZ globals injected by the test runner at runtime.
+# Referenced in selene.toml via std = "...+testez".
+
+[globals.describe]
+args = [
+    { type = "string" },
+    { type = "function" },
+]
+
+[globals.it]
+args = [
+    { type = "string" },
+    { type = "function" },
+]
+
+[globals.expect]
+args = [
+    { type = "any" },
+]
+
+[globals.beforeEach]
+args = [{ type = "function" }]
+
+[globals.afterEach]
+args = [{ type = "function" }]
+
+[globals.beforeAll]
+args = [{ type = "function" }]
+
+[globals.afterAll]
+args = [{ type = "function" }]
+
+[globals.FOCUS]
+property = true
+
+[globals.SKIP]
+property = true
