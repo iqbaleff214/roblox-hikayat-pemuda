@@ -722,6 +722,206 @@ AssetConfig.Zones = {
 }
 
 -- ============================================================
+-- TASKS
+-- ============================================================
+AssetConfig.Tasks = {
+    dailyQuota    = { easy = 3, medium = 2 },
+    weeklyQuota   = { medium = 2, hard = 1 },
+    rerollCost    = { rupiah = 500 },
+    rerollsPerDay = 1,
+    resetHourUTC  = 17, -- 00:00 WIB = 17:00 UTC
+
+    allDailyBonus = {
+        rupiah   = { min = 2000, max = 5000 },
+        itemDrop = { chance = 0.4, rarityMin = "TidakBiasa" },
+        morality = 3,
+    },
+    allWeeklyBonus = {
+        gold     = 2,
+        itemDrop = { chance = 1.0, rarityMin = "Epik" },
+    },
+
+    Templates = {
+        {
+            id         = "T_Explore",
+            difficulty = "Easy",
+            type       = "Explore",
+            titleKey   = "task.explore.title",
+            descKey    = "task.explore.desc",
+            target     = "any",
+            count      = 1,
+            reward     = { rupiah = 400 },
+        },
+        {
+            id         = "T_Gather_Kayu",
+            difficulty = "Easy",
+            type       = "Gather",
+            titleKey   = "task.gather.kayu.title",
+            descKey    = "task.gather.kayu.desc",
+            item       = "Kayu",
+            count      = 3,
+            reward     = { rupiah = 350 },
+        },
+        {
+            id         = "T_Talk_NPCs",
+            difficulty = "Easy",
+            type       = "Talk",
+            titleKey   = "task.talk.title",
+            descKey    = "task.talk.desc",
+            count      = 2,
+            reward     = { rupiah = 300 },
+        },
+        {
+            id         = "T_Craft_Any",
+            difficulty = "Easy",
+            type       = "Craft",
+            titleKey   = "task.craft.title",
+            descKey    = "task.craft.desc",
+            count      = 1,
+            reward     = { rupiah = 350 },
+        },
+        {
+            id         = "T_Sell_Value",
+            difficulty = "Easy",
+            type       = "SellValue",
+            titleKey   = "task.sell.title",
+            descKey    = "task.sell.desc",
+            targetRupiah = 1000,
+            reward     = { rupiah = 500 },
+        },
+        {
+            id         = "T_Combat",
+            difficulty = "Medium",
+            type       = "Combat",
+            titleKey   = "task.combat.title",
+            descKey    = "task.combat.desc",
+            count      = 3,
+            reward     = { rupiah = 1000 },
+        },
+        {
+            id         = "T_SideQuest",
+            difficulty = "Medium",
+            type       = "CompleteQuest",
+            titleKey   = "task.sidequest.title",
+            descKey    = "task.sidequest.desc",
+            questType  = "Side",
+            count      = 1,
+            reward     = { rupiah = 1200 },
+        },
+        {
+            id         = "T_Collect",
+            difficulty = "Medium",
+            type       = "Collect",
+            titleKey   = "task.collect.title",
+            descKey    = "task.collect.desc",
+            itemType   = "Koleksi",
+            count      = 1,
+            reward     = { rupiah = 900 },
+        },
+        -- Weekly hard examples
+        {
+            id         = "T_W_Combat_Hard",
+            difficulty = "Hard",
+            type       = "Combat",
+            titleKey   = "task.weekly.combat.title",
+            descKey    = "task.weekly.combat.desc",
+            count      = 15,
+            reward     = { rupiah = 5000 },
+        },
+        {
+            id         = "T_W_Craft_Variety",
+            difficulty = "Hard",
+            type       = "CraftVariety",
+            titleKey   = "task.weekly.craft.title",
+            descKey    = "task.weekly.craft.desc",
+            count      = 5,
+            reward     = { rupiah = 4000 },
+        },
+        -- Add more task templates here
+    },
+}
+
+-- ============================================================
+-- EVENTS (Festival)
+-- ============================================================
+AssetConfig.Events = {
+    Lebaran = {
+        id         = "Lebaran",
+        nameKey    = "event.lebaran.name",
+        currency   = { id = "KoinLebaran", symbol = "🪙", nameKey = "event.lebaran.currency" },
+        durationDays = 14,
+        taskBonus  = true,
+        shopItems  = { "BajuKoko", "KetupatlDisplay" },
+        eventTasks = {
+            { type = "Talk", count = 5, reward = { eventCurrency = 2 } },
+            { type = "Craft", item = "Ketupat", count = 3, reward = { eventCurrency = 5 } },
+        },
+    },
+    -- Add more events here
+}
+
+-- ============================================================
+-- LOGIN STREAK
+-- ============================================================
+AssetConfig.LoginStreak = {
+    {  day = 1,  reward = { rupiah = 500 } },
+    {  day = 2,  reward = { rupiah = 800 } },
+    {  day = 3,  reward = { rupiah = 1000, items = { { id = "NasiBungkus", amount = 2 } } } },
+    {  day = 5,  reward = { rupiah = 2000, items = { { id = "RandomTidakBiasa", amount = 1 } } } },
+    {  day = 7,  reward = { rupiah = 3000, gold = 1 } },
+    {  day = 14, reward = { rupiah = 5000, gold = 2, items = { { id = "RandomEpik", amount = 1 } } } },
+    {  day = 30, reward = { rupiah = 10000, gold = 5, items = { { id = "RandomLegenda", amount = 1 } } } },
+}
+
+-- ============================================================
+-- ACHIEVEMENTS
+-- ============================================================
+AssetConfig.Achievements = {
+    {
+        id      = "ACH_FirstMarriage",
+        nameKey = "ach.firstmarriage.name",
+        descKey = "ach.firstmarriage.desc",
+        type    = "Relationship",
+        target  = "Menikah",
+        count   = 1,
+        reward  = { gold = 1 },
+    },
+    {
+        id      = "ACH_Defeat100",
+        nameKey = "ach.defeat100.name",
+        descKey = "ach.defeat100.desc",
+        type    = "Combat",
+        count   = 100,
+        reward  = { rupiah = 5000 },
+    },
+    {
+        id      = "ACH_AllZones",
+        nameKey = "ach.allzones.name",
+        descKey = "ach.allzones.desc",
+        type    = "Explore",
+        count   = 5,
+        reward  = { gold = 1 },
+    },
+    {
+        id      = "ACH_Pahlawan",
+        nameKey = "ach.pahlawan.name",
+        descKey = "ach.pahlawan.desc",
+        type    = "Morality",
+        target  = "Pahlawan",
+        reward  = { items = { { id = "LegendaCosmeticGood", amount = 1 } } },
+    },
+    {
+        id      = "ACH_Penjahat",
+        nameKey = "ach.penjahat.name",
+        descKey = "ach.penjahat.desc",
+        type    = "Morality",
+        target  = "Penjahat",
+        reward  = { items = { { id = "LegendaCosmeticBad", amount = 1 } } },
+    },
+    -- Add more achievements here
+}
+
+-- ============================================================
 -- AUDIO
 -- ============================================================
 AssetConfig.Audio = {
@@ -756,18 +956,42 @@ All player data saved via `DataStoreService`.
 
 ```lua
 {
-    version    = 1,
-    rupiah     = 0,
-    gold       = 0,
-    morality   = 50,
-    inventory  = {},          -- { itemId, amount, slot }
-    hotbar     = {},          -- { slotIndex, itemId }
-    hotbarSize = 4,
+    version       = 2,
+    rupiah        = 0,
+    gold          = 0,
+    morality      = 50,
+    inventory     = {},             -- { itemId, amount, slot }
+    hotbar        = {},             -- { slotIndex, itemId }
+    hotbarSize    = 4,
     inventorySize = 20,
-    questProgress = {},       -- { questId, status, objectiveProgress }
-    relationships = {},       -- { targetUserId, type }
-    unlockedZones = { "KampungAwal", "TepiSungai" },
-    completedQuests = {},
+
+    questProgress    = {},          -- { questId, status, objectiveProgress }
+    completedQuests  = {},
+    activeQuests     = {},          -- max 5 concurrent side quests
+
+    relationships    = {},          -- { targetUserId, type }
+    unlockedZones    = { "KampungAwal", "TepiSungai" },
+
+    -- Task system
+    dailyTasks       = {},          -- { taskId, progress, completed, claimed } — reset daily
+    weeklyTasks      = {},          -- { taskId, progress, completed, claimed } — reset weekly
+    lastDailyReset   = 0,           -- Unix timestamp of last daily reset
+    lastWeeklyReset  = 0,           -- Unix timestamp of last weekly reset
+    dailyRerollsUsed = 0,           -- reset with daily
+
+    -- Retention
+    loginStreak      = 0,
+    lastLoginDate    = "",          -- "YYYY-MM-DD" in WIB
+    streakRewardsClaimed = {},      -- { day = true/false }
+
+    achievements     = {},          -- { achId, completed, claimedAt }
+    collectibleCount = 0,
+
+    -- Galeri
+    galeriLayout     = {},          -- { itemId, pedestalSlot }
+
+    -- Event currencies
+    eventCurrencies  = {},          -- { eventId, amount }
 }
 ```
 
@@ -784,31 +1008,44 @@ All player data saved via `DataStoreService`.
 game
 ├── ReplicatedStorage
 │   ├── Config
-│   │   └── AssetConfig          (ModuleScript)
+│   │   └── AssetConfig          (ModuleScript)  ← single source of truth
 │   ├── Modules
 │   │   ├── ItemModule           (ModuleScript)
 │   │   ├── QuestModule          (ModuleScript)
+│   │   ├── TaskModule           (ModuleScript)
 │   │   ├── MoralityModule       (ModuleScript)
 │   │   ├── CurrencyModule       (ModuleScript)
 │   │   ├── RelationshipModule   (ModuleScript)
+│   │   ├── AchievementModule    (ModuleScript)
+│   │   ├── LoginStreakModule     (ModuleScript)
 │   │   └── LocalizationUtil     (ModuleScript)
 │   └── RemoteEvents
 │       ├── UpdateHotbar
 │       ├── OpenShop
 │       ├── QuestUpdate
-│       └── MoralityChanged
+│       ├── TaskUpdate
+│       ├── MoralityChanged
+│       ├── AchievementUnlocked
+│       ├── LoginStreakClaimed
+│       └── OpenGaleri
 ├── ServerScriptService
 │   ├── GameManager              (Script)
 │   ├── DataManager              (Script)
 │   ├── QuestServer              (Script)
+│   ├── TaskServer               (Script)
 │   ├── ShopServer               (Script)
 │   ├── CombatServer             (Script)
 │   ├── NPCManager               (Script)
-│   └── RelationshipServer       (Script)
+│   ├── RelationshipServer       (Script)
+│   ├── AchievementServer        (Script)
+│   ├── LoginStreakServer         (Script)
+│   ├── EventManager             (Script)
+│   └── LeaderboardServer        (Script)
 ├── StarterPlayerScripts
 │   ├── HotbarController         (LocalScript)
 │   ├── InventoryController      (LocalScript)
 │   ├── QuestHUD                 (LocalScript)
+│   ├── TaskHUD                  (LocalScript)
 │   ├── DialogController         (LocalScript)
 │   └── CameraController         (LocalScript)
 ├── StarterGui
@@ -816,13 +1053,20 @@ game
 │   ├── InventoryGui             (ScreenGui)
 │   ├── ShopGui                  (ScreenGui)
 │   ├── QuestGui                 (ScreenGui)
+│   ├── TaskGui                  (ScreenGui)
 │   ├── DialogGui                (ScreenGui)
-│   └── SocialGui                (ScreenGui)
+│   ├── SocialGui                (ScreenGui)
+│   ├── AchievementGui           (ScreenGui)
+│   ├── GaleriGui                (ScreenGui)
+│   └── LoginStreakGui           (ScreenGui)
 └── Workspace
     ├── Map
     │   ├── KampungAwal
     │   ├── PasarBesar
-    │   └── ...
+    │   │   └── Leaderboard      (BillboardGui NPC)
+    │   ├── HutanLarangan
+    │   ├── TepiSungai
+    │   └── BukitTua
     └── NPCs
 ```
 
@@ -842,9 +1086,279 @@ game
 
 ## 21. Open Questions
 
-- [x] Day/night cycle speed (real-time ratio vs. compressed) compressed
-- [x] PvP zone boundaries — which zones allow rival combat? all
-- [x] Gold → Robux exchange rate (monetization decision) yes, player can topup gold with robux but gold also can be earned by quest
-- [ ] Max active side quests per player
-- [x] Marriage dissolution mechanic when both player agree or when the admin dissolve them
-- [x] Collectible display — dedicated room/display case or profile card only? leaderboard or dedicated in-game
+- [x] Day/night cycle: **compressed** — game day ≠ real day; exact ratio TBD by feel-test
+- [x] PvP zone: **all zones** allow rival combat
+- [x] Gold monetization: player can **topup Gold with Robux**, but Gold also earnable via quests (non-pay-to-win)
+- [x] Max active side quests: **5 concurrent** (keeps backlog manageable; enforced server-side)
+- [x] Marriage dissolution: **both players agree** OR **admin force-dissolve** (moderation tool)
+- [x] Collectible display: **in-game leaderboard** + **dedicated Galeri in-game** room per player
+
+---
+
+## 22. Task System (Tugas)
+
+**Definition:** Tasks are objectives auto-generated by the game system — not from NPCs. Players do not "accept" tasks; they are always active and refresh on schedule. This is separate from Quests (NPC-offered, optional, narrative).
+
+| Concept | Source | Player choice | Resets |
+|---|---|---|---|
+| **Quest** | NPC dialog | Must accept/decline | Never (per player) |
+| **Task** | Game system | Always active | Daily / Weekly |
+
+### 22.1 Daily Tasks (Tugas Harian)
+
+- 5 tasks generated per player per day
+- Distribution: 3 Easy + 2 Medium
+- Reset at **00:00 WIB (UTC+7)**
+- Player can reroll **1 task per day** (costs Rp 500)
+- Complete all 5 = **Bonus Peti** (chest: Rp 2.000–5.000 + rare item chance)
+
+**Task types:**
+| Type | Example | Difficulty |
+|---|---|---|
+| Explore | Visit Hutan Larangan | Easy |
+| Gather | Collect 3 Kayu | Easy |
+| Talk | Talk to 2 NPCs | Easy |
+| Craft | Craft any 1 item | Easy |
+| Sell | Sell items worth Rp 1.000 total | Easy |
+| Buy | Buy from any shop | Easy |
+| Combat | Defeat 3 enemies | Medium |
+| Deliver | Complete 1 side quest | Medium |
+| Collect | Find 1 collectible item | Medium |
+| Social | Check a Sahabat's active quest | Medium |
+
+**Rewards per task:**
+| Difficulty | Rupiah | Bonus |
+|---|---|---|
+| Easy | Rp 300–600 | — |
+| Medium | Rp 800–1.500 | Small item drop chance |
+| All 5 complete | Rp 2.000–5.000 | Rare item chance + morality +3 |
+
+### 22.2 Weekly Tasks (Tugas Mingguan)
+
+- 3 tasks generated per player per week
+- Distribution: 2 Medium + 1 Hard
+- Reset every **Monday 00:00 WIB**
+- No reroll
+- Complete all 3 = **◆ 2 Gold + Epik item drop**
+
+**Hard task examples:**
+- Complete 3 side quests in one week
+- Craft 5 different items
+- Defeat 15 enemies
+- Earn Rp 20.000 total from selling
+
+### 22.3 Task UI
+
+- **Task Board** panel in HUD (bottom-left by default), toggle with keybind / tap button
+- Shows: task name, progress bar (e.g. 2/5), reward preview
+- Completed tasks show checkmark + greyed out
+- "Claim" button appears when task complete — player must tap/click to collect reward
+- Unclaimed rewards persist for 48h before expiring
+- Mobile: compact card list; desktop: expandable panel
+
+### 22.4 Task Config in AssetConfig
+
+Task templates defined in `AssetConfig.Tasks` (see Section 17). Server picks randomly from pool, weighted by difficulty quota.
+
+```lua
+AssetConfig.Tasks = {
+    dailyQuota   = { easy = 3, medium = 2 },
+    weeklyQuota  = { medium = 2, hard = 1 },
+    rerollCost   = { rupiah = 500 },
+    rerollsPerDay = 1,
+
+    allDailyBonus = {
+        rupiah = { min = 2000, max = 5000 },
+        itemDrop = { chance = 0.4, rarityMin = "TidakBiasa" },
+        morality = 3,
+    },
+    allWeeklyBonus = {
+        gold  = 2,
+        itemDrop = { chance = 1.0, rarityMin = "Epik" },
+    },
+
+    Templates = {
+        {
+            id         = "T_Explore",
+            difficulty = "Easy",
+            type       = "Explore",
+            titleKey   = "task.explore.title",
+            descKey    = "task.explore.desc",
+            target     = "any",
+            count      = 1,
+            reward     = { rupiah = 400 },
+        },
+        {
+            id         = "T_Gather_Kayu",
+            difficulty = "Easy",
+            type       = "Gather",
+            titleKey   = "task.gather.kayu.title",
+            descKey    = "task.gather.kayu.desc",
+            item       = "Kayu",
+            count      = 3,
+            reward     = { rupiah = 350 },
+        },
+        {
+            id         = "T_Combat",
+            difficulty = "Medium",
+            type       = "Combat",
+            titleKey   = "task.combat.title",
+            descKey    = "task.combat.desc",
+            count      = 3,
+            reward     = { rupiah = 1000 },
+        },
+        -- Add more task templates here
+    },
+}
+```
+
+---
+
+## 23. Retention & Engagement Mechanics
+
+These mechanics create habit loops and long-term goals that keep players returning daily.
+
+### 23.1 Login Streak
+
+Daily login tracked per player. Consecutive days = escalating reward.
+
+| Streak Day | Reward |
+|---|---|
+| Day 1 | Rp 500 |
+| Day 2 | Rp 800 |
+| Day 3 | Rp 1.000 + Makanan item |
+| Day 5 | Rp 2.000 + Tidak Biasa item |
+| Day 7 | Rp 3.000 + ◆ 1 Gold |
+| Day 14 | Rp 5.000 + ◆ 2 Gold + Epik item |
+| Day 30 | Rp 10.000 + ◆ 5 Gold + Legenda item |
+
+- Missing a day resets streak to 1
+- Reward popup shown immediately on join if not yet claimed today
+- Streak count shown on player profile
+
+### 23.2 Achievement System (Pencapaian)
+
+One-time milestones. Each awards: badge on profile + Rupiah or Gold.
+
+| Category | Example Achievement | Reward |
+|---|---|---|
+| Social | First marriage | ◆ 1 |
+| Social | Have 5 Sahabat | Badge |
+| Combat | Defeat 100 enemies | Rp 5.000 |
+| Exploration | Visit all zones | ◆ 1 |
+| Craft | Craft 10 different items | Rp 3.000 |
+| Collection | Collect 50 collectibles | Legenda item |
+| Economy | Earn Rp 100.000 total | ◆ 2 |
+| Morality | Reach Pahlawan tier | Legenda cosmetic |
+| Morality | Reach Penjahat tier | Legenda cosmetic (alt) |
+| Quest | Complete all side quests | ◆ 3 + title badge |
+
+Achievements visible on player profile card. Shown as icon grid.
+
+### 23.3 Collectible Leaderboard & Galeri
+
+- **Leaderboard**: top players by collectible count, shown in Pasar Besar zone on a billboard NPC
+- **Galeri Pribadi**: each player has an in-game display room (small instanced area) — accessible via profile card or dedicated location in their home zone
+- Galeri shows collected items on pedestals/shelves
+- Other players can visit and react (like/compliment)
+- Rare collectibles glow with rarity color
+
+### 23.4 Variable Reward Loop
+
+Surprise rewards on routine actions to create dopamine variance:
+
+- Enemy defeat: **5% chance** of rare item drop (on top of base loot)
+- Shop sell: **rare "lucky sale"** — random +20% bonus Rupiah (3% chance)
+- Daily task complete: **random bonus Rupiah** within range (never fixed)
+- Crafting: **1% chance** of crafting an "enhanced" version (higher stats/rarity)
+- Opening Bonus Peti: animated chest opening, rarity revealed with fanfare
+
+### 23.5 Progress Visibility (Always Show Next Goal)
+
+Players always see what's next:
+- Hotbar upgrade progress shown even when not in menu
+- Inventory slot counter (e.g., "18/20 — Upgrade Available")
+- Quest log shows next main chapter title (locked, grayed out) to create anticipation
+- Achievement progress bars (e.g., "Defeated 67/100 enemies")
+- Morality bar with next tier threshold shown
+
+### 23.6 Time-Limited Festival Events
+
+Recurring seasonal events with exclusive cosmetic rewards (not pay-walled):
+
+| Event | Season | Exclusive Reward |
+|---|---|---|
+| Lebaran Festival | Eid al-Fitr period | Baju Koko set, ketupat cosmetic |
+| HUT RI | August 17 | Merah-putih accessories |
+| Tahun Baru | New Year | Kembang api emote, topi party |
+| Panen Raya | Mid-year | Farmer cosmetic set |
+
+- Events last 7–14 days
+- Event-exclusive tasks added to daily pool during event
+- Event currency (e.g., "Koin Lebaran") earned via event tasks, spent at event shop
+- Countdown timer shown in HUD during active events
+
+### 23.7 Social Pull Mechanics
+
+- **Sahabat quest sharing**: see friend's active quest marker on compass — natural co-op incentive
+- **Rival notification**: rival enters your zone → subtle HUD ping
+- **Galeri visit**: notification when another player visits your Galeri
+- **Relationship milestones**: "You and [Player] have been Sahabat for 7 days!" — badge upgrade
+- **Leaderboard FOMO**: top 3 collectible holders shown by name in Pasar Besar
+
+### 23.8 Progression Sinks (Rupiah/Gold Drain)
+
+Prevents currency inflation, gives spending goals:
+- Hotbar slot upgrades (Rp scaling)
+- Inventory expansion (Rp)
+- Galeri decoration items (Rp + Gold)
+- Peta (map) purchase (Rp)
+- Daily task reroll (Rp)
+- Cosmetic crafting ingredients (Rupiah-expensive)
+- Galeri theme unlocks (Gold)
+
+---
+
+## 24. Game Loop Summary
+
+```
+[Daily Login]
+    ↓
+[Login Streak Reward claimed]
+    ↓
+[Check Daily Tasks + Weekly Tasks]
+    ↓
+[Core Loop]
+    ├── Explore world → find collectibles, lore, world events
+    ├── Fight enemies → loot drops, morality shift
+    ├── Gather ingredients → Craft items
+    ├── Visit shops → Buy/Sell
+    ├── Talk to NPCs → Accept/Decline side quests
+    ├── Progress main quest
+    └── Interact with players → Relationships, Galeri visits
+    ↓
+[Complete Tasks → Claim rewards → Peti opened]
+    ↓
+[Progress visible: next tier, next upgrade, next achievement]
+    ↓
+[FOMO hook: festival timer, rival in zone, Sahabat quest]
+    ↓
+[Session end — streak maintained — return tomorrow]
+```
+
+**Short session (5–10 min):** Login → claim streak → complete 2 easy tasks → done  
+**Medium session (20–30 min):** Full daily tasks + 1–2 side quests + shop run  
+**Long session (1h+):** Main quest chapter + full weekly task + Galeri decoration + social
+
+---
+
+## 25. Resolved Design Decisions
+
+| Decision | Resolution |
+|---|---|
+| Day/night cycle | Compressed (game day faster than real time) |
+| PvP zones | All zones allow rival combat |
+| Gold monetization | Topup via Robux + earnable via quests |
+| Max concurrent side quests | 5 per player |
+| Marriage dissolution | Both players consent OR admin force-dissolve |
+| Collectible display | In-game leaderboard (Pasar Besar) + Galeri Pribadi room |
