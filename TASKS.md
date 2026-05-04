@@ -14,6 +14,8 @@
 
 ### TASK-000 — Shared Source Code Architecture
 
+- [ ] Not started
+
 **Goal:** Establish how one codebase serves all 7 Places (Sumatera, Jawa, Kalimantan, Sulawesi, Papua, Nusa Tenggara, Maluku) without duplicating scripts. This is the foundational architecture decision — all other tasks depend on this pattern.
 
 **Deliverable:** Published Roblox Model asset for shared modules. Documented `require(assetId)` pattern. `SharedConfig.lua` reference table listing all shared asset IDs.
@@ -106,6 +108,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-001 — AssetConfig Module
 
+- [ ] Not started
+
 **Goal:** Create the single source of truth for all game data. All 7 Places share this one module — no per-island copy. Devs add new items, quests, NPCs, weapons, zones by editing this one module only, then publishing once.
 
 **Deliverable:** `ReplicatedStorage/Config/AssetConfig` (ModuleScript), published as Roblox asset, ID recorded in `SharedConfig`.
@@ -133,6 +137,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-002 — Folder & RemoteEvent Bootstrap Script
+
+- [ ] Not started
 
 **Goal:** On server start, ensure every required `RemoteEvent`, `RemoteFunction`, and `Folder` exists. Bootstrap also loads all shared modules via `SharedConfig` so every subsequent server script can require them without repeating the asset ID lookup.
 
@@ -171,6 +177,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-003 — LocalizationUtil Module
 
+- [ ] Not started
+
 **Goal:** Wrap Roblox's `LocalizationService` into a simple utility so all other scripts call `L("key")` instead of raw service calls. Supports Indonesian (id) and English (en) with Indonesian as default fallback.
 
 **Deliverable:** `ReplicatedStorage/Modules/LocalizationUtil` (ModuleScript)
@@ -188,6 +196,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-004 — DataManager
+
+- [ ] Not started
 
 **Goal:** Handle all player data persistence via `DataStoreService`. Every other system reads/writes player data through DataManager only — no other script touches DataStore directly.
 
@@ -209,6 +219,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-005 — GameManager
+
+- [ ] Not started
 
 **Goal:** Central server orchestrator. Handles player join/leave lifecycle, distributes initial data to clients, and fires startup sequence for all other server systems.
 
@@ -235,6 +247,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-010 — Stamina System
 
+- [ ] Not started
+
 **Goal:** Track, deplete, and regenerate each player's stamina server-side. Broadcast changes to the owning client for HUD display. Other systems (combat, sprint) call StaminaModule to spend stamina.
 
 **Deliverable:** `ReplicatedStorage/Modules/StaminaModule` (ModuleScript), integrated into `GameManager`
@@ -254,6 +268,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-011 — Inventory & Item System
+
+- [ ] Not started
 
 **Goal:** Manage each player's inventory server-side. Items are stored as `{ id, amount }` entries. Client requests actions (use, equip, move to hotbar); server validates and updates.
 
@@ -278,6 +294,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-012 — Hotbar System
 
+- [ ] Not started
+
 **Goal:** Allow players to assign up to 8 items to quick-access slots. Desktop uses keys 1–8; mobile uses tap. Equip/use is instant from hotbar.
 
 **Deliverable:** `StarterPlayerScripts/HotbarController` (LocalScript)
@@ -298,6 +316,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-013 — Combat System
+
+- [ ] Not started
 
 **Goal:** Handle weapon equip/unequip, hitbox detection, damage application, cooldown enforcement, and stamina cost. No client-side damage authority — server validates all hits.
 
@@ -328,6 +348,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-014 — Currency System
 
+- [ ] Not started
+
 **Goal:** Manage Rupiah and Gold balances server-side. Provide formatted display strings (Indonesian number format). All currency changes go through CurrencyModule.
 
 **Deliverable:** `ReplicatedStorage/Modules/CurrencyModule` (ModuleScript)
@@ -349,6 +371,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-020 — Shop System
+
+- [ ] Not started
 
 **Goal:** Handle buy and sell transactions. Validate stock, morality-based pricing, accepted item types, and shop category restrictions — all server-side.
 
@@ -381,6 +405,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-021 — Crafting System
 
+- [ ] Not started
+
 **Goal:** Allow players to combine ingredients into output items. Server validates recipe, deducts ingredients, adds output, applies the 1% enhanced craft chance.
 
 **Deliverable:** `ServerScriptService/CraftingServer` (Script)
@@ -408,6 +434,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-030 — NPC Manager
 
+- [ ] Not started
+
 **Goal:** Spawn all NPCs from `AssetConfig.NPCs` into the correct zone at server start. Add ProximityPrompts by script. Run daily schedules (move NPCs between locations based on game time). No manual NPC placement in Studio.
 
 **Deliverable:** `ServerScriptService/NPCManager` (Script)
@@ -433,6 +461,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-031 — Dialog System
+
+- [ ] Not started
 
 **Goal:** Drive branching NPC conversations from a data table. All dialog trees are defined in a config table (separate from AssetConfig for readability). Server sends the dialog node; client displays it and sends back player choice.
 
@@ -481,6 +511,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-040 — Quest System
 
+- [ ] Not started
+
 **Goal:** Track each player's main and side quest progress server-side. Handle objective completion from other systems (combat, dialog, item collect). Deliver rewards on completion. Enforce 5 concurrent side quest cap.
 
 **Deliverable:** `ReplicatedStorage/Modules/QuestModule` (ModuleScript), `ServerScriptService/QuestServer` (Script)
@@ -500,6 +532,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-041 — Task System (Tugas Harian & Mingguan)
+
+- [ ] Not started
 
 **Goal:** Generate daily (5) and weekly (3) tasks per player from template pool. Track progress. Reset on schedule. Award Bonus Peti on full daily completion.
 
@@ -528,6 +562,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-050 — Morality System
 
+- [ ] Not started
+
 **Goal:** Apply morality changes from all sources. Broadcast tier changes to client (for HUD icon, NPC behavior). Persist via DataManager.
 
 **Deliverable:** `ReplicatedStorage/Modules/MoralityModule` (ModuleScript)
@@ -550,6 +586,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-051 — Achievement System
 
+- [ ] Not started
+
 **Goal:** Track one-time milestone achievements. Check after relevant actions. Award badge + currency/item on first unlock.
 
 **Deliverable:** `ReplicatedStorage/Modules/AchievementModule` (ModuleScript), `ServerScriptService/AchievementServer` (Script)
@@ -567,6 +605,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-052 — Login Streak System
+
+- [ ] Not started
 
 **Goal:** Award daily login rewards based on consecutive-day streak. Show streak popup on join.
 
@@ -593,6 +633,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-060 — Zone Manager
 
+- [ ] Not started
+
 **Goal:** Detect which zone a player is currently in (via part overlap check). Unlock zones per player progress. Update server zone tracking. Call `AchievementServer` on first visit.
 
 **Deliverable:** `ServerScriptService/ZoneManager` (Script)
@@ -611,6 +653,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-061 — Travel System (Bandara & Pelabuhan)
+
+- [ ] Not started
 
 **Goal:** Allow inter-island travel via TeleportService at Bandara locations and inter-zone ferry at Pelabuhan locations. Charge ticket price. Show Peta Perjalanan map UI.
 
@@ -641,6 +685,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-062 — World Event System
 
+- [ ] Not started
+
 **Goal:** Periodically spawn random world events in active zones. Each event has a trigger area, a timer, and a resolution outcome (morality change, loot drop).
 
 **Deliverable:** `ServerScriptService/WorldEventServer` (Script)
@@ -661,6 +707,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-063 — Day/Night Cycle
+
+- [ ] Not started
 
 **Goal:** Run a compressed in-game day cycle (real-time minutes → in-game hours). Drive `Lighting` service properties. Update NPC schedules. Trigger ambient audio transitions.
 
@@ -684,6 +732,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-070 — Relationship System
+
+- [ ] Not started
 
 **Goal:** Allow two players to mutually form, view, and remove relationships. Validate constraints (1 marriage max, require Cincin item). Display badge on player nameplate.
 
@@ -713,6 +763,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-071 — Leaderboard System
 
+- [ ] Not started
+
 **Goal:** Maintain a server-side ordered leaderboard of top players by collectible count. Display top 3 on in-world billboard in KotaJogja. Update periodically.
 
 **Deliverable:** `ServerScriptService/LeaderboardServer` (Script)
@@ -729,6 +781,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-072 — Galeri System
+
+- [ ] Not started
 
 **Goal:** Each player has a personal display room (Galeri) for collectible items. Other players can visit. Collectibles placed on pedestals, glow by rarity.
 
@@ -752,6 +806,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-080 — HUD (Main Heads-Up Display)
+
+- [ ] Not started
 
 **Goal:** Always-visible HUD showing: stamina bar, morality icon/label, active quest objective, currency (Rp + Gold), compass, and hotbar. Responsive to both mobile and desktop.
 
@@ -778,6 +834,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-081 — Inventory GUI
 
+- [ ] Not started
+
 **Goal:** Full inventory panel with filter tabs, item grid, tooltip on hover/hold, and action menu (use, equip, assign to hotbar, drop).
 
 **Deliverable:** `StarterGui/InventoryGui` (ScreenGui)
@@ -799,6 +857,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-082 — Shop GUI
 
+- [ ] Not started
+
 **Goal:** Shop panel with Buy and Sell tabs. Shows items, prices (with morality discount applied), confirm dialog.
 
 **Deliverable:** `StarterGui/ShopGui` (ScreenGui)
@@ -816,6 +876,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-083 — Dialog GUI
+
+- [ ] Not started
 
 **Goal:** NPC conversation panel. Shows NPC portrait, name, localized text with typewriter effect, and choice buttons. Supports morality-gated choices.
 
@@ -837,6 +899,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-084 — Quest & Task GUI
 
+- [ ] Not started
+
 **Goal:** Quest log panel listing active + completed quests. Task board panel showing daily and weekly tasks with progress bars and claim buttons.
 
 **Deliverable:** `StarterGui/QuestGui` (ScreenGui), `StarterGui/TaskGui` (ScreenGui)
@@ -853,6 +917,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-085 — Travel GUI (Peta Perjalanan)
+
+- [ ] Not started
 
 **Goal:** Full-screen Indonesia archipelago map for selecting travel destination. Show unlocked (green) vs locked (gray) zones. Display ticket cost and Berangkat button.
 
@@ -872,6 +938,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-086 — Social, Achievement, Galeri & Login Streak GUIs
+
+- [ ] Not started
 
 **Goal:** Build the remaining player-facing panels: social/relationship panel, achievement grid, Galeri layout editor, and login streak popup.
 
@@ -893,6 +961,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-090 — Audio Manager
 
+- [ ] Not started
+
 **Goal:** Play zone BGM and ambient sounds, crossfade on zone change. Play SFX at correct positions. All audio asset IDs come from AssetConfig.
 
 **Deliverable:** `StarterPlayerScripts/AudioManager` (LocalScript)
@@ -911,6 +981,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-091 — VFX Manager
+
+- [ ] Not started
 
 **Goal:** Trigger particle effects and screen feedback for combat, morality, UI events, and world events from a single managed system.
 
@@ -936,6 +1008,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-095 — Festival Event Manager
 
+- [ ] Not started
+
 **Goal:** Detect real-world date ranges matching Indonesian holidays. Activate event-specific tasks, event currency, event shop stock, and zone decorations.
 
 **Deliverable:** `ServerScriptService/EventManager` (Script)
@@ -956,6 +1030,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-096 — Mobile Optimization Pass
 
+- [ ] Not started
+
 **Goal:** Audit all GUIs and controllers for mobile usability. Ensure all tap targets meet 44px minimum, touch gestures work, no desktop-only controls block progression.
 
 **Deliverable:** Updates across all LocalScripts and ScreenGuis
@@ -975,6 +1051,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-097 — Performance & Streaming Config
 
+- [ ] Not started
+
 **Goal:** Configure Roblox Streaming Enabled correctly per Place. Ensure NPCs and props outside the player's stream area are not loaded client-side. Define stream radius.
 
 **Deliverable:** Configuration in each Place's `Workspace` settings + `ZoneManager` adjustments
@@ -992,6 +1070,8 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 ---
 
 ### TASK-098 — Localization Table Population
+
+- [ ] Not started
 
 **Goal:** Fill the Roblox `LocalizationTable` CSV with all string keys used across the game. Indonesian as default, English as secondary. All keys used in code must be present.
 
@@ -1026,9 +1106,17 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 | 10 — Polish | TASK-095 to 098 | Events, mobile audit, streaming, localization |
 
 **Build order for Jawa MVP:**
-`001 → 002 → 003 → 004 → 005 → 010 → 011 → 012 → 013 → 014 → 020 → 021 → 030 → 031 → 040 → 041 → 050 → 060 → 063 → 080 → 081 → 082 → 083 → 084 → 090 → 091 → 096 → 098`
+`000 → 001 → 002 → 003 → 004 → 005 → 010 → 011 → 012 → 013 → 014 → 020 → 021 → 030 → 031 → 040 → 041 → 050 → 060 → 063 → 080 → 081 → 082 → 083 → 084 → 090 → 091 → 096 → 098`
+
+**Expanding to other islands (after Jawa MVP is stable):**
+1. Duplicate the Place in Roblox Studio (File → Publish As → new Place in same Universe).
+2. In the new Place, keep only: terrain, model anchors, `ServerScriptService/SharedConfig`, `ServerScriptService/Bootstrap`.
+3. All logic (NPCManager, ZoneManager, QuestEngine, etc.) loads via `require(SharedConfig.*)` — no copy-paste.
+4. Add the new Place's `PlaceId` to `AssetConfig.Places` table, re-publish AssetConfig asset.
+5. Fill in zone data, NPC spawn points, and Bandara/Pelabuhan anchor Parts for that island in Studio.
+6. Zero additional scripting needed — the shared systems handle the new island automatically from AssetConfig data.
 
 **Recommended parallel work (can split between devs):**
-- Dev A: TASK-001 → 005 → 010 → 011 → 013 → 014
-- Dev B: TASK-030 → 031 → 040 → 050
-- Dev C: TASK-080 → 081 → 082 → 083 (UI focus)
+- Dev A: TASK-000 → 001 → 002 → 004 → 005 → 010 → 011 → 013 → 014 (core systems + shared architecture)
+- Dev B: TASK-030 → 031 → 040 → 050 (NPC/quest/morality — all shared modules)
+- Dev C: TASK-080 → 081 → 082 → 083 (UI focus — LocalScripts, also shared)
