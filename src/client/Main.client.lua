@@ -24,9 +24,9 @@ require(Controllers:WaitForChild("MoralityController"))
 require(Controllers:WaitForChild("AchievementController"))
 require(Controllers:WaitForChild("LoginStreakController"))
 
--- Phase 6+:
--- require(Controllers:WaitForChild("ZoneController"))
--- require(Controllers:WaitForChild("TravelController"))
+-- Phase 6: World & Travel
+require(Controllers:WaitForChild("ZoneController"))
+require(Controllers:WaitForChild("TravelController"))
 
 -- Phase 7 UI:
 -- require(Controllers:WaitForChild("HUDController"))

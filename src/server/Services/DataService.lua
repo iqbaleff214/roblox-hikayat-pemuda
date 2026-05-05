@@ -51,6 +51,9 @@ local PROFILE_TEMPLATE = {
 
 	-- Combat
 	equippedWeapon   = nil,
+
+	-- Zone tracking (persisted so player returns to last zone on rejoin)
+	lastZone         = "KotaJogja",
 }
 
 -- Profile key format — "PlayerData_v2_<userId>" across all 7 Places
@@ -90,6 +93,7 @@ local function migrate(data)
 	data.galeriLayout        = data.galeriLayout        or {}
 	data.eventCurrencies     = data.eventCurrencies     or {}
 	data.equippedWeapon      = data.equippedWeapon      or nil
+	data.lastZone            = data.lastZone            or "KotaJogja"
 end
 
 -- ── Private: load profile for a player ───────────────────────────
@@ -216,6 +220,16 @@ end
 -- Returns true if the player's profile is currently loaded.
 function DataService:isLoaded(player)
 	return self._profiles[player.UserId] ~= nil
+end
+
+-- Manually triggers a save for a player (e.g. before teleport).
+-- ProfileService auto-saves on release, so this is best-effort.
+function DataService:save(player)
+	local profile = self._profiles[player.UserId]
+	if not profile then return end
+	pcall(function()
+		profile:Save()
+	end)
 end
 
 -- ── Client-facing methods (auto-wired as RemoteFunctions by Knit) ─

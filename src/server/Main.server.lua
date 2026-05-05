@@ -38,7 +38,9 @@ ensureFolder(mapFolder, "Props")
 local REMOTE_EVENTS = {
 	-- Core
 	"ZoneChanged",
+	"ZoneUnlocked",
 	"MoralityChanged",
+	"GameTimeUpdate",
 	-- Inventory & Hotbar
 	"SyncInventory",
 	"UpdateHotbar",
@@ -120,6 +122,12 @@ require(Services:WaitForChild("TaskService"))
 -- Phase 5: Morality & Progression
 require(Services:WaitForChild("AchievementService"))
 require(Services:WaitForChild("LoginStreakService"))
+
+-- Phase 6: World & Travel
+require(Services:WaitForChild("ZoneService"))
+require(Services:WaitForChild("TravelService"))
+require(Services:WaitForChild("WorldEventService"))
+require(Services:WaitForChild("DayNightService"))
 
 -- Future services (uncomment as implemented):
 -- require(Services:WaitForChild("ZoneService"))

@@ -987,15 +987,137 @@ AssetConfig.Audio = {
 }
 
 -- ============================================================
+-- ZONE BOUNDS (center + size for ZoneBoundary Part creation)
+-- Positions are placeholders — replace with actual terrain positions after Studio work.
+-- Each Place's zones share a coordinate space; zones in other Places have no conflict
+-- because each Place is a separate server.
+-- ============================================================
+AssetConfig.ZoneBounds = {
+	-- JAWA (6 zones)
+	KotaJogja = { center = Vector3.new(    0, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Suroboyo  = { center = Vector3.new( 3000, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Semarang  = { center = Vector3.new( 6000, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Bandung   = { center = Vector3.new(    0, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	Jakarta   = { center = Vector3.new( 3000, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	Serang    = { center = Vector3.new( 6000, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	-- SUMATERA (10 zones)
+	BandaAceh     = { center = Vector3.new(    0, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Medan         = { center = Vector3.new( 3000, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Padang        = { center = Vector3.new( 6000, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Pekanbaru     = { center = Vector3.new(    0, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	Palembang     = { center = Vector3.new( 3000, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	BandarLampung = { center = Vector3.new( 6000, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	PangkalPinang = { center = Vector3.new(    0, 50, 6000), size = Vector3.new(2048, 500, 2048) },
+	Jambi         = { center = Vector3.new( 3000, 50, 6000), size = Vector3.new(2048, 500, 2048) },
+	Bengkulu      = { center = Vector3.new( 6000, 50, 6000), size = Vector3.new(2048, 500, 2048) },
+	TanjungPinang = { center = Vector3.new(    0, 50, 9000), size = Vector3.new(2048, 500, 2048) },
+	-- KALIMANTAN (5 zones)
+	Pontianak    = { center = Vector3.new(    0, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Banjarmasin  = { center = Vector3.new( 3000, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	PalangkaRaya = { center = Vector3.new( 6000, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Samarinda    = { center = Vector3.new(    0, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	TanjungSelor = { center = Vector3.new( 3000, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	-- SULAWESI (7 zones)
+	Makassar   = { center = Vector3.new(    0, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	TanahToraja = { center = Vector3.new( 3000, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Manado     = { center = Vector3.new( 6000, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Gorontalo  = { center = Vector3.new(    0, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	Palu       = { center = Vector3.new( 3000, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	Kendari    = { center = Vector3.new( 6000, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	Mamuju     = { center = Vector3.new(    0, 50, 6000), size = Vector3.new(2048, 500, 2048) },
+	-- PAPUA (4 zones)
+	Jayapura  = { center = Vector3.new(    0, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Sorong    = { center = Vector3.new( 3000, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Manokwari = { center = Vector3.new(    0, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	Merauke   = { center = Vector3.new( 3000, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	-- NUSA TENGGARA (3 zones)
+	Denpasar = { center = Vector3.new(    0, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Mataram  = { center = Vector3.new( 3000, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Kupang   = { center = Vector3.new(    0, 50, 3000), size = Vector3.new(2048, 500, 2048) },
+	-- MALUKU (2 zones)
+	Ambon   = { center = Vector3.new(    0, 50,    0), size = Vector3.new(2048, 500, 2048) },
+	Ternate = { center = Vector3.new( 3000, 50,    0), size = Vector3.new(2048, 500, 2048) },
+}
+
+-- ============================================================
+-- DAY / NIGHT CYCLE
+-- ============================================================
+AssetConfig.DayNight = {
+	RealMinutesPerDay    = 30,
+	DawnHour             = 5,
+	DuskHour             = 19,
+	BrightnessDay        = 1.0,
+	BrightnessNight      = 0.15,
+	AmbientDay           = Color3.fromRGB(115, 115, 115),
+	AmbientNight         = Color3.fromRGB(12, 12, 35),
+	OutdoorAmbientDay    = Color3.fromRGB(115, 115, 115),
+	OutdoorAmbientNight  = Color3.fromRGB(12, 12, 35),
+	BroadcastIntervalSec = 60, -- how often GameTimeUpdate fires to clients
+}
+
+-- ============================================================
+-- WORLD EVENTS (array for weighted-random selection)
+-- ============================================================
+AssetConfig.WorldEvents = {
+	{
+		id             = "MerchantAttacked",
+		nameKey        = "event.world.merchant.name",
+		weight         = 30,
+		duration       = 60,
+		banditCount    = 2,
+		moralityReward = 8,
+		rupiahReward   = 2000,
+	},
+	{
+		id       = "RareIngredientSpawn",
+		nameKey  = "event.world.ingredient.name",
+		weight   = 20,
+		duration = 120,
+		itemId   = "Cincin",
+	},
+	{
+		id             = "NPCDistress",
+		nameKey        = "event.world.distress.name",
+		weight         = 35,
+		duration       = 90,
+		moralityReward = 5,
+		rupiahReward   = 500,
+	},
+	{
+		id             = "PoacherCamp",
+		nameKey        = "event.world.poacher.name",
+		weight         = 15,
+		duration       = 120,
+		poacherCount   = 3,
+		moralityReward = 10,
+		rupiahReward   = 1500,
+	},
+}
+
+-- ============================================================
 -- HELPER FUNCTIONS (nil-safe — callers must check return value)
 -- ============================================================
-function AssetConfig.getItem(id)    return AssetConfig.Items[id]    end
-function AssetConfig.getWeapon(id)  return AssetConfig.Weapons[id]  end
-function AssetConfig.getZone(id)    return AssetConfig.Zones[id]    end
-function AssetConfig.getQuest(id)   return AssetConfig.Quests[id]   end
-function AssetConfig.getPlace(id)   return AssetConfig.Places[id]   end
-function AssetConfig.getNPC(id)     return AssetConfig.NPCs[id]     end
-function AssetConfig.getShop(id)    return AssetConfig.Shops[id]    end
+function AssetConfig.getItem(id)
+	return AssetConfig.Items[id]
+end
+function AssetConfig.getWeapon(id)
+	return AssetConfig.Weapons[id]
+end
+function AssetConfig.getZone(id)
+	return AssetConfig.Zones[id]
+end
+function AssetConfig.getQuest(id)
+	return AssetConfig.Quests[id]
+end
+function AssetConfig.getPlace(id)
+	return AssetConfig.Places[id]
+end
+function AssetConfig.getNPC(id)
+	return AssetConfig.NPCs[id]
+end
+function AssetConfig.getShop(id)
+	return AssetConfig.Shops[id]
+end
 
 -- Returns the morality tier table for a given morality value (0-100)
 function AssetConfig.getMoralityTier(value)

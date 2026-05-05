@@ -633,7 +633,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-060 — Zone Manager
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Detect which zone a player is currently in (via part overlap check). Unlock zones per player progress. Update server zone tracking. Call `AchievementServer` on first visit.
 
@@ -654,7 +654,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-061 — Travel System (Bandara & Pelabuhan)
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Allow inter-island travel via TeleportService at Bandara locations and inter-zone ferry at Pelabuhan locations. Charge ticket price. Show Peta Perjalanan map UI.
 
@@ -685,7 +685,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-062 — World Event System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Periodically spawn random world events in active zones. Each event has a trigger area, a timer, and a resolution outcome (morality change, loot drop).
 
@@ -708,7 +708,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-063 — Day/Night Cycle
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Run a compressed in-game day cycle (real-time minutes → in-game hours). Drive `Lighting` service properties. Update NPC schedules. Trigger ambient audio transitions.
 
