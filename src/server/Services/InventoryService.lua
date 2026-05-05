@@ -53,13 +53,19 @@ end
 
 -- Adds `amount` of `itemId` to the player's inventory.
 -- Respects inventorySize cap. Returns true on success, false if full.
-function InventoryService:addItem(player, itemId, amount)
+-- enhanced=true forces a new stack (crafted enhanced items never merge with normal).
+function InventoryService:addItem(player, itemId, amount, enhanced)
 	amount = amount or 1
 	local data = self._dataService:get(player)
 	if not data then return false, "not_loaded" end
 
 	local inventory = data.inventory
-	local idx, entry = ItemModule.findInInventory(inventory, itemId)
+	local entry
+
+	if not enhanced then
+		-- Merge into an existing non-enhanced stack if one exists
+		entry = select(2, ItemModule.findInInventory(inventory, itemId, false))
+	end
 
 	if entry then
 		entry.amount = entry.amount + amount
@@ -67,7 +73,11 @@ function InventoryService:addItem(player, itemId, amount)
 		if #inventory >= data.inventorySize then
 			return false, "full"
 		end
-		table.insert(inventory, { id = itemId, amount = amount })
+		local newEntry = { id = itemId, amount = amount }
+		if enhanced then
+			newEntry.enhanced = true
+		end
+		table.insert(inventory, newEntry)
 	end
 
 	syncToClient(self, player)

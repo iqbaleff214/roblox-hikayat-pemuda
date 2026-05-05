@@ -39,19 +39,42 @@ function ItemModule.isRanged(itemId)
 end
 
 -- Linear search through an inventory array: returns (index, entry) or (nil, nil).
-function ItemModule.findInInventory(inventory, itemId)
+-- enhanced param:
+--   nil  → first match regardless of enhanced state (default, backward-compatible)
+--   true → only enhanced entries
+--   false → only non-enhanced entries (entry.enhanced is nil or false)
+function ItemModule.findInInventory(inventory, itemId, enhanced)
 	for i, entry in inventory do
 		if entry.id == itemId then
-			return i, entry
+			if enhanced == nil then
+				return i, entry
+			end
+			local entryEnhanced = entry.enhanced == true
+			if entryEnhanced == (enhanced == true) then
+				return i, entry
+			end
 		end
 	end
 	return nil, nil
 end
 
--- Returns total amount of itemId across the entire inventory array.
-function ItemModule.countInInventory(inventory, itemId)
-	local _, entry = ItemModule.findInInventory(inventory, itemId)
-	return entry and entry.amount or 0
+-- Returns total amount of itemId in the inventory.
+-- enhanced=nil counts all stacks; true/false counts only matching.
+function ItemModule.countInInventory(inventory, itemId, enhanced)
+	local total = 0
+	for _, entry in inventory do
+		if entry.id == itemId then
+			if enhanced == nil then
+				total += entry.amount
+			else
+				local entryEnhanced = entry.enhanced == true
+				if entryEnhanced == (enhanced == true) then
+					total += entry.amount
+				end
+			end
+		end
+	end
+	return total
 end
 
 return ItemModule

@@ -372,7 +372,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-020 — Shop System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Handle buy and sell transactions. Validate stock, morality-based pricing, accepted item types, and shop category restrictions — all server-side.
 
@@ -405,7 +405,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-021 — Crafting System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Allow players to combine ingredients into output items. Server validates recipe, deducts ingredients, adds output, applies the 1% enhanced craft chance.
 

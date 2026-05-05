@@ -106,9 +106,11 @@ require(Services:WaitForChild("CurrencyService"))
 require(Services:WaitForChild("InventoryService"))
 require(Services:WaitForChild("CombatService"))
 
+-- Phase 2: Economy
+require(Services:WaitForChild("ShopService"))
+require(Services:WaitForChild("CraftingService"))
+
 -- Future services (uncomment as implemented):
--- require(Services:WaitForChild("ShopService"))
--- require(Services:WaitForChild("CraftingService"))
 -- require(Services:WaitForChild("QuestService"))
 -- require(Services:WaitForChild("TaskService"))
 -- require(Services:WaitForChild("MoralityService"))
