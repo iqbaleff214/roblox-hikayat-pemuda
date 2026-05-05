@@ -5,8 +5,7 @@
 -- 3. Starts Knit.
 -- This file is identical in all 7 island Places — no per-Place changes needed.
 
-local ReplicatedStorage   = game:GetService("ReplicatedStorage")
-local ServerScriptService = game:GetService("ServerScriptService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Knit = require(ReplicatedStorage:WaitForChild("Packages").Knit)
 
@@ -93,18 +92,21 @@ end
 
 -- ── Step 2: Load Services ─────────────────────────────────────────
 -- Require every service so Knit registers them before Knit.Start().
--- Phase 0: DataService + GameService
--- Phase 1+: add more services below as they are created.
+-- Services are loaded in dependency order (dependencies first).
 
 local Services = script.Parent:WaitForChild("Services")
 
+-- Phase 0: Foundation
 require(Services:WaitForChild("DataService"))
 require(Services:WaitForChild("GameService"))
 
+-- Phase 1: Core Mechanics
+require(Services:WaitForChild("StaminaService"))
+require(Services:WaitForChild("CurrencyService"))
+require(Services:WaitForChild("InventoryService"))
+require(Services:WaitForChild("CombatService"))
+
 -- Future services (uncomment as implemented):
--- require(Services:WaitForChild("StaminaService"))
--- require(Services:WaitForChild("InventoryService"))
--- require(Services:WaitForChild("CombatService"))
 -- require(Services:WaitForChild("ShopService"))
 -- require(Services:WaitForChild("CraftingService"))
 -- require(Services:WaitForChild("QuestService"))

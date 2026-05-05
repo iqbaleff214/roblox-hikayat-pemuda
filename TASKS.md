@@ -247,7 +247,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-010 — Stamina System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Track, deplete, and regenerate each player's stamina server-side. Broadcast changes to the owning client for HUD display. Other systems (combat, sprint) call StaminaModule to spend stamina.
 
@@ -269,7 +269,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-011 — Inventory & Item System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Manage each player's inventory server-side. Items are stored as `{ id, amount }` entries. Client requests actions (use, equip, move to hotbar); server validates and updates.
 
@@ -294,7 +294,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-012 — Hotbar System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Allow players to assign up to 8 items to quick-access slots. Desktop uses keys 1–8; mobile uses tap. Equip/use is instant from hotbar.
 
@@ -317,7 +317,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-013 — Combat System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Handle weapon equip/unequip, hitbox detection, damage application, cooldown enforcement, and stamina cost. No client-side damage authority — server validates all hits.
 
@@ -348,7 +348,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-014 — Currency System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Manage Rupiah and Gold balances server-side. Provide formatted display strings (Indonesian number format). All currency changes go through CurrencyModule.
 
