@@ -2,25 +2,26 @@
 -- Receives dialog nodes from NPCService, renders typewriter text and choice buttons.
 -- Fires DialogChoice back to server when player selects an option.
 -- Phase 8: NPC portrait, WalkSpeed disable during dialog, auto-close when no choices.
+-- Phase 10: Mobile — ScrollingFrame for >3 choices; MobileUtil sizes.
 
 local Players           = game:GetService("Players")
-local UserInputService  = game:GetService("UserInputService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Knit             = require(ReplicatedStorage:WaitForChild("Packages").Knit)
 local AssetConfig      = require(ReplicatedStorage:WaitForChild("Shared").Config.AssetConfig)
 local LocalizationUtil = require(ReplicatedStorage:WaitForChild("Shared").Modules.LocalizationUtil)
+local MobileUtil       = require(ReplicatedStorage:WaitForChild("Shared").Modules.MobileUtil)
 
 local LocalPlayer = Players.LocalPlayer
 local PlayerGui   = LocalPlayer:WaitForChild("PlayerGui")
 
 local CHAR_DELAY   = 0.03
-local MIN_BTN_SIZE = 44
-local IS_MOBILE    = UserInputService.TouchEnabled
+local MIN_BTN_SIZE = MobileUtil.choiceButtonHeight()
+local IS_MOBILE    = MobileUtil.IS_MOBILE
 
--- Panel height: 30% on desktop, 40% on mobile
-local PANEL_HEIGHT = IS_MOBILE and UDim2.new(1, -32, 0.4, 0) or UDim2.new(1, -32, 0, 220)
-local PANEL_POS    = IS_MOBILE and UDim2.new(0, 16, 0.6, 0) or UDim2.new(0, 16, 1, -236)
+-- Panel height: ~30% on desktop, 40% on mobile (from MobileUtil)
+local PANEL_HEIGHT = MobileUtil.dialogPanelSize()
+local PANEL_POS    = MobileUtil.dialogPanelPos()
 
 local DialogController = Knit.CreateController { Name = "DialogController" }
 
@@ -128,19 +129,24 @@ local function buildUI()
 	textLbl.Text                     = ""
 	textLbl.Parent                   = frame
 
-	-- Choice frame (below portrait+text row)
-	local choiceFr                   = Instance.new("Frame")
-	choiceFr.Name                    = "ChoiceFrame"
-	choiceFr.Size                    = UDim2.new(1, -24, 0, 96)
-	choiceFr.Position                = UDim2.fromOffset(12, 116)
-	choiceFr.BackgroundTransparency  = 1
-	choiceFr.ClipsDescendants        = false
-	choiceFr.Parent                  = frame
+	-- Choice scroll (ScrollingFrame — scrolling toggled on when >3 choices on mobile)
+	local choiceFr                      = Instance.new("ScrollingFrame")
+	choiceFr.Name                       = "ChoiceFrame"
+	choiceFr.Size                       = UDim2.new(1, -24, 0, 96)
+	choiceFr.Position                   = UDim2.fromOffset(12, 116)
+	choiceFr.BackgroundTransparency     = 1
+	choiceFr.BorderSizePixel            = 0
+	choiceFr.ScrollBarThickness         = 0  -- hidden by default; shown when scrollable
+	choiceFr.ScrollBarImageTransparency = 1
+	choiceFr.AutomaticCanvasSize        = Enum.AutomaticSize.None
+	choiceFr.CanvasSize                 = UDim2.fromScale(0, 0)
+	choiceFr.ClipsDescendants           = true
+	choiceFr.Parent                     = frame
 
-	local list                       = Instance.new("UIListLayout")
-	list.SortOrder                   = Enum.SortOrder.LayoutOrder
-	list.Padding                     = UDim.new(0, 4)
-	list.Parent                      = choiceFr
+	local list                          = Instance.new("UIListLayout")
+	list.SortOrder                      = Enum.SortOrder.LayoutOrder
+	list.Padding                        = UDim.new(0, 4)
+	list.Parent                         = choiceFr
 
 	_gui          = screenGui
 	_portrait     = portrait
@@ -278,6 +284,21 @@ local function showNode(npcId, nodeData)
 				_npcService.DialogChoice:Fire(npcId, idx)
 			end)
 		end
+	end
+
+	-- On mobile with >3 choices: enable ScrollingFrame so all choices are reachable
+	if IS_MOBILE and choiceCount > 3 then
+		local rowH   = MIN_BTN_SIZE + 4
+		local maxH   = rowH * 3          -- show 3 rows, scroll for the rest
+		_choiceFrame.Size                = UDim2.new(1, -24, 0, maxH)
+		_choiceFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+		_choiceFrame.CanvasSize          = UDim2.fromScale(0, 0)
+		_choiceFrame.ScrollBarThickness  = 4
+		_choiceFrame.ScrollBarImageTransparency = 0
+	else
+		_choiceFrame.Size                = UDim2.new(1, -24, 0, MIN_BTN_SIZE * math.max(choiceCount, 1) + 4 * math.max(choiceCount - 1, 0))
+		_choiceFrame.AutomaticCanvasSize = Enum.AutomaticSize.None
+		_choiceFrame.ScrollBarThickness  = 0
 	end
 
 	-- Auto-close 2s after typewriter finishes when no choices

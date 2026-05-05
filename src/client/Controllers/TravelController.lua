@@ -1,14 +1,16 @@
 -- LocalScript: StarterPlayerScripts/Client/Controllers/TravelController
 -- Listens to TravelService.OpenTravelMap and shows Indonesia archipelago map.
 -- Phase 8: Full-screen map with island buttons at geographic positions.
--- Player selects island → zone dots appear → confirm Berangkat.
+-- Phase 10: Zone dots ≥ 30px (MobileUtil.MIN_MAP_DOT_PX) on all platforms.
 
-local Players      = game:GetService("Players")
-local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Knit        = require(ReplicatedStorage:WaitForChild("Packages").Knit)
 local AssetConfig = require(ReplicatedStorage:WaitForChild("Shared").Config.AssetConfig)
+local MobileUtil  = require(ReplicatedStorage:WaitForChild("Shared").Modules.MobileUtil)
+
+local DOT_SIZE = math.max(MobileUtil.MIN_MAP_DOT_PX, MobileUtil.IS_MOBILE and 36 or 30)
 
 local TravelController = Knit.CreateController { Name = "TravelController" }
 
@@ -16,7 +18,6 @@ local TravelController = Knit.CreateController { Name = "TravelController" }
 
 local _gui           = nil
 local _travelService = nil
-local _payload       = nil
 local _selectedDest  = nil
 
 -- ── Geographic island positions (UDim2.fromScale on map canvas) ───
@@ -255,7 +256,7 @@ end
 local function buildZoneDot(dest, onSelect)
 	local dot = Instance.new("TextButton")
 	dot.Name            = "Zone_" .. (dest.zoneId or dest.nameKey)
-	dot.Size            = UDim2.fromOffset(10, 10)
+	dot.Size            = UDim2.fromOffset(DOT_SIZE, DOT_SIZE)
 	dot.AnchorPoint     = Vector2.new(0.5, 0.5)
 	dot.BorderSizePixel = 0
 	dot.Text            = ""
@@ -326,7 +327,6 @@ local function clearLayer(layer)
 end
 
 local function showGui(payload)
-	_payload      = payload
 	_selectedDest = nil
 
 	local gui = buildGui()

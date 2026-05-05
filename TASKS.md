@@ -1008,7 +1008,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-095 — Festival Event Manager
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Detect real-world date ranges matching Indonesian holidays. Activate event-specific tasks, event currency, event shop stock, and zone decorations.
 
@@ -1030,7 +1030,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-096 — Mobile Optimization Pass
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Audit all GUIs and controllers for mobile usability. Ensure all tap targets meet 44px minimum, touch gestures work, no desktop-only controls block progression.
 
@@ -1051,7 +1051,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-097 — Performance & Streaming Config
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Configure Roblox Streaming Enabled correctly per Place. Ensure NPCs and props outside the player's stream area are not loaded client-side. Define stream radius.
 
@@ -1071,7 +1071,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-098 — Localization Table Population
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Fill the Roblox `LocalizationTable` CSV with all string keys used across the game. Indonesian as default, English as secondary. All keys used in code must be present.
 

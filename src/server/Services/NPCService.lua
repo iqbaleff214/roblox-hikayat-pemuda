@@ -48,6 +48,7 @@ local NPCService = Knit.CreateService {
 	_sessions     = nil, -- { [userId] = { npcId, nodeId } }
 	_dataService  = nil,
 	_shopService  = nil,
+	_zoneService  = nil,
 }
 
 -- ── Schedule helpers ──────────────────────────────────────────────
@@ -158,6 +159,9 @@ end
 function NPCService:KnitStart()
 	self._dataService = Knit.GetService("DataService")
 	self._shopService = Knit.GetService("ShopService")
+	pcall(function()
+		self._zoneService = Knit.GetService("ZoneService")
+	end)
 
 	self:_spawnAll()
 	self:_startScheduleLoop()
@@ -255,6 +259,15 @@ function NPCService:_startScheduleLoop()
 			for npcId, npcCfg in AssetConfig.NPCs do
 				local model = self._npcInstances[npcId]
 				if model and model.Parent and model.PrimaryPart then
+					-- Skip tween if no players are in this NPC's zone (performance)
+					local zoneId = npcCfg.zone
+					if zoneId and self._zoneService then
+						local inZone = self._zoneService:getPlayersInZone(zoneId)
+						if #inZone == 0 then
+							continue
+						end
+					end
+
 					local entry   = activeEntry(npcCfg, hour)
 					local locPart = entry and findLocationPart(npcCfg.zone, entry.location)
 					if locPart then

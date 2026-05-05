@@ -892,6 +892,40 @@ AssetConfig.Events = {
 			{ type = "Talk",  count = 5, reward = { eventCurrency = 2 } },
 			{ type = "Craft", item = "Ketupat", count = 3, reward = { eventCurrency = 5 } },
 		},
+		-- Approximate Eid al-Fitr window (varies yearly — adjust per lunar calendar)
+		startMonth = 3, startDay = 29,
+		endMonth   = 4, endDay   = 11,
+		decorZones = { "KotaJogja", "Suroboyo" },
+	},
+	Natal = {
+		id           = "Natal",
+		nameKey      = "event.natal.name",
+		currency     = { id = "KoinNatal", symbol = "⭐", nameKey = "event.natal.currency" },
+		durationDays = 12,
+		taskBonus    = true,
+		shopItems    = { "PohonNatal", "KaosNatal" },
+		eventTasks   = {
+			{ type = "Talk",  count = 3, reward = { eventCurrency = 2 } },
+			{ type = "Collect", item = "BintangNatal", count = 5, reward = { eventCurrency = 5 } },
+		},
+		startMonth = 12, startDay = 20,
+		endMonth   = 12, endDay   = 31,
+		decorZones = { "Jakarta", "Bandung" },
+	},
+	Kemerdekaan = {
+		id           = "Kemerdekaan",
+		nameKey      = "event.kemerdekaan.name",
+		currency     = { id = "KoinMerah", symbol = "🏅", nameKey = "event.kemerdekaan.currency" },
+		durationDays = 7,
+		taskBonus    = true,
+		shopItems    = { "BenderaMerahPutih", "BajuPahlawan" },
+		eventTasks   = {
+			{ type = "Talk",   count = 5, reward = { eventCurrency = 3 } },
+			{ type = "Combat", count = 8, reward = { eventCurrency = 5 } },
+		},
+		startMonth = 8, startDay = 15,
+		endMonth   = 8, endDay   = 22,
+		decorZones = { "KotaJogja", "Suroboyo", "Jakarta" },
 	},
 }
 

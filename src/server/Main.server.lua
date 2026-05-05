@@ -63,6 +63,8 @@ local REMOTE_EVENTS = {
 	"DialogOpen",
 	"OpenGaleri",
 	"OpenTravelMap",
+	-- Festival Events
+	"EventActive",
 	-- Travel
 	"TeleportToPlace",
 	-- World
@@ -133,6 +135,9 @@ require(Services:WaitForChild("DayNightService"))
 require(Services:WaitForChild("RelationshipService"))
 require(Services:WaitForChild("LeaderboardService"))
 require(Services:WaitForChild("GaleriService"))
+
+-- Phase 10: Polish
+require(Services:WaitForChild("EventService"))
 
 -- Future services (uncomment as implemented):
 -- require(Services:WaitForChild("ZoneService"))
