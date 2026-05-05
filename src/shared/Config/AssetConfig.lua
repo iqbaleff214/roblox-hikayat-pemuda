@@ -1095,6 +1095,16 @@ AssetConfig.WorldEvents = {
 }
 
 -- ============================================================
+-- RARITY (glow colors for collectible pedestals)
+-- ============================================================
+AssetConfig.Rarity = {
+	Biasa            = { color = Color3.fromRGB(180, 180, 180), glowRange = 8  },
+	["Tidak Biasa"]  = { color = Color3.fromRGB(30,  220,  80), glowRange = 12 },
+	Langka           = { color = Color3.fromRGB(60,  100, 255), glowRange = 16 },
+	Legenda          = { color = Color3.fromRGB(255, 170,   0), glowRange = 24 },
+}
+
+-- ============================================================
 -- HELPER FUNCTIONS (nil-safe — callers must check return value)
 -- ============================================================
 function AssetConfig.getItem(id)

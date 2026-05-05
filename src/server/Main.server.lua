@@ -129,6 +129,11 @@ require(Services:WaitForChild("TravelService"))
 require(Services:WaitForChild("WorldEventService"))
 require(Services:WaitForChild("DayNightService"))
 
+-- Phase 7: Social Systems
+require(Services:WaitForChild("RelationshipService"))
+require(Services:WaitForChild("LeaderboardService"))
+require(Services:WaitForChild("GaleriService"))
+
 -- Future services (uncomment as implemented):
 -- require(Services:WaitForChild("ZoneService"))
 -- require(Services:WaitForChild("TravelService"))

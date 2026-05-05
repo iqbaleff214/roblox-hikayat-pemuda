@@ -28,10 +28,14 @@ require(Controllers:WaitForChild("LoginStreakController"))
 require(Controllers:WaitForChild("ZoneController"))
 require(Controllers:WaitForChild("TravelController"))
 
--- Phase 7 UI:
+-- Phase 7: Social Systems
+require(Controllers:WaitForChild("RelationshipController"))
+require(Controllers:WaitForChild("LeaderboardController"))
+require(Controllers:WaitForChild("GaleriController"))
+
+-- Phase 8 UI:
 -- require(Controllers:WaitForChild("HUDController"))
 -- require(Controllers:WaitForChild("ShopController"))
--- require(Controllers:WaitForChild("GaleriController"))
 
 -- Phase 9:
 -- require(Controllers:WaitForChild("AudioController"))

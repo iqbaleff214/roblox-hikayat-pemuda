@@ -733,7 +733,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-070 — Relationship System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Allow two players to mutually form, view, and remove relationships. Validate constraints (1 marriage max, require Cincin item). Display badge on player nameplate.
 
@@ -763,7 +763,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-071 — Leaderboard System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Maintain a server-side ordered leaderboard of top players by collectible count. Display top 3 on in-world billboard in KotaJogja. Update periodically.
 
@@ -782,7 +782,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-072 — Galeri System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Each player has a personal display room (Galeri) for collectible items. Other players can visit. Collectibles placed on pedestals, glow by rarity.
 
