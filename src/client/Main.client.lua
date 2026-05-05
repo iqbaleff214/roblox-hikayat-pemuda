@@ -34,8 +34,8 @@ require(Controllers:WaitForChild("LeaderboardController"))
 require(Controllers:WaitForChild("GaleriController"))
 
 -- Phase 8 UI:
--- require(Controllers:WaitForChild("HUDController"))
--- require(Controllers:WaitForChild("ShopController"))
+require(Controllers:WaitForChild("HUDController"))
+require(Controllers:WaitForChild("ShopController"))
 
 -- Phase 9:
 -- require(Controllers:WaitForChild("AudioController"))

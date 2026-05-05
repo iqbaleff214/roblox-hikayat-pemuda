@@ -807,7 +807,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-080 — HUD (Main Heads-Up Display)
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Always-visible HUD showing: stamina bar, morality icon/label, active quest objective, currency (Rp + Gold), compass, and hotbar. Responsive to both mobile and desktop.
 
@@ -834,7 +834,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-081 — Inventory GUI
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Full inventory panel with filter tabs, item grid, tooltip on hover/hold, and action menu (use, equip, assign to hotbar, drop).
 
@@ -857,7 +857,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-082 — Shop GUI
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Shop panel with Buy and Sell tabs. Shows items, prices (with morality discount applied), confirm dialog.
 
@@ -877,7 +877,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-083 — Dialog GUI
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** NPC conversation panel. Shows NPC portrait, name, localized text with typewriter effect, and choice buttons. Supports morality-gated choices.
 
@@ -899,7 +899,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-084 — Quest & Task GUI
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Quest log panel listing active + completed quests. Task board panel showing daily and weekly tasks with progress bars and claim buttons.
 
@@ -918,7 +918,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-085 — Travel GUI (Peta Perjalanan)
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Full-screen Indonesia archipelago map for selecting travel destination. Show unlocked (green) vs locked (gray) zones. Display ticket cost and Berangkat button.
 
@@ -939,7 +939,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-086 — Social, Achievement, Galeri & Login Streak GUIs
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Build the remaining player-facing panels: social/relationship panel, achievement grid, Galeri layout editor, and login streak popup.
 

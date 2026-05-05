@@ -21,9 +21,11 @@ local GaleriService = Knit.CreateService {
 		-- client → server
 		PlaceCollectible = Knit.CreateSignal(), -- (itemId: string, pedestalSlot: number)
 		OpenGaleri       = Knit.CreateSignal(), -- (targetUserId: number)
+		GaleriLike       = Knit.CreateSignal(), -- (targetUserId: number)
 		-- server → client
 		GaleriData       = Knit.CreateSignal(), -- (targetUserId, layout, isOwner)
 		GaleriVisited    = Knit.CreateSignal(), -- (visitorName: string)
+		GaleriLiked      = Knit.CreateSignal(), -- (likerName: string) fired to galeri owner
 	},
 
 	_dataService      = nil,
@@ -177,6 +179,10 @@ function GaleriService:KnitStart()
 		self:_handleOpenGaleri(player, targetUserId)
 	end)
 
+	self.Client.GaleriLike:Connect(function(player, targetUserId)
+		self:_handleGaleriLike(player, targetUserId)
+	end)
+
 	-- Seed for players already in game (Studio play solo)
 	for _, player in Players:GetPlayers() do
 		task.spawn(function()
@@ -244,6 +250,20 @@ function GaleriService:_handleOpenGaleri(player, targetUserId)
 
 	local isOwner = (player.UserId == targetUserId)
 	self.Client.GaleriData:Fire(player, targetUserId, layout, isOwner)
+end
+
+function GaleriService:_handleGaleriLike(player, targetUserId)
+	if type(targetUserId) ~= "number" then
+		return
+	end
+	if player.UserId == targetUserId then
+		return
+	end
+	local targetPlayer = Players:GetPlayerByUserId(targetUserId)
+	if not targetPlayer then
+		return
+	end
+	self.Client.GaleriLiked:Fire(targetPlayer, player.Name)
 end
 
 -- ── Public API ────────────────────────────────────────────────────

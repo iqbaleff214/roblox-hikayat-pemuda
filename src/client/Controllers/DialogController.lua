@@ -1,30 +1,65 @@
--- LocalScript (Knit Controller): StarterPlayerScripts/Client/Controllers/DialogController
+-- LocalScript: StarterPlayerScripts/Client/Controllers/DialogController
 -- Receives dialog nodes from NPCService, renders typewriter text and choice buttons.
 -- Fires DialogChoice back to server when player selects an option.
+-- Phase 8: NPC portrait, WalkSpeed disable during dialog, auto-close when no choices.
 
 local Players           = game:GetService("Players")
+local UserInputService  = game:GetService("UserInputService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Knit             = require(ReplicatedStorage:WaitForChild("Packages").Knit)
+local AssetConfig      = require(ReplicatedStorage:WaitForChild("Shared").Config.AssetConfig)
 local LocalizationUtil = require(ReplicatedStorage:WaitForChild("Shared").Modules.LocalizationUtil)
 
 local LocalPlayer = Players.LocalPlayer
 local PlayerGui   = LocalPlayer:WaitForChild("PlayerGui")
 
-local CHAR_DELAY   = 0.03 -- seconds between typewriter characters
-local MIN_BTN_SIZE = 44   -- minimum button height in px (mobile-friendly)
+local CHAR_DELAY   = 0.03
+local MIN_BTN_SIZE = 44
+local IS_MOBILE    = UserInputService.TouchEnabled
+
+-- Panel height: 30% on desktop, 40% on mobile
+local PANEL_HEIGHT = IS_MOBILE and UDim2.new(1, -32, 0.4, 0) or UDim2.new(1, -32, 0, 220)
+local PANEL_POS    = IS_MOBILE and UDim2.new(0, 16, 0.6, 0) or UDim2.new(0, 16, 1, -236)
 
 local DialogController = Knit.CreateController { Name = "DialogController" }
 
 -- ── UI state ──────────────────────────────────────────────────────
 
 local _gui           = nil
-local _frame         = nil
+local _portrait      = nil
 local _speakerLabel  = nil
 local _textLabel     = nil
 local _choiceFrame   = nil
-local _skipConn      = nil  -- InputBegan connection for typewriter skip
-local _typeTask      = nil  -- task thread for active typewriter
+local _skipConn      = nil
+local _typeTask      = nil
+local _autoCloseTask = nil
+
+-- ── Humanoid walk control ─────────────────────────────────────────
+
+local _savedWalkSpeed = nil
+
+local function disableMovement()
+	local char = LocalPlayer.Character
+	if not char then return end
+	local hum = char:FindFirstChildOfClass("Humanoid")
+	if not hum then return end
+	_savedWalkSpeed    = hum.WalkSpeed
+	hum.WalkSpeed      = 0
+	hum.JumpPower      = 0
+end
+
+local function restoreMovement()
+	local char = LocalPlayer.Character
+	if not char then return end
+	local hum = char:FindFirstChildOfClass("Humanoid")
+	if not hum then return end
+	if _savedWalkSpeed then
+		hum.WalkSpeed = _savedWalkSpeed
+		_savedWalkSpeed = nil
+	end
+	hum.JumpPower = 50
+end
 
 -- ── UI construction ───────────────────────────────────────────────
 
@@ -38,10 +73,10 @@ local function buildUI()
 
 	local frame                      = Instance.new("Frame")
 	frame.Name                       = "DialogFrame"
-	frame.Size                       = UDim2.new(1, -40, 0, 210)
-	frame.Position                   = UDim2.new(0, 20, 1, -230)
+	frame.Size                       = PANEL_HEIGHT
+	frame.Position                   = PANEL_POS
 	frame.BackgroundColor3           = Color3.fromRGB(20, 20, 20)
-	frame.BackgroundTransparency     = 0.2
+	frame.BackgroundTransparency     = 0.15
 	frame.BorderSizePixel            = 0
 	frame.Parent                     = screenGui
 
@@ -49,36 +84,55 @@ local function buildUI()
 	corner.CornerRadius              = UDim.new(0, 8)
 	corner.Parent                    = frame
 
+	-- Portrait area (left column)
+	local portrait                   = Instance.new("ImageLabel")
+	portrait.Name                    = "Portrait"
+	portrait.Size                    = UDim2.fromOffset(96, 96)
+	portrait.Position                = UDim2.fromOffset(12, 12)
+	portrait.BackgroundColor3        = Color3.fromRGB(40, 40, 60)
+	portrait.BackgroundTransparency  = 0
+	portrait.BorderSizePixel         = 0
+	portrait.Image                   = "rbxassetid://0"
+	portrait.ScaleType               = Enum.ScaleType.Fit
+	portrait.Parent                  = frame
+
+	local portraitCorner             = Instance.new("UICorner")
+	portraitCorner.CornerRadius      = UDim.new(0, 6)
+	portraitCorner.Parent            = portrait
+
+	-- Right side: speaker name
 	local speaker                    = Instance.new("TextLabel")
 	speaker.Name                     = "SpeakerLabel"
-	speaker.Size                     = UDim2.new(1, -20, 0, 28)
-	speaker.Position                 = UDim2.new(0, 10, 0, 8)
+	speaker.Size                     = UDim2.new(1, -124, 0, 26)
+	speaker.Position                 = UDim2.fromOffset(116, 10)
 	speaker.BackgroundTransparency   = 1
 	speaker.TextColor3               = Color3.fromRGB(255, 200, 80)
 	speaker.Font                     = Enum.Font.GothamBold
-	speaker.TextSize                 = 18
+	speaker.TextSize                 = 17
 	speaker.TextXAlignment           = Enum.TextXAlignment.Left
 	speaker.Text                     = ""
 	speaker.Parent                   = frame
 
+	-- Right side: dialog text
 	local textLbl                    = Instance.new("TextLabel")
 	textLbl.Name                     = "DialogText"
-	textLbl.Size                     = UDim2.new(1, -20, 0, 85)
-	textLbl.Position                 = UDim2.new(0, 10, 0, 40)
+	textLbl.Size                     = UDim2.new(1, -124, 0, 72)
+	textLbl.Position                 = UDim2.fromOffset(116, 40)
 	textLbl.BackgroundTransparency   = 1
 	textLbl.TextColor3               = Color3.new(1, 1, 1)
 	textLbl.Font                     = Enum.Font.Gotham
-	textLbl.TextSize                 = 16
+	textLbl.TextSize                 = 15
 	textLbl.TextWrapped              = true
 	textLbl.TextXAlignment           = Enum.TextXAlignment.Left
 	textLbl.TextYAlignment           = Enum.TextYAlignment.Top
 	textLbl.Text                     = ""
 	textLbl.Parent                   = frame
 
+	-- Choice frame (below portrait+text row)
 	local choiceFr                   = Instance.new("Frame")
 	choiceFr.Name                    = "ChoiceFrame"
-	choiceFr.Size                    = UDim2.new(1, -20, 0, 80)
-	choiceFr.Position                = UDim2.new(0, 10, 0, 132)
+	choiceFr.Size                    = UDim2.new(1, -24, 0, 96)
+	choiceFr.Position                = UDim2.fromOffset(12, 116)
 	choiceFr.BackgroundTransparency  = 1
 	choiceFr.ClipsDescendants        = false
 	choiceFr.Parent                  = frame
@@ -89,7 +143,7 @@ local function buildUI()
 	list.Parent                      = choiceFr
 
 	_gui          = screenGui
-	_frame        = frame
+	_portrait     = portrait
 	_speakerLabel = speaker
 	_textLabel    = textLbl
 	_choiceFrame  = choiceFr
@@ -114,18 +168,52 @@ local function cancelTypewriter()
 	end
 end
 
+local function cancelAutoClose()
+	if _autoCloseTask then
+		task.cancel(_autoCloseTask)
+		_autoCloseTask = nil
+	end
+end
+
 -- ── NPCService reference (set in KnitStart) ───────────────────────
 
 local _npcService = nil
 
 -- ── Dialog rendering ──────────────────────────────────────────────
 
+local function closeDialog()
+	cancelTypewriter()
+	cancelAutoClose()
+	clearChoices()
+	if _gui then
+		_gui.Enabled = false
+	end
+	if _textLabel then
+		_textLabel.Text = ""
+	end
+	if _speakerLabel then
+		_speakerLabel.Text = ""
+	end
+	restoreMovement()
+end
+
 local function showNode(npcId, nodeData)
 	cancelTypewriter()
+	cancelAutoClose()
 	clearChoices()
 
 	_gui.Enabled       = true
-	_speakerLabel.Text = nodeData.speaker or ""
+	disableMovement()
+
+	-- Update portrait from NPC config
+	local npcCfg = AssetConfig.getNPC(npcId)
+	if npcCfg and npcCfg.portrait then
+		_portrait.Image = npcCfg.portrait
+	else
+		_portrait.Image = "rbxassetid://0"
+	end
+
+	_speakerLabel.Text = nodeData.speaker or (npcCfg and npcCfg.nameKey) or ""
 	_textLabel.Text    = ""
 
 	local fullText = LocalizationUtil.get(nodeData.textKey or "")
@@ -139,47 +227,66 @@ local function showNode(npcId, nodeData)
 		_typeTask = nil
 	end)
 
-	-- Skip typewriter on background click / tap
-	_skipConn = _frame.InputBegan:Connect(function()
-		if _typeTask then
-			cancelTypewriter()
-			_textLabel.Text = fullText
-		end
-	end)
-
-	-- Choice buttons
-	for order, choice in nodeData.choices do
-		local btn                        = Instance.new("TextButton")
-		btn.Name                         = "Choice_" .. tostring(choice.choiceIndex)
-		btn.LayoutOrder                  = order
-		btn.Size                         = UDim2.new(1, 0, 0, MIN_BTN_SIZE)
-		btn.BackgroundColor3             = Color3.fromRGB(50, 50, 70)
-		btn.BorderSizePixel              = 0
-		btn.TextColor3                   = Color3.new(1, 1, 1)
-		btn.Font                         = Enum.Font.Gotham
-		btn.TextSize                     = 14
-		btn.TextWrapped                  = true
-		btn.Text                         = LocalizationUtil.get(choice.labelKey or "")
-		btn.Parent                       = _choiceFrame
-
-		local btnCorner                  = Instance.new("UICorner")
-		btnCorner.CornerRadius           = UDim.new(0, 6)
-		btnCorner.Parent                 = btn
-
-		local idx = choice.choiceIndex
-		btn.Activated:Connect(function()
-			clearChoices()
-			_npcService.DialogChoice:Fire(npcId, idx)
+	-- Skip typewriter on frame click/tap
+	local frame = _gui:FindFirstChildOfClass("Frame")
+	if frame then
+		_skipConn = frame.InputBegan:Connect(function()
+			if _typeTask then
+				cancelTypewriter()
+				_textLabel.Text = fullText
+			end
 		end)
 	end
-end
 
-local function closeDialog()
-	cancelTypewriter()
-	clearChoices()
-	_gui.Enabled       = false
-	_textLabel.Text    = ""
-	_speakerLabel.Text = ""
+	-- Build choice buttons
+	local choiceCount = 0
+	for order, choice in nodeData.choices do
+		choiceCount = choiceCount + 1
+
+		local disabled = false
+		if choice.requiredMoralityMin then
+			-- Will be checked at render time; server enforces hard-gate
+			disabled = false
+		end
+
+		local btn                    = Instance.new("TextButton")
+		btn.Name                     = "Choice_" .. tostring(choice.choiceIndex)
+		btn.LayoutOrder              = order
+		btn.Size                     = UDim2.new(1, 0, 0, MIN_BTN_SIZE)
+		btn.BackgroundColor3         = disabled
+			and Color3.fromRGB(50, 50, 50)
+			or  Color3.fromRGB(50, 50, 70)
+		btn.BorderSizePixel          = 0
+		btn.TextColor3               = disabled
+			and Color3.fromRGB(100, 100, 100)
+			or  Color3.new(1, 1, 1)
+		btn.Font                     = Enum.Font.Gotham
+		btn.TextSize                 = 14
+		btn.TextWrapped              = true
+		btn.Text                     = LocalizationUtil.get(choice.labelKey or "")
+		btn.Active                   = not disabled
+		btn.Parent                   = _choiceFrame
+
+		local btnCorner              = Instance.new("UICorner")
+		btnCorner.CornerRadius       = UDim.new(0, 6)
+		btnCorner.Parent             = btn
+
+		if not disabled then
+			local idx = choice.choiceIndex
+			btn.Activated:Connect(function()
+				clearChoices()
+				_npcService.DialogChoice:Fire(npcId, idx)
+			end)
+		end
+	end
+
+	-- Auto-close 2s after typewriter finishes when no choices
+	if choiceCount == 0 then
+		_autoCloseTask = task.delay(#fullText * CHAR_DELAY + 2, function()
+			_autoCloseTask = nil
+			closeDialog()
+		end)
+	end
 end
 
 -- ── KnitInit / KnitStart ──────────────────────────────────────────

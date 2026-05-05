@@ -1,7 +1,6 @@
 -- LocalScript: StarterPlayerScripts/Client/Controllers/GaleriController
--- Renders the Galeri grid UI on GaleriData signal from GaleriService.
--- Own galeri: slot cells are clickable to assign collectibles via PlaceCollectible.
--- Visited galeri: read-only display.
+-- Phase 7: renders Galeri grid UI on GaleriData signal.
+-- Phase 8: adds "Suka" button for visited galeris, shows owner name + collectible count.
 
 local Players      = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
@@ -15,7 +14,7 @@ local GaleriController = Knit.CreateController { Name = "GaleriController" }
 -- ── State ─────────────────────────────────────────────────────────
 
 local _galeriService  = nil
-local _cachedLayouts  = {} -- [userId] = layout table
+local _cachedLayouts  = {}
 local _gui            = nil
 local _currentOwnerId = nil
 local _isOwner        = false
@@ -23,9 +22,7 @@ local _isOwner        = false
 -- ── UI: close ─────────────────────────────────────────────────────
 
 local function closeGui()
-	if not _gui then
-		return
-	end
+	if not _gui then return end
 	_gui.sg.Enabled  = false
 	_currentOwnerId  = nil
 	_isOwner         = false
@@ -78,9 +75,9 @@ local function buildSlotCell(parent, slot, itemId, isOwner)
 				rarityBar.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
 			end
 		else
-			nameLabel.TextColor3        = Color3.fromRGB(160, 160, 160)
-			nameLabel.Text              = itemId
-			rarityBar.BackgroundColor3  = Color3.fromRGB(180, 180, 180)
+			nameLabel.TextColor3       = Color3.fromRGB(160, 160, 160)
+			nameLabel.Text             = itemId
+			rarityBar.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
 		end
 	else
 		nameLabel.TextColor3       = Color3.fromRGB(60, 60, 80)
@@ -98,9 +95,7 @@ end
 -- ── UI: build root GUI (lazy) ─────────────────────────────────────
 
 local function buildGui()
-	if _gui then
-		return _gui
-	end
+	if _gui then return _gui end
 
 	local playerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
 
@@ -124,7 +119,7 @@ local function buildGui()
 
 	local panel                       = Instance.new("Frame")
 	panel.Name                        = "Panel"
-	panel.Size                        = UDim2.fromOffset(480, 520)
+	panel.Size                        = UDim2.fromOffset(480, 560)
 	panel.AnchorPoint                 = Vector2.new(0.5, 0.5)
 	panel.Position                    = UDim2.fromScale(0.5, 0.5)
 	panel.BackgroundColor3            = Color3.fromRGB(18, 18, 28)
@@ -137,18 +132,38 @@ local function buildGui()
 	panelCorner.CornerRadius = UDim.new(0, 12)
 	panelCorner.Parent       = panel
 
+	-- Title row (title + close button)
 	local titleLabel             = Instance.new("TextLabel")
 	titleLabel.Name              = "Title"
-	titleLabel.Size              = UDim2.new(1, -80, 0, 36)
+	titleLabel.Size              = UDim2.new(1, -96, 0, 36)
 	titleLabel.Position          = UDim2.fromOffset(16, 12)
 	titleLabel.BackgroundTransparency = 1
 	titleLabel.Font              = Enum.Font.GothamBold
-	titleLabel.TextSize          = 18
+	titleLabel.TextSize          = 17
 	titleLabel.TextColor3        = Color3.fromRGB(255, 215, 0)
 	titleLabel.TextXAlignment    = Enum.TextXAlignment.Left
 	titleLabel.Text              = "Galeri Koleksi"
 	titleLabel.ZIndex            = 3
 	titleLabel.Parent            = panel
+
+	-- Suka button (only visible when visiting)
+	local sukaBtn                = Instance.new("TextButton")
+	sukaBtn.Name                 = "SukaBtn"
+	sukaBtn.Size                 = UDim2.fromOffset(56, 28)
+	sukaBtn.Position             = UDim2.new(1, -100, 0, 16)
+	sukaBtn.BackgroundColor3     = Color3.fromRGB(200, 50, 100)
+	sukaBtn.BorderSizePixel      = 0
+	sukaBtn.Font                 = Enum.Font.GothamBold
+	sukaBtn.TextSize             = 13
+	sukaBtn.TextColor3           = Color3.fromRGB(255, 255, 255)
+	sukaBtn.Text                 = "♥ Suka"
+	sukaBtn.Visible              = false
+	sukaBtn.ZIndex               = 3
+	sukaBtn.Parent               = panel
+
+	local sukaBtnCorner = Instance.new("UICorner")
+	sukaBtnCorner.CornerRadius = UDim.new(0, 6)
+	sukaBtnCorner.Parent       = sukaBtn
 
 	local closeBtn               = Instance.new("TextButton")
 	closeBtn.Name                = "Close"
@@ -167,10 +182,45 @@ local function buildGui()
 	closeCorner.CornerRadius = UDim.new(0, 6)
 	closeCorner.Parent       = closeBtn
 
+	-- Owner info bar (name + collectible count)
+	local ownerBar               = Instance.new("Frame")
+	ownerBar.Name                = "OwnerBar"
+	ownerBar.Size                = UDim2.new(1, -32, 0, 24)
+	ownerBar.Position            = UDim2.fromOffset(16, 50)
+	ownerBar.BackgroundTransparency = 1
+	ownerBar.ZIndex              = 3
+	ownerBar.Parent              = panel
+
+	local ownerNameLbl           = Instance.new("TextLabel")
+	ownerNameLbl.Name            = "OwnerName"
+	ownerNameLbl.Size            = UDim2.fromScale(0.6, 1)
+	ownerNameLbl.BackgroundTransparency = 1
+	ownerNameLbl.Font            = Enum.Font.Gotham
+	ownerNameLbl.TextSize        = 12
+	ownerNameLbl.TextColor3      = Color3.fromRGB(160, 200, 255)
+	ownerNameLbl.TextXAlignment  = Enum.TextXAlignment.Left
+	ownerNameLbl.Text            = ""
+	ownerNameLbl.ZIndex          = 4
+	ownerNameLbl.Parent          = ownerBar
+
+	local collectibleCountLbl    = Instance.new("TextLabel")
+	collectibleCountLbl.Name     = "CollectibleCount"
+	collectibleCountLbl.Size     = UDim2.fromScale(0.4, 1)
+	collectibleCountLbl.AnchorPoint = Vector2.new(1, 0)
+	collectibleCountLbl.Position = UDim2.fromScale(1, 0)
+	collectibleCountLbl.BackgroundTransparency = 1
+	collectibleCountLbl.Font     = Enum.Font.Gotham
+	collectibleCountLbl.TextSize = 12
+	collectibleCountLbl.TextColor3 = Color3.fromRGB(200, 200, 200)
+	collectibleCountLbl.TextXAlignment = Enum.TextXAlignment.Right
+	collectibleCountLbl.Text     = ""
+	collectibleCountLbl.ZIndex   = 4
+	collectibleCountLbl.Parent   = ownerBar
+
 	local scroll              = Instance.new("ScrollingFrame")
 	scroll.Name               = "Scroll"
-	scroll.Size               = UDim2.new(1, -32, 1, -64)
-	scroll.Position           = UDim2.fromOffset(16, 56)
+	scroll.Size               = UDim2.new(1, -32, 1, -86)
+	scroll.Position           = UDim2.fromOffset(16, 78)
 	scroll.BackgroundTransparency = 1
 	scroll.BorderSizePixel    = 0
 	scroll.ScrollBarThickness = 4
@@ -187,17 +237,42 @@ local function buildGui()
 	grid.Parent          = scroll
 
 	_gui = {
-		sg        = sg,
-		backdrop  = backdrop,
-		panel     = panel,
-		titleLabel = titleLabel,
-		scroll    = scroll,
-		closeBtn  = closeBtn,
+		sg                  = sg,
+		backdrop            = backdrop,
+		panel               = panel,
+		titleLabel          = titleLabel,
+		sukaBtn             = sukaBtn,
+		scroll              = scroll,
+		closeBtn            = closeBtn,
+		ownerNameLbl        = ownerNameLbl,
+		collectibleCountLbl = collectibleCountLbl,
 	}
 	return _gui
 end
 
--- ── UI: populate grid from layout ────────────────────────────────
+-- ── UI: populate grid from layout ─────────────────────────────────
+
+local function countCollectibles(layout)
+	local count = 0
+	for _, itemId in layout do
+		if itemId then
+			count = count + 1
+		end
+	end
+	return count
+end
+
+local function resolveOwnerName(targetUserId)
+	local player = Players:GetPlayerByUserId(targetUserId)
+	if player then
+		return player.Name
+	end
+	local name = "[" .. tostring(targetUserId) .. "]"
+	pcall(function()
+		name = Players:GetNameFromUserIdAsync(targetUserId)
+	end)
+	return name
+end
 
 local function showGui(targetUserId, layout, isOwner)
 	_currentOwnerId = targetUserId
@@ -206,11 +281,25 @@ local function showGui(targetUserId, layout, isOwner)
 	local gui = buildGui()
 	gui.sg.Enabled = true
 
+	-- Title
 	if isOwner then
 		gui.titleLabel.Text = "Galeri Saya"
 	else
-		gui.titleLabel.Text = "Galeri Kolektor #" .. tostring(targetUserId)
+		local ownerName = resolveOwnerName(targetUserId)
+		gui.titleLabel.Text = "Galeri " .. ownerName
 	end
+
+	-- Owner info bar
+	local ownerName = isOwner
+		and Players.LocalPlayer.Name
+		or  resolveOwnerName(targetUserId)
+
+	gui.ownerNameLbl.Text        = "Kolektor: " .. ownerName
+	gui.collectibleCountLbl.Text = tostring(countCollectibles(layout)) .. " koleksi"
+
+	-- Suka button: visible only when visiting someone else
+	gui.sukaBtn.Visible = not isOwner
+	gui.sukaBtn.Text    = "♥ Suka"
 
 	-- Clear existing slots
 	for _, child in gui.scroll:GetChildren() do
@@ -224,19 +313,17 @@ local function showGui(targetUserId, layout, isOwner)
 		local itemId = layout[tostring(slot)]
 		local cell   = buildSlotCell(gui.scroll, slot, itemId, isOwner)
 
-		-- Owner: tap empty slot to assign a collectible (fires PlaceCollectible from inventory)
 		if isOwner and not itemId then
 			local slotCapture = slot
 			cell.Activated:Connect(function()
-				-- Placeholder: a full implementation would open an item picker overlay.
-				-- For now the signal hook is wired but the picker is deferred to Phase 8 UI.
+				-- Placeholder: open item picker to assign a collectible
 				warn("[GaleriController] PlaceCollectible picker not yet implemented for slot " .. slotCapture)
 			end)
 		end
 	end
 end
 
--- ── Visit notification ────────────────────────────────────────────
+-- ── Visit notification ─────────────────────────────────────────────
 
 local function showVisitNotif(visitorName)
 	local playerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -284,6 +371,54 @@ local function showVisitNotif(visitorName)
 	end)
 end
 
+-- ── Liked notification (owner receives a "Suka") ──────────────────
+
+local function showLikedNotif(likerName)
+	local playerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
+
+	local sg              = Instance.new("ScreenGui")
+	sg.Name               = "GaleriLikedNotif"
+	sg.ResetOnSpawn       = false
+	sg.IgnoreGuiInset     = true
+	sg.ZIndexBehavior     = Enum.ZIndexBehavior.Sibling
+	sg.Parent             = playerGui
+
+	local label              = Instance.new("TextLabel")
+	label.Size               = UDim2.fromOffset(270, 36)
+	label.AnchorPoint        = Vector2.new(1, 0)
+	label.Position           = UDim2.new(1, 16, 0, 124)
+	label.BackgroundColor3   = Color3.fromRGB(60, 20, 40)
+	label.BackgroundTransparency = 0.15
+	label.BorderSizePixel    = 0
+	label.Font               = Enum.Font.Gotham
+	label.TextSize           = 13
+	label.TextColor3         = Color3.fromRGB(255, 160, 200)
+	label.Text               = "♥ " .. likerName .. " menyukai galeri Anda"
+	label.Parent             = sg
+
+	local labelCorner       = Instance.new("UICorner")
+	labelCorner.CornerRadius = UDim.new(0, 8)
+	labelCorner.Parent       = label
+
+	TweenService:Create(
+		label,
+		TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+		{ Position = UDim2.new(1, -16, 0, 124) }
+	):Play()
+
+	task.delay(3.5, function()
+		local out = TweenService:Create(
+			label,
+			TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+			{ Position = UDim2.new(1, 16, 0, 124) }
+		)
+		out:Play()
+		out.Completed:Connect(function()
+			sg:Destroy()
+		end)
+	end)
+end
+
 -- ── KnitInit / KnitStart ─────────────────────────────────────────
 
 function GaleriController:KnitInit()
@@ -301,27 +436,36 @@ function GaleriController:KnitStart()
 		showVisitNotif(visitorName)
 	end)
 
-	-- Wire close/backdrop after GUI is lazily constructed
+	_galeriService.GaleriLiked:Connect(function(likerName)
+		showLikedNotif(likerName)
+	end)
+
 	task.defer(function()
 		local gui = buildGui()
+
 		gui.closeBtn.Activated:Connect(closeGui)
 		gui.backdrop.Activated:Connect(closeGui)
+
+		gui.sukaBtn.Activated:Connect(function()
+			if _currentOwnerId and not _isOwner then
+				_galeriService.GaleriLike:Fire(_currentOwnerId)
+				gui.sukaBtn.Text = "♥ Disukai!"
+				gui.sukaBtn.BackgroundColor3 = Color3.fromRGB(120, 30, 60)
+				gui.sukaBtn.Active = false
+			end
+		end)
 	end)
 end
 
 -- ── Public API ────────────────────────────────────────────────────
 
 function GaleriController:openGaleri(targetUserId)
-	if not _galeriService then
-		return
-	end
+	if not _galeriService then return end
 	_galeriService.OpenGaleri:Fire(targetUserId)
 end
 
 function GaleriController:placeCollectible(itemId, slot)
-	if not _galeriService then
-		return
-	end
+	if not _galeriService then return end
 	_galeriService.PlaceCollectible:Fire(itemId, slot)
 end
 
