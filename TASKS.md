@@ -14,7 +14,7 @@
 
 ### TASK-000 — Shared Source Code Architecture
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Establish how one codebase serves all 7 Places (Sumatera, Jawa, Kalimantan, Sulawesi, Papua, Nusa Tenggara, Maluku) without duplicating scripts. This is the foundational architecture decision — all other tasks depend on this pattern.
 
@@ -108,7 +108,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-001 — AssetConfig Module
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Create the single source of truth for all game data. All 7 Places share this one module — no per-island copy. Devs add new items, quests, NPCs, weapons, zones by editing this one module only, then publishing once.
 
@@ -138,7 +138,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-002 — Folder & RemoteEvent Bootstrap Script
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** On server start, ensure every required `RemoteEvent`, `RemoteFunction`, and `Folder` exists. Bootstrap also loads all shared modules via `SharedConfig` so every subsequent server script can require them without repeating the asset ID lookup.
 
@@ -177,7 +177,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-003 — LocalizationUtil Module
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Wrap Roblox's `LocalizationService` into a simple utility so all other scripts call `L("key")` instead of raw service calls. Supports Indonesian (id) and English (en) with Indonesian as default fallback.
 
@@ -197,7 +197,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-004 — DataManager
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Handle all player data persistence via `DataStoreService`. Every other system reads/writes player data through DataManager only — no other script touches DataStore directly.
 
@@ -220,7 +220,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-005 — GameManager
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Central server orchestrator. Handles player join/leave lifecycle, distributes initial data to clients, and fires startup sequence for all other server systems.
 
