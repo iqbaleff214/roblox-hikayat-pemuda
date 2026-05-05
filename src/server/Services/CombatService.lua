@@ -6,9 +6,10 @@ local Players           = game:GetService("Players")
 local Debris            = game:GetService("Debris")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local Knit       = require(ReplicatedStorage:WaitForChild("Packages").Knit)
-local AssetConfig = require(ReplicatedStorage:WaitForChild("Shared").Config.AssetConfig)
-local ItemModule  = require(ReplicatedStorage:WaitForChild("Shared").Modules.ItemModule)
+local Knit          = require(ReplicatedStorage:WaitForChild("Packages").Knit)
+local AssetConfig   = require(ReplicatedStorage:WaitForChild("Shared").Config.AssetConfig)
+local ItemModule    = require(ReplicatedStorage:WaitForChild("Shared").Modules.ItemModule)
+local MoralityModule = require(ReplicatedStorage:WaitForChild("Shared").Modules.MoralityModule)
 
 local PROJECTILE_LIFETIME = 5
 
@@ -114,11 +115,7 @@ function CombatService:_meleeAttack(player, weapon)
 
 		-- Morality penalty for hitting innocent NPCs
 		if isNPCCharacter(target.character) and not isEnemyNPC(target.character) then
-			-- MoralityService.apply(player, -15)  -- wired in Phase 5 (TASK-050)
-			if data then
-				data.morality = math.max(0, morality - 15)
-				-- Broadcast morality change once Phase 5 is wired
-			end
+			MoralityModule.apply(player, -15)
 		end
 
 		-- Broadcast hit VFX/SFX to all clients near the impact

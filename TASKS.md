@@ -562,7 +562,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-050 — Morality System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Apply morality changes from all sources. Broadcast tier changes to client (for HUD icon, NPC behavior). Persist via DataManager.
 
@@ -586,7 +586,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-051 — Achievement System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Track one-time milestone achievements. Check after relevant actions. Award badge + currency/item on first unlock.
 
@@ -606,7 +606,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-052 — Login Streak System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Award daily login rewards based on consecutive-day streak. Show streak popup on join.
 

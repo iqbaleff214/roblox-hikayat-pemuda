@@ -5,8 +5,9 @@
 local Players           = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local Knit       = require(ReplicatedStorage:WaitForChild("Packages").Knit)
-local AssetConfig = require(ReplicatedStorage:WaitForChild("Shared").Config.AssetConfig)
+local Knit          = require(ReplicatedStorage:WaitForChild("Packages").Knit)
+local AssetConfig   = require(ReplicatedStorage:WaitForChild("Shared").Config.AssetConfig)
+local MoralityModule = require(ReplicatedStorage:WaitForChild("Shared").Modules.MoralityModule)
 
 local MAX_SIDE_QUESTS = 5
 
@@ -212,7 +213,7 @@ function QuestService:complete(player, questId)
 			end
 		end
 		if r.morality and r.morality ~= 0 then
-			data.morality = math.clamp((data.morality or 50) + r.morality, 0, 100)
+			MoralityModule.apply(player, r.morality)
 		end
 	end
 

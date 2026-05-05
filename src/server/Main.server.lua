@@ -117,13 +117,11 @@ require(Services:WaitForChild("NPCService"))
 require(Services:WaitForChild("QuestService"))
 require(Services:WaitForChild("TaskService"))
 
+-- Phase 5: Morality & Progression
+require(Services:WaitForChild("AchievementService"))
+require(Services:WaitForChild("LoginStreakService"))
+
 -- Future services (uncomment as implemented):
--- require(Services:WaitForChild("QuestService"))
--- require(Services:WaitForChild("TaskService"))
--- require(Services:WaitForChild("MoralityService"))
--- require(Services:WaitForChild("AchievementService"))
--- require(Services:WaitForChild("LoginStreakService"))
--- require(Services:WaitForChild("NPCService"))
 -- require(Services:WaitForChild("ZoneService"))
 -- require(Services:WaitForChild("TravelService"))
 -- require(Services:WaitForChild("RelationshipService"))

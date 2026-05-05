@@ -5,9 +5,10 @@
 local Players           = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local Knit       = require(ReplicatedStorage:WaitForChild("Packages").Knit)
-local AssetConfig = require(ReplicatedStorage:WaitForChild("Shared").Config.AssetConfig)
-local TaskModule  = require(ReplicatedStorage:WaitForChild("Shared").Modules.TaskModule)
+local Knit          = require(ReplicatedStorage:WaitForChild("Packages").Knit)
+local AssetConfig   = require(ReplicatedStorage:WaitForChild("Shared").Config.AssetConfig)
+local TaskModule    = require(ReplicatedStorage:WaitForChild("Shared").Modules.TaskModule)
+local MoralityModule = require(ReplicatedStorage:WaitForChild("Shared").Modules.MoralityModule)
 
 local TaskService = Knit.CreateService {
 	Name   = "TaskService",
@@ -221,10 +222,7 @@ function TaskService:_handleClaim(player, taskIndex, isWeekly)
 			self._currencyService:add(player, "Gold", bonus.gold)
 		end
 		if bonus.morality and bonus.morality > 0 then
-			local d = self._dataService:get(player)
-			if d then
-				d.morality = math.clamp((d.morality or 50) + bonus.morality, 0, 100)
-			end
+			MoralityModule.apply(player, bonus.morality)
 		end
 	end
 

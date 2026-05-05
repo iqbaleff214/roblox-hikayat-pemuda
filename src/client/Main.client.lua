@@ -19,9 +19,10 @@ require(Controllers:WaitForChild("DialogController"))
 require(Controllers:WaitForChild("QuestController"))
 require(Controllers:WaitForChild("TaskController"))
 
--- Phase 5+:
--- require(Controllers:WaitForChild("MoralityController"))
--- require(Controllers:WaitForChild("AchievementController"))
+-- Phase 5: Morality & Progression
+require(Controllers:WaitForChild("MoralityController"))
+require(Controllers:WaitForChild("AchievementController"))
+require(Controllers:WaitForChild("LoginStreakController"))
 
 -- Phase 6+:
 -- require(Controllers:WaitForChild("ZoneController"))
