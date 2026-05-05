@@ -973,6 +973,7 @@ AssetConfig.Audio = {
 		MainMenu      = "rbxassetid://0",
 		QuestComplete = "rbxassetid://0",
 		TravelScreen  = "rbxassetid://0",
+		Night         = "rbxassetid://0", -- shared night theme for all islands
 	},
 	SFX = {
 		Punch         = "rbxassetid://0",
@@ -983,6 +984,16 @@ AssetConfig.Audio = {
 		QuestComplete = "rbxassetid://0",
 		ShopBuy       = "rbxassetid://0",
 		ShopSell      = "rbxassetid://0",
+		DialogOpen    = "rbxassetid://0",
+		ZoneEnter     = "rbxassetid://0",
+		MoralityRise  = "rbxassetid://0",
+		MoralityFall  = "rbxassetid://0",
+	},
+	VFX = {
+		HitSpark      = "HitSpark",
+		MoralityRise  = "MoralityRise",
+		MoralityFall  = "MoralityFall",
+		AchRadiance   = "AchRadiance",
 	},
 }
 

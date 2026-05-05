@@ -37,8 +37,9 @@ require(Controllers:WaitForChild("GaleriController"))
 require(Controllers:WaitForChild("HUDController"))
 require(Controllers:WaitForChild("ShopController"))
 
--- Phase 9:
--- require(Controllers:WaitForChild("AudioController"))
+-- Phase 9: Audio & VFX
+require(Controllers:WaitForChild("AudioController"))
+require(Controllers:WaitForChild("VFXController"))
 
 -- ── Start Knit ────────────────────────────────────────────────────
 Knit.Start():andThen(function()

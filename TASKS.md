@@ -961,7 +961,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-090 — Audio Manager
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Play zone BGM and ambient sounds, crossfade on zone change. Play SFX at correct positions. All audio asset IDs come from AssetConfig.
 
@@ -982,7 +982,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-091 — VFX Manager
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Trigger particle effects and screen feedback for combat, morality, UI events, and world events from a single managed system.
 
