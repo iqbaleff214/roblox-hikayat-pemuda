@@ -434,7 +434,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-030 — NPC Manager
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Spawn all NPCs from `AssetConfig.NPCs` into the correct zone at server start. Add ProximityPrompts by script. Run daily schedules (move NPCs between locations based on game time). No manual NPC placement in Studio.
 
@@ -462,7 +462,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-031 — Dialog System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Drive branching NPC conversations from a data table. All dialog trees are defined in a config table (separate from AssetConfig for readability). Server sends the dialog node; client displays it and sends back player choice.
 

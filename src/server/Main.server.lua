@@ -110,6 +110,9 @@ require(Services:WaitForChild("CombatService"))
 require(Services:WaitForChild("ShopService"))
 require(Services:WaitForChild("CraftingService"))
 
+-- Phase 3: NPC & Dialog
+require(Services:WaitForChild("NPCService"))
+
 -- Future services (uncomment as implemented):
 -- require(Services:WaitForChild("QuestService"))
 -- require(Services:WaitForChild("TaskService"))

@@ -12,8 +12,8 @@ require(Controllers:WaitForChild("InventoryController"))
 require(Controllers:WaitForChild("HotbarController"))
 require(Controllers:WaitForChild("CombatController"))
 
--- Phase 3+ (uncomment as implemented):
--- require(Controllers:WaitForChild("DialogController"))
+-- Phase 3: NPC & Dialog
+require(Controllers:WaitForChild("DialogController"))
 
 -- Phase 4+:
 -- require(Controllers:WaitForChild("QuestController"))

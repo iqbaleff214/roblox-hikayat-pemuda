@@ -73,28 +73,33 @@ function ShopService:KnitStart()
 	self._currencyService  = Knit.GetService("CurrencyService")
 
 	self.Client.RequestOpenShop:Connect(function(player, shopId)
-		local shopCfg = AssetConfig.getShop(shopId)
-		if not shopCfg then return end
-
-		local data     = self._dataService:get(player)
-		local morality = data and data.morality or 50
-
-		local stockData = {}
-		for _, itemId in shopCfg.stock do
-			local itemCfg = ItemModule.getConfig(itemId)
-			if itemCfg then
-				stockData[#stockData + 1] = {
-					id       = itemId,
-					nameKey  = itemCfg.nameKey,
-					imageId  = itemCfg.imageId,
-					buyPrice = getBuyPrice(shopCfg, itemCfg, morality),
-					sellMult = shopCfg.sellMultiplier,
-				}
-			end
-		end
-
-		self.Client.OpenShop:Fire(player, shopId, stockData)
+		self:openFor(player, shopId)
 	end)
+end
+
+-- Server-callable: open a shop for a player (also used by NPCService proximity prompts).
+function ShopService:openFor(player, shopId)
+	local shopCfg = AssetConfig.getShop(shopId)
+	if not shopCfg then return end
+
+	local data     = self._dataService:get(player)
+	local morality = data and data.morality or 50
+
+	local stockData = {}
+	for _, itemId in shopCfg.stock do
+		local itemCfg = ItemModule.getConfig(itemId)
+		if itemCfg then
+			stockData[#stockData + 1] = {
+				id       = itemId,
+				nameKey  = itemCfg.nameKey,
+				imageId  = itemCfg.imageId,
+				buyPrice = getBuyPrice(shopCfg, itemCfg, morality),
+				sellMult = shopCfg.sellMultiplier,
+			}
+		end
+	end
+
+	self.Client.OpenShop:Fire(player, shopId, stockData)
 end
 
 -- ── Client RemoteFunctions ────────────────────────────────────────
