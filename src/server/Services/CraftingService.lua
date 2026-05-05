@@ -95,7 +95,12 @@ function CraftingService:_handleCraft(player, recipeIndex)
 
 		if added then
 			self.Client.CraftComplete:Fire(player, recipe.output, recipe.outputAmount, isEnhanced)
-			-- Notify AchievementService if loaded (Phase 8)
+			pcall(function()
+				Knit.GetService("QuestService"):triggerCheck(player, "Craft", nil, 1)
+			end)
+			pcall(function()
+				Knit.GetService("TaskService"):triggerCheck(player, "Craft", nil, 1)
+			end)
 			pcall(function()
 				Knit.GetService("AchievementService"):check(player, "Craft")
 			end)
@@ -108,7 +113,7 @@ end
 -- ── Client RemoteFunction ─────────────────────────────────────────
 
 -- Returns the full recipes table for the crafting UI.
-function CraftingService.Client:GetRecipes(_player)
+function CraftingService.Client:GetRecipes()
 	return AssetConfig.Recipes
 end
 

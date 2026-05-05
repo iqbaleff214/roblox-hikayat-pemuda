@@ -15,9 +15,9 @@ require(Controllers:WaitForChild("CombatController"))
 -- Phase 3: NPC & Dialog
 require(Controllers:WaitForChild("DialogController"))
 
--- Phase 4+:
--- require(Controllers:WaitForChild("QuestController"))
--- require(Controllers:WaitForChild("TaskController"))
+-- Phase 4: Quest & Task Systems
+require(Controllers:WaitForChild("QuestController"))
+require(Controllers:WaitForChild("TaskController"))
 
 -- Phase 5+:
 -- require(Controllers:WaitForChild("MoralityController"))

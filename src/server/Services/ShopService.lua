@@ -167,6 +167,12 @@ function ShopService.Client:SellItem(player, shopId, itemId, amount)
 	if not removed then return false, removeReason end
 
 	self.Server._currencyService:add(player, "Rupiah", totalEarned)
+
+	-- Task progress for sell value
+	pcall(function()
+		Knit.GetService("TaskService"):triggerCheck(player, "SellValue", nil, totalEarned)
+	end)
+
 	return true, self.Server._currencyService:get(player, "Rupiah"), totalEarned
 end
 

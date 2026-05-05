@@ -22,13 +22,15 @@ local TWEEN_INFO        = TweenInfo.new(3, Enum.EasingStyle.Sine, Enum.EasingDir
 local ON_ENTER_DISPATCH = {
 	QuestService = {
 		triggerCheck = function(player, ...)
+			local args = { ... }
 			pcall(function()
-				Knit.GetService("QuestService"):triggerCheck(player, ...)
+				Knit.GetService("QuestService"):triggerCheck(player, table.unpack(args))
 			end)
 		end,
 		offerQuest = function(player, ...)
+			local args = { ... }
 			pcall(function()
-				Knit.GetService("QuestService"):offerQuest(player, ...)
+				Knit.GetService("QuestService"):offerQuest(player, table.unpack(args))
 			end)
 		end,
 	},
@@ -133,8 +135,12 @@ local function filterChoices(choices, morality)
 	local filtered = {}
 	for idx, choice in choices do
 		local pass = true
-		if choice.minMorality and morality < choice.minMorality then pass = false end
-		if choice.maxMorality and morality > choice.maxMorality then pass = false end
+		if choice.minMorality and morality < choice.minMorality then
+			pass = false
+		end
+		if choice.maxMorality and morality > choice.maxMorality then
+			pass = false
+		end
 		if pass then
 			filtered[#filtered + 1] = { labelKey = choice.labelKey, choiceIndex = idx }
 		end
@@ -195,7 +201,7 @@ function NPCService:_addNameTag(model, npcCfg)
 
 	local billboard             = Instance.new("BillboardGui")
 	billboard.Name              = "NameTag"
-	billboard.Size              = UDim2.new(0, 120, 0, 30)
+	billboard.Size              = UDim2.fromOffset(120, 30)
 	billboard.StudsOffset       = Vector3.new(0, 3, 0)
 	billboard.AlwaysOnTop       = false
 	billboard.Parent            = anchor
@@ -273,6 +279,17 @@ function NPCService:_startDialog(player, npcId)
 
 	self._sessions[player.UserId] = { npcId = npcId, nodeId = tree.root }
 	self:_sendNode(player, npcId, tree.root)
+
+	-- Quest / Task: talking to this NPC + checking any delivery objectives
+	pcall(function()
+		Knit.GetService("QuestService"):triggerCheck(player, "Talk", npcId)
+	end)
+	pcall(function()
+		Knit.GetService("QuestService"):triggerCheck(player, "Deliver", npcId)
+	end)
+	pcall(function()
+		Knit.GetService("TaskService"):triggerCheck(player, "Talk", npcId)
+	end)
 end
 
 function NPCService:_sendNode(player, npcId, nodeId)

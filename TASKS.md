@@ -511,7 +511,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-040 — Quest System
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Track each player's main and side quest progress server-side. Handle objective completion from other systems (combat, dialog, item collect). Deliver rewards on completion. Enforce 5 concurrent side quest cap.
 
@@ -533,7 +533,7 @@ local AssetConfig  = require(SharedConfig.AssetConfig)
 
 ### TASK-041 — Task System (Tugas Harian & Mingguan)
 
-- [ ] Not started
+- [x] Done
 
 **Goal:** Generate daily (5) and weekly (3) tasks per player from template pool. Track progress. Reset on schedule. Award Bonus Peti on full daily completion.
 

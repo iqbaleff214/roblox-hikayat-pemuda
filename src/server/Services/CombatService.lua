@@ -10,8 +10,6 @@ local Knit       = require(ReplicatedStorage:WaitForChild("Packages").Knit)
 local AssetConfig = require(ReplicatedStorage:WaitForChild("Shared").Config.AssetConfig)
 local ItemModule  = require(ReplicatedStorage:WaitForChild("Shared").Modules.ItemModule)
 
--- Time (seconds) a client's direction vector is trusted after firing AttackRequest
-local MAX_DIRECTION_AGE = 0.5
 local PROJECTILE_LIFETIME = 5
 
 local CombatService = Knit.CreateService {
@@ -46,11 +44,6 @@ end
 local function getRootPart(player)
 	local char = getCharacter(player)
 	return char and char:FindFirstChild("HumanoidRootPart")
-end
-
-local function getHumanoid(player)
-	local char = getCharacter(player)
-	return char and char:FindFirstChildOfClass("Humanoid")
 end
 
 -- Collect unique humanoids within radius of origin, excluding the attacker's character.
@@ -108,6 +101,16 @@ function CombatService:_meleeAttack(player, weapon)
 		end
 
 		target.humanoid:TakeDamage(damage)
+
+		-- Quest / Task progress on kill
+		if target.humanoid.Health <= 0 then
+			pcall(function()
+				Knit.GetService("QuestService"):triggerCheck(player, "Combat", nil, 1)
+			end)
+			pcall(function()
+				Knit.GetService("TaskService"):triggerCheck(player, "Combat", nil, 1)
+			end)
+		end
 
 		-- Morality penalty for hitting innocent NPCs
 		if isNPCCharacter(target.character) and not isEnemyNPC(target.character) then
@@ -169,6 +172,16 @@ function CombatService:_rangedAttack(player, weapon, direction)
 
 		hitHumanoid:TakeDamage(weapon.damage)
 
+		-- Quest / Task progress on ranged kill
+		if hitHumanoid.Health <= 0 then
+			pcall(function()
+				Knit.GetService("QuestService"):triggerCheck(player, "Combat", nil, 1)
+			end)
+			pcall(function()
+				Knit.GetService("TaskService"):triggerCheck(player, "Combat", nil, 1)
+			end)
+		end
+
 		-- Sumpit slow effect
 		if weapon.statusEffect then
 			local targetPlayer = Players:GetPlayerFromCharacter(hitChar)
@@ -209,7 +222,9 @@ end
 -- Unequips weapon (called when slot cleared or on death).
 function CombatService:unequip(player)
 	local data = self._dataService:get(player)
-	if data then data.equippedWeapon = nil end
+	if data then
+		data.equippedWeapon = nil
+	end
 	self.Client.WeaponEquipped:Fire(player, nil)
 end
 

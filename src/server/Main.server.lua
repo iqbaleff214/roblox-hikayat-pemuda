@@ -113,6 +113,10 @@ require(Services:WaitForChild("CraftingService"))
 -- Phase 3: NPC & Dialog
 require(Services:WaitForChild("NPCService"))
 
+-- Phase 4: Quest & Task Systems
+require(Services:WaitForChild("QuestService"))
+require(Services:WaitForChild("TaskService"))
+
 -- Future services (uncomment as implemented):
 -- require(Services:WaitForChild("QuestService"))
 -- require(Services:WaitForChild("TaskService"))
